@@ -1,0 +1,23 @@
+{
+ "at": "2026-11-24 08:09 UTC",
+ "tests": {
+  "passed": 11,
+  "names": [
+   "names: each control has the name that the page shows",
+   "keyboard: the recipe starts at 4 servings, and the servings field is 1 tab stop",
+   "keyboard: the arrow keys step the servings and each quantity follows",
+   "keyboard: Shift steps by 4, and Home and End go to 1 and 48",
+   "keyboard: a typed number above the maximum is lowered when it commits",
+   "keyboard: Enter and Space on Fit to flour read the flour field in the chosen format",
+   "keyboard: text that is not a number is named in the status, and the servings stay",
+   "agent: an agent switches to German, types 1.000 g of flour, and fits the recipe",
+   "agent: German reads 1,5 as one and a half, and shows the quantities with a decimal comma",
+   "agent: the same text 1.000 reads as 1 in English, and the amount snaps up to 1 serving",
+   "agent: an agent step above the maximum is clamped, and a step to an unknown format is refused"
+  ]
+ },
+ "snapshotBytes": 469,
+ "treeBytes": 682,
+ "tabStops": 4,
+ "lines": 146
+}
