@@ -1,0 +1,20 @@
+{
+ "at": "2026-11-24 07:08 UTC",
+ "tests": {
+  "passed": 8,
+  "names": [
+   "names: each control has the name that the page shows",
+   "keyboard: the radio group is 1 tab stop, and the arrow keys move and check",
+   "keyboard: Space checks the focused radio",
+   "keyboard: the arrow keys step the money by 1 cent, and Shift steps by 1 dollar",
+   "keyboard: typed text commits as money, and a value above the maximum is lowered",
+   "keyboard: Enter on the Place order button reports the choice",
+   "agent: an agent chooses a speed and sets the money, and the page reports them",
+   "agent: an agent steps the money by 1 cent with increment"
+  ]
+ },
+ "snapshotBytes": 510,
+ "treeBytes": 587,
+ "tabStops": 3,
+ "lines": 87
+}

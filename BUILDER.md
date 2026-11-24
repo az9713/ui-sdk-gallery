@@ -82,6 +82,8 @@ Each one cost a failed run. The docs do not state them.
 - **A slot's role sets what TypeScript requires.** A `grid` root needs `keys` (or `keys: { none: "why" }`). A `gridcell` needs `focus`. The type error and the strict-mode error both name the missing field.
 - **A part that is not a button gets only clicks through `press`.** Handle Space and Enter in `on.keydown`.
 - **In a test file, call `mountUI` in the first page test, after the `mount` tests.** Tab in a `mount` view goes to the first control of the document.
+- **axe fails the gate when it cannot decide a contrast.** (A02, A03.) `web.css` draws icons on some parts: the password toggle, the checkbox indicator, the OTP separator, the number-input step buttons. Leave those parts empty, with an `aria-label` where they are buttons. A `−` or `+` character in them fails. The OTP input has inline transparent text: `[data-stage] ui-otp-input input { opacity: 0 !important; }` clears it.
+- **An item label that holds a hint does not match a short label.** (A03.) `setValue "Overnight"` failed on the radio labeled "Overnight ($24.00, next day)". Use the item's value in the step, or keep the hint out of the `<label>`.
 - **`checkPattern` has 15 patterns and `grid` is not one of them.** Use it when your pattern is in the list of `references/testing.md`.
 
 ## Your files
