@@ -1,0 +1,23 @@
+{
+ "at": "2026-11-24 23:29 UTC",
+ "tests": {
+  "passed": 11,
+  "names": [
+   "names: the bridge sees each field and both buttons by name",
+   "visual: the card picture is hidden from the bridge and starts on its front with placeholders",
+   "agent: a Save with empty fields lists what is missing and saves nothing",
+   "agent: the agent fills the Tax ID and the card, and reads each value back as [redacted]",
+   "visual: the person's card picture shows what the agent filled",
+   "agent: the Business name has no mark, so its new value reaches the agent",
+   "agent: a Tax ID the bridge has seen as secret stays redacted after the mark is removed",
+   "keyboard: Tab goes through the 5 fields, then Save and Turn over, 1 stop each",
+   "keyboard: focus on the Security code turns the card to its back, and leaving turns it to the front",
+   "keyboard: Enter and Space on Turn over turn the card over and back",
+   "keyboard: Enter on Save checks the fields again"
+  ]
+ },
+ "snapshotBytes": 659,
+ "treeBytes": 514,
+ "tabStops": 7,
+ "lines": 170
+}
