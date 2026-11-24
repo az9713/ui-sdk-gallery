@@ -1,0 +1,23 @@
+{
+ "at": "2026-11-24 23:02 UTC",
+ "tests": {
+  "passed": 11,
+  "names": [
+   "keyboard: the arrow keys choose a size as they move, and the group is 1 tab stop on the chosen one",
+   "keyboard: with no size chosen, the tab stop is the first size and no radio is checked",
+   "keyboard: Space chooses the focused size, and a click chooses a size",
+   "keyboard: the group follows the radio group pattern",
+   "server: the size picker renders with no DOM",
+   "direction: Left and Right follow the text direction",
+   "direction: ArrowRight moves to the next size in ltr and to the previous size in rtl",
+   "agent: the primitive's setValue takes only its own sizes",
+   "names: the page names the picker, its 9 sizes and the bag button, and hides the drawing",
+   "keyboard: on the page, the arrow keys change the size, the foot outline scales and the status line follows",
+   "agent: an agent chooses size 42, and size 47 is refused with the 9 real sizes"
+  ]
+ },
+ "snapshotBytes": 438,
+ "treeBytes": 560,
+ "tabStops": 2,
+ "lines": 258
+}
