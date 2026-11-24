@@ -1,0 +1,22 @@
+{
+ "at": "2026-11-24 09:24 UTC",
+ "tests": {
+  "passed": 10,
+  "names": [
+   "keyboard: the line is 1 tab stop, and Left and Right, Home and End move focus only",
+   "keyboard: typing a name moves focus to that station and picks nothing",
+   "keyboard: Space continues a name that is being typed, and picks the focused station when none is",
+   "keyboard: Space and Enter pick the focused station, and the arrow keys do not",
+   "keyboard: a click picks a station",
+   "server: the metro line renders with no DOM",
+   "direction: Left and Right follow the text direction",
+   "names: the page names the line, each station and the button",
+   "keyboard: on the page, typing finds a station, Space picks it and the status line reports it",
+   "agent: an agent picks Museum and plans the trip, and a station that is not on the line is refused"
+  ]
+ },
+ "snapshotBytes": 458,
+ "treeBytes": 406,
+ "tabStops": 2,
+ "lines": 206
+}
