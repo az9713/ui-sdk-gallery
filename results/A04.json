@@ -1,0 +1,28 @@
+{
+ "at": "2026-11-24 07:26 UTC",
+ "tests": {
+  "passed": 16,
+  "names": [
+   "names: each control has the name that the page shows",
+   "keyboard: the month grid is 1 tab stop on the check-in day, across both months",
+   "keyboard: arrows move by day and week, and Enter twice picks a stay that the fields follow",
+   "keyboard: Page Down moves to the next month and Space picks a day",
+   "keyboard: a sold-out night takes focus but cannot be picked",
+   "keyboard: Escape drops a start with no end, and the same day twice does not make a stay of 0 nights",
+   "keyboard: Enter on the trigger opens the calendar, 2 picks close it, and focus returns to the trigger",
+   "keyboard: Alt+Down in Check in opens the calendar, and Escape closes it and keeps the stay",
+   "keyboard: a check-in after the check-out is invalid and keeps the stay, and a valid date clears it",
+   "keyboard: a typed stay over a sold-out night, or past the last bookable day, is invalid",
+   "keyboard: Enter on Book reports the stay in the status line, in the singular for 1 night",
+   "agent: an agent sets the stay on the picker, the calendar and the fields follow, and Book reports it",
+   "agent: a stay in a month that the calendar does not show turns the calendar to it, and a stay it shows does not",
+   "agent: an agent sets the stay on the calendar, and the picker follows",
+   "agent: a stay over a sold-out night, past the last day, or over 15 days changes nothing",
+   "agent: an agent turns the calendar to another month, and clears the stay"
+  ]
+ },
+ "snapshotBytes": 519,
+ "treeBytes": 5283,
+ "tabStops": 7,
+ "lines": 114
+}

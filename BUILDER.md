@@ -92,6 +92,11 @@ Each one cost a failed run. The docs do not state them.
 - **`document.elementFromPoint` returns nothing in a `mount` drag.** (B02.) For an own drop target, test `getBoundingClientRect` of the target elements.
 - **Pointer drag in jsdom needs a stub of `getBoundingClientRect`.** (B03.) Use `view.drag` from `mount`.
 - **In jsdom, setting `.value` from code or sending an `input` event does not fire `valuechange`.** (A05: `ui-textarea`, `ui-date-input`, `ui-time-input`.) In a test, call `element.api.setValue(...)`. In the UI, read the value when the person submits.
+- **A refused `setValue` returns `ok: true` with `steps[0].result === false`**, not `ok: false`. (A04.)
+- **Put an `aria-label` on a composite root** (date picker, calendar). (A04.) Without it, the bridge label is the first input's label or a heading that changes.
+- **The design stage measures contrast that axe does not.** (A04.) `web.css` gives `data-disabled` parts opacity 0.5 (1.2:1 on unavailable days). Set `opacity: 1` and mark the state another way.
+- **`web.css` does not style `data-slot="row"`**, which docs examples use. (A04.) Lay out such a row yourself.
+- **`console.log` does not show in Vitest output here.** (A04.) Write probe output to a file in your scratchpad.
 - **`checkPattern` has 15 patterns and `grid` is not one of them.** Use it when your pattern is in the list of `references/testing.md`.
 
 ## Your files
