@@ -1,0 +1,20 @@
+{
+ "at": "2026-11-24 17:55 UTC",
+ "tests": {
+  "passed": 8,
+  "names": [
+   "keyboard: Space and Enter on Start toggle playing, and aria-pressed follows",
+   "keyboard: Skip is the second tab stop, moves to the next track and wraps from the last to the first",
+   "controller: a handle made outside the deck plays, pauses and changes the track with the reason imperative",
+   "server: the turntable renders with no DOM",
+   "direction: Start and Skip do the same in left-to-right and right-to-left",
+   "names: the page names the deck, its 2 buttons, its 4 tracks and the 4 remote buttons",
+   "keyboard: the remote's buttons drive the deck from outside its tree, and the status line follows",
+   "agent: an agent presses the remote's Next track and Play, and a track the album does not have is refused"
+  ]
+ },
+ "snapshotBytes": 620,
+ "treeBytes": 578,
+ "tabStops": 6,
+ "lines": 386
+}

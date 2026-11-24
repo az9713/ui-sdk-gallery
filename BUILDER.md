@@ -141,6 +141,11 @@ Each one cost a failed run. The docs do not state them.
 - **`PartDisplay` refuses `"grid"` and `"flex"`.** (B11, B12.) Use `"block"` in `createParts` and set grid or flex in CSS. In `task.done`, use `hasAttribute("hidden")`: `.hidden` has the type `boolean | "until-found"`.
 - **axe fails `color-contrast` on a gradient background and on options outside a scroll window.** (B14, B17.) Draw a track with a plain color (`::after`), and give options outside the visible rows opacity 0. The design stage fails `overflow: hidden` on a box with absolutely positioned children (B13).
 - **`checkPattern(root, "tree")` requires type-ahead.** (B16.) Add `createTypeahead`. `checkDirection` passes on a vertical tree whose first item is a closed branch.
+- **The design stage reads `border-inline-start` with a radius as `side-tab`** (B40). Use a 1px border on all sides.
+- **jsdom's `canvas.getContext` prints "Not implemented" and returns nothing.** (B40.) Stub `HTMLCanvasElement.prototype.getContext` to return `null` in the test file.
+- **three 0.186.1 works in the gate's Chrome with 0 console messages** (B40, WebGL2, `antialias: true`). Named imports tree-shake; `WebGLRenderer` alone adds about 1.2 MB to the unminified gate build.
+- **With `closed: true`, the bridge refuses an unknown item before your api's throw runs.** (B40.) Test the api's throw directly, not through an agent step.
+- **The gate does not emulate reduced motion.** Test the reduced-motion path in a unit test with a `matchMedia` stub.
 - **`checkPattern` has 15 patterns and `grid` is not one of them.** Use it when your pattern is in the list of `references/testing.md`.
 
 ## Your files
