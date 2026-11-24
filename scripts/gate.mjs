@@ -195,10 +195,40 @@ async function stageBrowser(browser, row, url) {
       }
     }
     if (reasons.length) throw new Fail("browser", reasons)
-    return { snapshotBytes, treeBytes, tabStops }
+    const breaks = await page.evaluate(() => window.gallery.breaks)
+    return { snapshotBytes, treeBytes, tabStops, breaks }
   } finally {
     await page.close()
   }
+}
+
+// Deliberate breaks: each one is applied to the UI file, and the test that it names must fail.
+function stageBreaks(id, row, file, breaks) {
+  if (!PRIMITIVE_SETS.includes(row.set)) return 0
+  if (breaks.length < 3) throw new Fail("breaks", `a primitive needs a minimum of 3 deliberate breaks in its definition. Found: ${breaks.length}`)
+  const path = join(here, "ui", file.ui)
+  const original = readFileSync(path, "utf8")
+  // The find text is also in the breaks list, so only the code before the list is searched and changed.
+  const cut = original.indexOf("breaks: [")
+  const code = original.slice(0, cut)
+  const report = join(here, "dist", `breaks-${id}.json`)
+  const reasons = []
+  try {
+    for (const b of breaks) {
+      if (code.split(b.find).length !== 2) {
+        reasons.push(`"${b.find}" must occur exactly 1 time in ${file.ui}, before the breaks list`)
+        continue
+      }
+      writeFileSync(path, code.replace(b.find, b.replace) + original.slice(cut))
+      run(`npx vitest run ui/${id}- --reporter=json --outputFile="${report}"`)
+      const failed = JSON.parse(readFileSync(report, "utf8")).testResults.flatMap((f) => f.assertionResults.filter((t) => t.status === "failed").map((t) => t.title))
+      if (!failed.includes(b.caught)) reasons.push(`break "${b.broke}": the test "${b.caught}" did not fail. Tests that failed: ${failed.join(" | ") || "none"}`)
+    }
+  } finally {
+    writeFileSync(path, original)
+  }
+  if (reasons.length) throw new Fail("breaks", reasons)
+  return breaks.length
 }
 
 function stageDesign(id, url) {
@@ -226,8 +256,11 @@ async function gate(ids, { full }) {
   try {
     for (const id of ids) {
       const row = rows.find((r) => r.id === id)
-      const measured = await stageBrowser(browser, row, url)
+      const { breaks, ...measured } = await stageBrowser(browser, row, url)
       stageDesign(id, url)
+      // The break stage changes the UI file for some seconds, so only a 1-UI run does it.
+      const caught = full ? 0 : stageBreaks(id, row, perUI.get(id).file, breaks)
+      if (caught) console.log(`pass breaks  ${caught} caught`)
       const names = namesOf(id)
       writeFileSync(
         join(here, "results", `${id}.json`),

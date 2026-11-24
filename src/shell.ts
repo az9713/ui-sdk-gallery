@@ -67,7 +67,7 @@ function show(entry: Entry, entries: Entry[]) {
         ${
           def.breaks?.length
             ? `<p>Deliberate breaks that a test caught: ${def.breaks.length}.</p>
-               <ul>${def.breaks.map((b) => `<li>${esc(b.broke)} Caught by: ${esc(b.caught)}</li>`).join("")}</ul>`
+               <ul>${def.breaks.map((b) => `<li>${esc(b.broke)} Caught by the test "${esc(b.caught)}".</li>`).join("")}</ul>`
             : ""
         }
         <h2>Use face</h2>
@@ -111,7 +111,7 @@ function show(entry: Entry, entries: Entry[]) {
   requestAnimationFrame(() => {
     refresh()
     Object.assign(window, {
-      gallery: { id: row.id, agent, stage, runTask, done: () => def.task?.done(stage), person: def.task?.person ?? "allow" },
+      gallery: { id: row.id, agent, stage, runTask, done: () => def.task?.done(stage), person: def.task?.person ?? "allow", breaks: def.breaks ?? [] },
     })
   })
 }

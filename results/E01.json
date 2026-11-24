@@ -1,0 +1,15 @@
+{
+ "at": "2026-11-24 06:03 UTC",
+ "tests": {
+  "passed": 3,
+  "names": [
+   "look: the definition switches web.css off and has no CSS of its own",
+   "keyboard: Space changes a switch",
+   "agent: the bridge finds each control by its name"
+  ]
+ },
+ "snapshotBytes": 588,
+ "treeBytes": 341,
+ "tabStops": 4,
+ "lines": 14
+}

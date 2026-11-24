@@ -187,6 +187,32 @@ const ui: UI = {
     ],
     done: (root) => root.querySelector("[data-status]")!.textContent === "Booked: C4, C5.",
   },
+  breaks: [
+    {
+      broke: "Focus no longer skips a taken seat.",
+      find: "disabled: (cell) => !free(seatId(cell)),",
+      replace: "",
+      caught: "keyboard: the grid is 1 tab stop, and a taken seat does not get focus",
+    },
+    {
+      broke: "Space and Enter no longer select a seat.",
+      find: 'if (event.key === " " || event.key === "Enter") {',
+      replace: "if (false) {",
+      caught: "keyboard: Space and Enter select a seat, and Space again clears it",
+    },
+    {
+      broke: "A taken seat can be selected.",
+      find: "selectable: free,",
+      replace: "",
+      caught: "keyboard: a click selects a free seat and does nothing on a taken seat",
+    },
+    {
+      broke: "Shift with an arrow key no longer extends the selection.",
+      find: "if (shift && from && reason",
+      replace: "if (false && shift && from && reason",
+      caught: "keyboard: Shift with an arrow key extends the selection",
+    },
+  ],
 }
 
 export { seatMap }

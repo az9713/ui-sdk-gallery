@@ -19,7 +19,8 @@ type UI = {
     person?: "allow" | "deny"
     done: (root: HTMLElement) => boolean
   }
-  breaks?: { broke: string; caught: string }[]
+  // Each break is applied by the gate: find is replaced with replace, and the test named caught must fail.
+  breaks?: { broke: string; find: string; replace: string; caught: string }[]
 }
 
 type Row = {
