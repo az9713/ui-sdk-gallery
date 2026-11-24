@@ -1,0 +1,21 @@
+{
+ "at": "2026-11-24 21:33 UTC",
+ "tests": {
+  "passed": 9,
+  "names": [
+   "names: each of the 150 controls has a name, and the console reads the more entry",
+   "keyboard: ArrowUp raises a fader, Home and End reach its bounds, and the meter follows",
+   "keyboard: ArrowRight and ArrowLeft move a pan control by 1 step",
+   "keyboard: Space and Enter press a mute button, and the status line follows",
+   "keyboard: Tab goes from 1 control to the next in strip order",
+   "agent: the snapshot lists 100 controls and ends with the more entry for the other 50",
+   "agent: query finds a control after the first 100, and act changes it",
+   "agent: the scripted task ends with the status that task.done reads",
+   "agent: a label that names 2 strips is refused with each match"
+  ]
+ },
+ "snapshotBytes": 10843,
+ "treeBytes": 7240,
+ "tabStops": 150,
+ "lines": 168
+}
