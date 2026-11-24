@@ -1,0 +1,27 @@
+{
+ "at": "2026-11-24 18:54 UTC",
+ "tests": {
+  "passed": 15,
+  "names": [
+   "keyboard: the list is 1 tab stop on the chosen typeface",
+   "keyboard: the arrow keys preview a typeface and Enter keeps it",
+   "keyboard: Space keeps the previewed typeface and Escape puts the poster back",
+   "keyboard: leaving the list puts the poster back to the chosen typeface",
+   "keyboard: hover previews a typeface and a click keeps it",
+   "keyboard: the chosen typeface does not show as a preview",
+   "server: the font picker renders with no DOM",
+   "direction: Up and Down act the same in left to right and right to left",
+   "names: the page names the list and each typeface, and the poster starts in Arial Black",
+   "keyboard: on the page, the arrow keys preview on the poster and Escape puts it back",
+   "keyboard: on the page, Enter keeps a typeface and Space keeps another",
+   "keyboard: on the page, leaving the list puts the poster back",
+   "visual: a change of typeface plays the kinetic type, and the first draw does not",
+   "agent: an agent peeks at a typeface, puts the poster back, and keeps another",
+   "visual: with reduced motion a change shows its end state at once"
+  ]
+ },
+ "snapshotBytes": 461,
+ "treeBytes": 565,
+ "tabStops": 1,
+ "lines": 311
+}
