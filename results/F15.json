@@ -1,0 +1,18 @@
+{
+ "at": "2026-11-24 23:33 UTC",
+ "tests": {
+  "passed": 6,
+  "names": [
+   "names: the page names the policy, the region list, its 10 regions and the save button, and hides the map",
+   "agent: the scripted task is canceled when it adds Japan, then sets 3 EU regions and saves after the person allows it",
+   "agent: the allow list refuses a single region, the policy and setAll, and asks the person nothing",
+   "agent: a step that names regions by label is canceled, since the group takes values",
+   "keyboard: each region is a tab stop, and Space lets the person add Japan outside the EU",
+   "keyboard: the person sets the policy to Any region, and then the agent may add Japan"
+  ]
+ },
+ "snapshotBytes": 1560,
+ "treeBytes": 1549,
+ "tabStops": 12,
+ "lines": 278
+}
