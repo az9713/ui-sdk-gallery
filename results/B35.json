@@ -1,0 +1,25 @@
+{
+ "at": "2026-11-24 18:57 UTC",
+ "tests": {
+  "passed": 13,
+  "names": [
+   "keyboard: Left and Right move along the white keys, and Home and End go to the ends",
+   "keyboard: the white keys and the black keys are 2 tab stops, and the arrows stay in their group",
+   "keyboard: each group keeps its own tab stop when focus leaves it and comes back",
+   "keyboard: Space and Enter play the focused key, and the same key again adds the note again",
+   "keyboard: a click plays a black key and marks it as the last key",
+   "api: play refuses a key that is not on the keyboard, and clear empties the melody",
+   "server: the piano renders with no DOM",
+   "direction: the arrows follow the dir of the keyboard, not the page",
+   "visualizer: reduced motion draws each state at once, and the motion loop stops when the page is gone",
+   "names: the page names the keyboard, its 2 groups, its 17 keys and the Start over button",
+   "audio: the AudioContext starts on a person's key press, not on mount or an agent's play",
+   "keyboard: on the page, the right notes advance the melody and a wrong note does not",
+   "agent: an agent finds the keyboard, plays the melody, refuses a key that is not there and starts over"
+  ]
+ },
+ "snapshotBytes": 172,
+ "treeBytes": 689,
+ "tabStops": 3,
+ "lines": 411
+}

@@ -163,6 +163,8 @@ Each one cost a failed run. The docs do not state them.
 - **The design stage fails `text-occlusion` when 2 axis labels touch** (B30: "0 km" on "0 m"). `onValueCommit` fires a `valuecommit` DOM event (name in `custom-elements.json`). Pass restored data to a root as `data-*` JSON read by `options: (el) => ...`.
 - **A `value="…"` attribute on a root makes the primitive controlled** and it ignores its own changes (B31). Use `default-value="…"` in markup. `onPreviewChange: "callback"` makes the element fire `previewchange`.
 - **The gate can fail "the UI did not mount in 10 s" when many gates run at the same time.** (B31, 8 builders.) Run it again before you change code.
+- **The design stage reports `text-occlusion` when one button covers part of another button's box** (B35: black piano keys over white keys). Put the covered button's label in a `<span>` in its visible part. A gate that fails at launch with "The browser is already running for …puppeteer_dev_chrome_profile" is a profile clash between 2 gates: run it again.
+- **Start Web Audio only in a person's click or key handler** (B35). An agent action sends no DOM event, so it never creates an AudioContext. `createRovingFocus` reads the nearest `dir`; set `dir="ltr"` on a root whose layout must not mirror.
 - **jsdom has no `matchMedia`.** Call `window.matchMedia?.(...)`.
 - **The gate does not emulate reduced motion.** Test the reduced-motion path in a unit test with a `matchMedia` stub.
 - **`checkPattern` has 15 patterns and `grid` is not one of them.** Use it when your pattern is in the list of `references/testing.md`.
