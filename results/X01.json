@@ -1,0 +1,17 @@
+{
+ "at": "2026-11-24 21:08 UTC",
+ "tests": {
+  "passed": 5,
+  "names": [
+   "keyboard: the 3 tabs are 1 tab stop, and each arrow key moves to the next tab and shows its panel",
+   "keyboard: Space changes each switch, and Save reports the 2 states",
+   "keyboard: Cancel closes the dialog and deletes nothing, and focus goes back to the trigger",
+   "keyboard: Escape closes the dialog, Tab stays inside it, and Delete forever deletes",
+   "keyboard: an empty project name is invalid and Save does not save it"
+  ]
+ },
+ "snapshotBytes": null,
+ "treeBytes": 438,
+ "tabStops": 4,
+ "lines": 177
+}
