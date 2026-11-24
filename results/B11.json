@@ -1,0 +1,27 @@
+{
+ "at": "2026-11-24 09:21 UTC",
+ "tests": {
+  "passed": 15,
+  "names": [
+   "keyboard: the inbox is 1 tab stop, and Up and Down move between messages without a change",
+   "keyboard: Left shows the end actions and focuses the first, Right goes to the next, and Left back to the message hides them",
+   "keyboard: Right shows the start action, and Escape hides it and gives focus back to the message",
+   "keyboard: Space and Enter on an action run it, hide the actions and give focus back to the message",
+   "keyboard: Archive hides the message, focus goes to the next one, and Up and Down skip it",
+   "pointer: a swipe past half the actions opens them, a short swipe springs back, and a press on another message closes them",
+   "pointer: a long swipe right marks the message read, and a long swipe left archives it",
+   "pointer: a click on a mouse button runs its action and leaves the row closed",
+   "server: the inbox renders with no DOM",
+   "direction: Left and Right show the side that the text direction puts them on",
+   "names: the page names the list, each message and each button, and only the list is a tab stop",
+   "pointer kind: the mouse buttons show with a pointer that hovers and hide on a touch screen",
+   "keyboard: on the page, the actions behind a message run, the status line reports them, and focus follows an archived message",
+   "pointer: on the page, a mouse button runs its action and the status line reports it",
+   "agent: an agent finds the inbox and its messages, marks 1 read, flags 1 and archives 1, and an unknown message is refused"
+  ]
+ },
+ "snapshotBytes": 461,
+ "treeBytes": 1683,
+ "tabStops": 1,
+ "lines": 402
+}

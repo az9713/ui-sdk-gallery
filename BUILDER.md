@@ -118,6 +118,9 @@ Each one cost a failed run. The docs do not state them.
 - **Strict mode refuses the reason `imperative` with an event.** (B06.) Call `zoomBy` or `fit` with no event from a button, or use a reason of your own. An agent action must not have the name of a behavior on the api (`connect`, `move`, `viewport`). `keys()` of `src/testing.ts` takes `Shift`, `Control` and `Alt`; `view.keys("+")` of `mount` sends nothing.
 - **`spans.spanStyle()` has no final semicolon in the browser** (jsdom has one). (B07.) Join your own style to it with `"; "`. It sets only the position along the track.
 - **`web.css` makes an inline `<svg>` under a slot 1rem wide** (`[data-slot] > svg`). (B09.) Set its width and height in your CSS. Only the screenshot shows this.
+- **A first gate pass can differ from the second.** (B12.) The shell shows the bridge snapshot only once `results/<ID>.json` exists, so `cramped-padding` from long snapshot lines can appear on the second run. Run the gate 2 times before you report.
+- **jsdom has no `Element.scrollTo`, and the `ResizeObserver` of `src/setup.ts` never reports.** (B12.) Stub both in the test file.
+- **`PartDisplay` refuses `"grid"` and `"flex"`.** (B11, B12.) Use `"block"` in `createParts` and set grid or flex in CSS. In `task.done`, use `hasAttribute("hidden")`: `.hidden` has the type `boolean | "until-found"`.
 - **`checkPattern` has 15 patterns and `grid` is not one of them.** Use it when your pattern is in the list of `references/testing.md`.
 
 ## Your files
