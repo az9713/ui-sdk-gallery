@@ -1,0 +1,23 @@
+{
+ "at": "2026-11-24 23:37 UTC",
+ "tests": {
+  "passed": 11,
+  "names": [
+   "keyboard: above the maximum, Enter on the fix button sets the maximum and clears the error",
+   "keyboard: below the minimum, Space on the fix button sets the minimum",
+   "keyboard: a dose in range has no error part and no fix button to Tab to",
+   "keyboard: text that is not a number is an error with no fix, and an empty dose is not an error",
+   "keyboard: useLimit with no error throws and sends nothing",
+   "server: the safety check renders with no DOM",
+   "direction: Tab and Enter on the fix button do the same in left to right and right to left",
+   "names: the page names both inputs, the safety check and the button",
+   "keyboard: on the page, the dose input is invalid and described by the error while it is out of range",
+   "agent: the safety check is in the snapshot only while the dose has an error",
+   "agent: the task sets a dose above the maximum, uses the limit through the shown check, and calculates"
+  ]
+ },
+ "snapshotBytes": 288,
+ "treeBytes": 552,
+ "tabStops": 3,
+ "lines": 338
+}
