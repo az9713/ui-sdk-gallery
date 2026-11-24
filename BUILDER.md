@@ -116,6 +116,7 @@ Each one cost a failed run. The docs do not state them.
 - **jsdom has no `ClipboardEvent`, and strict mode refuses a plain `Event` for the `paste` reason.** (B04.) Define a `ClipboardEvent` class with a `clipboardData` stub in the test file. A Shift press in jsdom needs a real `PointerEvent`.
 - **The design stage fails text wider than about 80 characters** (`line-length`). (B04.) `max-width: 60ch` passes.
 - **Strict mode refuses the reason `imperative` with an event.** (B06.) Call `zoomBy` or `fit` with no event from a button, or use a reason of your own. An agent action must not have the name of a behavior on the api (`connect`, `move`, `viewport`). `keys()` of `src/testing.ts` takes `Shift`, `Control` and `Alt`; `view.keys("+")` of `mount` sends nothing.
+- **`spans.spanStyle()` has no final semicolon in the browser** (jsdom has one). (B07.) Join your own style to it with `"; "`. It sets only the position along the track.
 - **`checkPattern` has 15 patterns and `grid` is not one of them.** Use it when your pattern is in the list of `references/testing.md`.
 
 ## Your files

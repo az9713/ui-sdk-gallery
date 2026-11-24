@@ -1,0 +1,26 @@
+{
+ "at": "2026-11-24 09:07 UTC",
+ "tests": {
+  "passed": 14,
+  "names": [
+   "keyboard: Left and Right move a task 1 day, and the start of the plan stops it",
+   "keyboard: Shift with Left or Right changes the last day, and a task stays at least 1 day long",
+   "keyboard: Up and Down move a task to the track above or below, and stop at the first and last track",
+   "keyboard: a task stops at the task next to it on its track",
+   "keyboard: a locked task does not move or change its days",
+   "keyboard: Delete and Backspace do not remove a task",
+   "keyboard: each task is 1 tab stop, named with its track and days",
+   "pointer: a drag on a task moves it by whole days, and a drag on its edge changes its days",
+   "server: the plan renders with no DOM",
+   "direction: Left and Right follow the text direction",
+   "names: the page names the plan and each task, and marks the locked task",
+   "keyboard: on the page, the arrow keys move a task and change its days, and the status line reports it",
+   "agent: an agent finds the plan, moves a task to another day and changes the length of another",
+   "agent: moveTask and resizeTask check the task, the track and the days, and refuse a locked task or an overlap"
+  ]
+ },
+ "snapshotBytes": 886,
+ "treeBytes": 999,
+ "tabStops": 7,
+ "lines": 289
+}
