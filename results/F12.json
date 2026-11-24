@@ -1,0 +1,18 @@
+{
+ "at": "2026-11-24 23:23 UTC",
+ "tests": {
+  "passed": 6,
+  "names": [
+   "names: the bridge sees Tickets and the Pay button, and Pay asks the person",
+   "visual: the seat block is hidden from the bridge and marks the chosen seats in row F",
+   "agent: the Pay step waits for the person; a Deny pays nothing and an Allow pays",
+   "agent: the confirm text follows the count",
+   "keyboard: Enter on Pay pays with no prompt, because the person pressed it",
+   "keyboard: Space on Pay pays too"
+  ]
+ },
+ "snapshotBytes": 258,
+ "treeBytes": 662,
+ "tabStops": 2,
+ "lines": 191
+}
