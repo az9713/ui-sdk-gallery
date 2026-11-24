@@ -1,0 +1,25 @@
+{
+ "at": "2026-11-24 07:41 UTC",
+ "tests": {
+  "passed": 13,
+  "names": [
+   "names: each control has the name that the page shows",
+   "keyboard: the menubar and the toolbar are 1 tab stop each, and a separator takes no focus",
+   "keyboard: Tab goes from the menubar to the toolbar and back",
+   "keyboard: ArrowRight and ArrowLeft move between the menus, and Tab comes back to the last one",
+   "keyboard: ArrowDown opens a menu on its first item, Enter runs it, and focus goes back to the trigger",
+   "keyboard: Escape closes a menu and runs nothing, and ArrowRight in an open menu opens the next one",
+   "keyboard: Space on Show ruler switches it on and off",
+   "keyboard: ArrowRight and ArrowLeft move through the toolbar and across its groups, Home and End go to its ends",
+   "keyboard: Space and Enter press the focused toggle, and the arrows alone press nothing",
+   "keyboard: 1 alignment stays pressed, and the same toggle does not clear it",
+   "keyboard: Enter on Insert link runs it",
+   "keyboard: focus on a toggle shows its hint, and Escape hides it and keeps focus",
+   "agent: an agent presses the toggles, and saves from the File menu"
+  ]
+ },
+ "snapshotBytes": 1315,
+ "treeBytes": 477,
+ "tabStops": 2,
+ "lines": 120
+}
