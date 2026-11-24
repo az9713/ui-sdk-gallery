@@ -105,6 +105,8 @@ Each one cost a failed run. The docs do not state them.
 - **axe fails `label-content-name-mismatch` when an `aria-label` does not contain the visible text.** (A10.) Write "Account menu for Hollis Grant", not "Account menu", and use the whole string as the step's ref.
 - **An expanded `ui-tree-item` branch fails axe `label-content-name-mismatch`.** (A12.) Start each branch collapsed. A `setValue` on a file in a closed folder does not reveal it: call `tree.api.reveal(path)` in `valuechange`.
 - **An item's bridge label is its text content with no added space.** (A13.) `Launch checklist<small>Mara</small>` reads "Launch checklistMara". Put a space before the inner element.
+- **The rating's bridge `setValue` does not work** in `0.1.0-beta.16`: each number fails with "No item 4 in …". (A15.) Leave the rating out of the task and record it with `test.fails`.
+- **jsdom gives a carousel 1 page.** (A15.) Stub `getBoundingClientRect`, `offsetWidth`, `clientWidth`, `scrollWidth` and `offsetLeft` in the test file.
 - **`checkPattern` has 15 patterns and `grid` is not one of them.** Use it when your pattern is in the list of `references/testing.md`.
 
 ## Your files

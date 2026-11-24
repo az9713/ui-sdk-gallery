@@ -1,0 +1,21 @@
+{
+ "at": "2026-11-24 07:53 UTC",
+ "tests": {
+  "passed": 9,
+  "names": [
+   "names: each control has the name that the page shows",
+   "keyboard: Enter on Next product and Previous product moves the carousel",
+   "keyboard: the indicators are 1 tab stop, and each arrow moves to a product",
+   "keyboard: the rating is 1 tab stop, both arrows change the score, and Space clears it",
+   "keyboard: each product keeps its own score",
+   "keyboard: Previous page is disabled on page 1, and Enter on a page number shows its results",
+   "keyboard: Tab reaches the carousel, the score and the result pages",
+   "agent: an agent opens a result page and picks a product",
+   "agent: an agent scores the product (the bridge lists the stars with auto ids, so setValue 4 finds no item)"
+  ]
+ },
+ "snapshotBytes": 550,
+ "treeBytes": 884,
+ "tabStops": 10,
+ "lines": 134
+}
