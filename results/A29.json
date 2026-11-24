@@ -1,0 +1,21 @@
+{
+ "at": "2026-11-24 08:25 UTC",
+ "tests": {
+  "passed": 9,
+  "names": [
+   "names: each control has the name that the page shows",
+   "keyboard: Enter opens the 4 layers in order, and focus goes into each new layer",
+   "keyboard: Escape closes 1 layer each time, from the top, and focus goes back to the trigger of that layer",
+   "keyboard: Keep labels closes only the confirm and removes nothing",
+   "keyboard: Space changes each label, and Save card shows the title and the labels on the card",
+   "keyboard: Cancel closes the dialog without a save, and the next open shows the saved card",
+   "keyboard: Save card with an empty title saves nothing, keeps the dialog open and puts focus on the title",
+   "keyboard: Remove labels in the confirm removes each label from the card and the board",
+   "agent: an agent goes through the 4 layers, and the confirm waits for the person"
+  ]
+ },
+ "snapshotBytes": 157,
+ "treeBytes": 160,
+ "tabStops": 1,
+ "lines": 169
+}

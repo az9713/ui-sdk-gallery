@@ -112,6 +112,7 @@ Each one cost a failed run. The docs do not state them.
 - **A toast, a drawer and an alert dialog are each 1 bridge entry with their title as the label.** (A20, A21.) Press an inner button by text: `{ ref: "Message archived", action: "press", args: ["Undo archive"] }`. The `keys` helper names Space `"Space"`, not `" "`.
 - **A design `cramped-padding` finding can come from the shell's snapshot box, not your UI.** (A18.) A snapshot line longer than about 34 characters wraps and fills it. A button inside a list or timeline item adds a `"row"` line with the whole item text. Keep such buttons out of items.
 - **Do not use `data-empty` on your own elements inside a date or time input.** (A24.) The input's separator segments carry it.
+- **The shell's `ui-overlay-host` is hidden from the bridge.** (A29.) For an overlays confirm the bridge must see, use `createOverlays()` from `@ui-sdk/core/overlays` plus `createConfirm({ overlays })`, and put your own host inside the stage. The shell's Allow / Deny prompt takes focus and closes non-modal popovers: set `dismissible="false"` on them while a confirm is pending.
 - **`checkPattern` has 15 patterns and `grid` is not one of them.** Use it when your pattern is in the list of `references/testing.md`.
 
 ## Your files
