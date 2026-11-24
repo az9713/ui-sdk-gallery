@@ -14,7 +14,7 @@ You build 1 row of `rows.json`. Your ID is in your prompt.
    - Look only: `ui/E01-no-stylesheet.ts`.
 4. **Write your 2 files**: `ui/<ID>-<name>.ts` and `ui/<ID>-<name>.test.ts`. `<name>` is lowercase words with dashes.
 5. **Run the gate until it passes.** Give the command a timeout of 600,000 ms: the gate for B01 takes 64 seconds, and each deliberate break adds a test run. Each failure prints `FAIL <stage>` and the reasons. Correct the UI or its tests. The gate is the judge: when you think that the gate is wrong, stop and report it.
-6. **Look at `shots/<ID>.png`.** Done when a person sees the UI of your row's title, with no text cut off and no parts that overlap.
+6. **Look at `shots/<ID>.png`.** Done when a person sees the UI of your row's title, with no text cut off and no parts that overlap. When the brief has a `Visual` line, the screenshot must also show that domain and that visual.
 7. **Report** in the format at the end of this file.
 
 ## The UI file
@@ -53,6 +53,11 @@ Rows with `Domain`, `Visual` and `Library` lines in their brief must show that d
 - **Text drawn in SVG counts for axe contrast.** Use the `--ui-*` tokens or colors with 4.5:1 on their background. Text on a gradient or a picture fails.
 - **Size:** keep the visual inside the stage. WebGL: 1 renderer, `antialias: true`, size it to its box, and `dispose()` nothing at module level.
 - **jsdom has no canvas 2D context and no WebGL.** Guard with `const ctx = canvas.getContext("2d"); if (!ctx) return` (and the same for WebGL) so tests run.
+- **No animation end gates a state.** Write the state and the status line at once; the animation only follows. `task.done` and the tests read the DOM.
+- **The gate takes the screenshot 300 ms after mount.** Draw the visual in its full first state in `mount`, before any intro animation. A blank or half-drawn chart in `shots/<ID>.png` is a fail.
+- **Headless Chrome of the gate has WebGL2** (checked 2026-11-24). A console warning or error from a library fails the browser stage.
+- **Do not flatten the assigned look to pass the design stage.** When `impeccable detect` reports a finding that the Visual line asks for (a neon glow, a CRT or pixel font, a skeuomorphic gradient), stop and report the exact finding line. The orchestrator adds a `DESIGN_EXCEPTIONS` entry in `scripts/gate.mjs`. Correct every other finding.
+- **If the library cannot work, keep the visual.** Draw it with `svg` or `canvas` instead, and say so in the report.
 
 ## The test file
 
@@ -153,3 +158,4 @@ All other files belong to the orchestrator: `src/`, `scripts/`, `rows.json`, `pa
 3. Each key that you selected with no APG rule.
 4. Each thing that you could not check.
 5. The files that you wrote.
+6. For a row with a `Visual` line: the library items that you imported, and each part of the Visual line that you could not draw, with the reason.
