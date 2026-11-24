@@ -1,0 +1,24 @@
+{
+ "at": "2026-11-24 09:05 UTC",
+ "tests": {
+  "passed": 12,
+  "names": [
+   "keyboard: the arrow keys go from event to event, in a day and across days, and Home, End go to the day's ends",
+   "keyboard: the week is 1 tab stop, and the arrow keys move focus without moving an event",
+   "keyboard: Space picks an event up, Up and Down move it by 30 minutes, and Space puts it down",
+   "keyboard: Shift with Down changes the end, and Right moves the event to the next day",
+   "keyboard: Escape puts a picked-up event back where it was",
+   "lanes: events that overlap share the day's width side by side, and an event alone takes all of it",
+   "pointer: a drag moves an event, and a drag of its lower edge changes its length",
+   "server: the week renders with no DOM",
+   "direction: in right to left, Left goes to the next day and Right to the day before, for focus and for a picked-up event",
+   "names: the page names the week, each day and each event",
+   "keyboard: on the page, a picked-up event moves to another day, focus stays on it, and the status line reports it",
+   "agent: an agent finds the week and its events, moves an event beside another and changes a length, and gets errors it can act on"
+  ]
+ },
+ "snapshotBytes": 1168,
+ "treeBytes": 1029,
+ "tabStops": 1,
+ "lines": 376
+}
