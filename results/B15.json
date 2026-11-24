@@ -1,0 +1,28 @@
+{
+ "at": "2026-11-24 09:32 UTC",
+ "tests": {
+  "passed": 16,
+  "names": [
+   "keyboard: the tree is 1 tab stop, and Up, Down, Home and End move focus without a change",
+   "keyboard: Right goes into a branch and Left back out, then Left closes the branch and Right opens it",
+   "keyboard: Space picks up a row, Right nests it under the row above, and Space drops it",
+   "keyboard: Enter picks up a parent, Down moves it with its children, and Enter drops it",
+   "keyboard: Escape puts a picked-up row back, and Tab puts it back and goes on",
+   "keyboard: the first row cannot nest, and a row goes no deeper than level 3",
+   "keyboard: a closed branch moves with its hidden rows, and a row dropped into a closed branch opens it",
+   "keyboard: the tree passes the APG tree view checks, typing a letter included",
+   "pointer: a drag sideways nests a row under the row above and reports the drag",
+   "pointer: a click on the arrow closes and opens a branch, and a click on a row changes nothing",
+   "server: the outline renders with no DOM",
+   "direction: Left and Right swap on a right to left page",
+   "names: the page names the tree, its rows and their levels, and describes how to move a row",
+   "keyboard: on the page, the rows follow the new order, focus stays on the moved row and the status line reports it",
+   "pointer: on the page, the arrow of a branch hides and shows its rows",
+   "agent: an agent finds the outline and its rows, nests 1 row and moves a branch"
+  ]
+ },
+ "snapshotBytes": 681,
+ "treeBytes": 779,
+ "tabStops": 1,
+ "lines": 358
+}
