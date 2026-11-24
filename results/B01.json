@@ -1,0 +1,22 @@
+{
+ "at": "2026-11-24 05:59 UTC",
+ "tests": {
+  "passed": 10,
+  "names": [
+   "keyboard: arrow keys move in 2 dimensions and Home, End go to the row ends",
+   "keyboard: the grid is 1 tab stop, and a taken seat does not get focus",
+   "keyboard: Space and Enter select a seat, and Space again clears it",
+   "keyboard: Shift with an arrow key extends the selection",
+   "keyboard: a click selects a free seat and does nothing on a taken seat",
+   "server: the seat map renders with no DOM",
+   "direction: Left and Right follow the text direction",
+   "names: the page names the grid, each seat and the button",
+   "keyboard: on the page, Space selects the focused seat and the status line reports it",
+   "agent: an agent finds the grid, selects 2 seats and books them, and cannot select a taken seat"
+  ]
+ },
+ "snapshotBytes": 171,
+ "treeBytes": 2104,
+ "tabStops": 2,
+ "lines": 194
+}
