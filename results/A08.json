@@ -1,0 +1,20 @@
+{
+ "at": "2026-11-24 07:40 UTC",
+ "tests": {
+  "passed": 8,
+  "names": [
+   "names: each control has the name that the page shows",
+   "agent: Save photo before the photo loads says that it is loading and cuts nothing",
+   "keyboard: the page has 3 tab stops: the photo, the zoom slider, and Save photo",
+   "keyboard: ArrowRight and ArrowLeft move the zoom by 0.1, and Home and End go to 1 and 4",
+   "keyboard: Plus and Minus on the photo move the slider, and an arrow pans the photo",
+   "keyboard: Enter and Space on Save photo each cut a round 128 px file and show it in the avatar",
+   "agent: an agent sets the zoom with the slider, saves, and the crop and the avatar follow",
+   "agent: an agent zooms the photo itself, and the slider shows the zoom"
+  ]
+ },
+ "snapshotBytes": 478,
+ "treeBytes": 237,
+ "tabStops": 3,
+ "lines": 118
+}
