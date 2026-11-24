@@ -1,0 +1,26 @@
+{
+ "at": "2026-11-24 09:18 UTC",
+ "tests": {
+  "passed": 14,
+  "names": [
+   "keyboard: ArrowUp brings back earlier messages, newest first, and ArrowDown returns to the draft",
+   "keyboard: Enter sends the draft, clears the field, and the sent message is the first that ArrowUp brings back",
+   "keyboard: Enter on an empty or blank field sends nothing",
+   "keyboard: Shift+Enter and the modifier arrows leave the draft alone",
+   "keyboard: a click on Send sends the draft",
+   "keyboard: the log follows new content while the reader is at the bottom",
+   "keyboard: the jump button shows only after the reader leaves the bottom, and it goes back to the end",
+   "keyboard: sending while scrolled up goes back to the end",
+   "server: the chat thread renders with no DOM",
+   "direction: ArrowUp and ArrowDown bring back the same messages in ltr and rtl",
+   "names: the page names the thread, the message list, the field and the buttons",
+   "keyboard: on the page, Tab reaches the list, the field and Send, in that order",
+   "keyboard: on the page, ArrowUp brings back my last message, and Enter sends a new one into the list",
+   "agent: an agent finds the thread, writes a draft and sends it, and an empty send is refused"
+  ]
+ },
+ "snapshotBytes": 106,
+ "treeBytes": 1536,
+ "tabStops": 3,
+ "lines": 272
+}
