@@ -1,0 +1,22 @@
+{
+ "at": "2026-11-24 21:42 UTC",
+ "tests": {
+  "passed": 10,
+  "names": [
+   "names: each control has the name that the page shows, and each of the 24 rows has its own menu",
+   "visual: each member has a generated identicon, hidden from the bridge and from screen readers",
+   "agent: the scripted task renames, promotes, removes after the person allows it, flips 2 emails and saves",
+   "keyboard: the tab list is 1 tab stop, and ArrowRight and ArrowLeft move between the 3 tabs",
+   "keyboard: each row menu is 1 tab stop, Enter opens it on Make admin, and Enter promotes the member",
+   "keyboard: ArrowDown and ArrowUp move through a row menu past its separator, and Escape closes it with no change",
+   "keyboard: Keep member closes the confirm dialog and removes nobody",
+   "keyboard: Confirm removal removes the member, and focus goes to the next row menu",
+   "keyboard: Space changes each email switch, and Enter on Save reports them",
+   "keyboard: an empty project name is invalid"
+  ]
+ },
+ "snapshotBytes": 3431,
+ "treeBytes": 2396,
+ "tabStops": 26,
+ "lines": 240
+}
