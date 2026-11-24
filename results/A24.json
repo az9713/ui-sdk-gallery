@@ -1,0 +1,27 @@
+{
+ "at": "2026-11-24 08:07 UTC",
+ "tests": {
+  "passed": 15,
+  "names": [
+   "names: each control has the name that the page shows",
+   "keyboard: the page has 8 tab stops in reading order, and the zone list takes none",
+   "keyboard: the first rows show the London meeting in 3 zones, with the day shift and the working hours",
+   "keyboard: ArrowUp on the day steps the meeting date, and every row follows",
+   "keyboard: ArrowUp on the hour steps the start time, and Tokyo passes midnight at 15:00 in London",
+   "keyboard: New York is on the previous day before 05:00 in London",
+   "keyboard: the working hours include 08:00 and end before 18:00 in each zone",
+   "keyboard: New York follows its own daylight saving change, 2 weeks before London's",
+   "keyboard: Enter on Next day adds 1 day, across the end of a month and a year",
+   "keyboard: Enter on Send invite reports each zone in the status line",
+   "keyboard: an erased date empties the rows, and Send invite and Next day wait for a date",
+   "keyboard: the label language changes the date labels and leaves the clocks alone",
+   "keyboard: Enter on the language list opens it, ArrowDown and Enter choose Deutsch",
+   "agent: an agent sets the date, the time and the language, and Send invite reports the 3 zones",
+   "agent: the Next day button moves a date that the agent set, across a year end"
+  ]
+ },
+ "snapshotBytes": 520,
+ "treeBytes": 981,
+ "tabStops": 8,
+ "lines": 182
+}
