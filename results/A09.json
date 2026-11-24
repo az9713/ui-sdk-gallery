@@ -1,0 +1,18 @@
+{
+ "at": "2026-11-24 07:40 UTC",
+ "tests": {
+  "passed": 6,
+  "names": [
+   "names: each control has the name that the page shows",
+   "keyboard: the layout switch is 1 tab stop, and the arrows check the next item",
+   "keyboard: Enter on the swatch opens the popover, Escape closes it, and focus returns to the swatch",
+   "keyboard: the arrows move the brightness slider and Save reports the color",
+   "agent: an agent sets the color and the mode, then saves",
+   "keyboard: the arrows change the hue slider and the color"
+  ]
+ },
+ "snapshotBytes": 522,
+ "treeBytes": 401,
+ "tabStops": 3,
+ "lines": 106
+}

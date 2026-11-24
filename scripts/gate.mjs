@@ -256,7 +256,14 @@ function stageDesign(id, url) {
     throw new Fail("design", `the detector did not run: ${(out.stderr + out.stdout).slice(0, 300)}`)
   }
   if (!Array.isArray(findings)) throw new Fail("design", "the detector output is not a list")
-  if (findings.length) throw new Fail("design", findings.map((f) => `${f.antipattern}: ${f.snippet}`))
+  const seen = findings.map((f) => `${f.antipattern}: ${f.snippet}`).filter((s) => !(DESIGN_EXCEPTIONS[id] ?? []).includes(s))
+  if (seen.length) throw new Fail("design", seen)
+}
+
+// ponytail: per-UI list of sanctioned detector findings. Each entry names why; add one only after reading the finding.
+const DESIGN_EXCEPTIONS = {
+  // The hue slider's track is a rainbow gradient by function; the detector reads its cyan band as an AI palette.
+  A09: ["ai-color-palette: Cyan gradient background"],
 }
 
 async function gate(ids, { full }) {
