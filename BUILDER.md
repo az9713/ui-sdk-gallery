@@ -151,6 +151,8 @@ Each one cost a failed run. The docs do not state them.
 - **matter-js 0.20.0 warns in the console when `Engine.update` steps more than 1000/60 ms.** (B32.) Step by exactly 1000/60 and carry the rest. `Body.setVelocity` takes px per 16.667 ms step. `import Matter from "matter-js"` works with tsc, vitest and the build.
 - **`view.drag` does not control time.** (B32.) To test velocity, dispatch your own `PointerEvent`s and set `timeStamp` with `Object.defineProperty`. A dispatched `PointerEvent` reports `source: "programmatic"`.
 - **When an agent names an item by its label, the bridge passes the item's value to any action** of a primitive with `agent.items` (B32: "Ginkgo" arrives as "ginkgo").
+- **axe cannot decide the contrast of `<text>` inside an inline `<svg>`** ("contains an image node"). (B25.) Put chart labels in HTML and keep only shapes in SVG. A line drawn by `::before` behind text has the same problem; inset `box-shadow` passes.
+- **An option of kind `"value"` that holds an object is not read from an attribute.** (B25.) Pass `options: () => ({ ... })` on the root in `createParts`.
 - **jsdom has no `matchMedia`.** Call `window.matchMedia?.(...)`.
 - **The gate does not emulate reduced motion.** Test the reduced-motion path in a unit test with a `matchMedia` stub.
 - **`checkPattern` has 15 patterns and `grid` is not one of them.** Use it when your pattern is in the list of `references/testing.md`.

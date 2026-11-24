@@ -1,0 +1,23 @@
+{
+ "at": "2026-11-24 18:12 UTC",
+ "tests": {
+  "passed": 11,
+  "names": [
+   "keyboard: Left and Right move between tags, Home and End go to the ends, and the list is 1 tab stop",
+   "keyboard: Delete and Backspace remove the focused tag",
+   "keyboard: the cross button removes its tag and is not a tab stop",
+   "server: the tag list renders with no DOM",
+   "direction: Left and Right follow the text direction",
+   "names: the page names the list, each tag and each cross button, and draws one bar for each tag",
+   "agent: an agent finds the list, removes 2 tags by name, and cannot remove a tag that is gone",
+   "keyboard: removing the focused tag moves focus to the next tag",
+   "keyboard: removing the last tag moves focus to the one before it",
+   "keyboard: the cross button of a tag removes it on the page and the chart follows",
+   "keyboard: removing the only tag left leaves no tag to take focus"
+  ]
+ },
+ "snapshotBytes": 455,
+ "treeBytes": 1094,
+ "tabStops": 1,
+ "lines": 300
+}
