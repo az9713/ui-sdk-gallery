@@ -121,6 +121,8 @@ Each one cost a failed run. The docs do not state them.
 - **A first gate pass can differ from the second.** (B12.) The shell shows the bridge snapshot only once `results/<ID>.json` exists, so `cramped-padding` from long snapshot lines can appear on the second run. Run the gate 2 times before you report.
 - **jsdom has no `Element.scrollTo`, and the `ResizeObserver` of `src/setup.ts` never reports.** (B12.) Stub both in the test file.
 - **`PartDisplay` refuses `"grid"` and `"flex"`.** (B11, B12.) Use `"block"` in `createParts` and set grid or flex in CSS. In `task.done`, use `hasAttribute("hidden")`: `.hidden` has the type `boolean | "until-found"`.
+- **axe fails `color-contrast` on a gradient background and on options outside a scroll window.** (B14, B17.) Draw a track with a plain color (`::after`), and give options outside the visible rows opacity 0. The design stage fails `overflow: hidden` on a box with absolutely positioned children (B13).
+- **`checkPattern(root, "tree")` requires type-ahead.** (B16.) Add `createTypeahead`. `checkDirection` passes on a vertical tree whose first item is a closed branch.
 - **`checkPattern` has 15 patterns and `grid` is not one of them.** Use it when your pattern is in the list of `references/testing.md`.
 
 ## Your files

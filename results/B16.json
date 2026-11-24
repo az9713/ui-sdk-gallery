@@ -1,0 +1,26 @@
+{
+ "at": "2026-11-24 09:26 UTC",
+ "tests": {
+  "passed": 14,
+  "names": [
+   "keyboard: Down, Up, Home and End move through the permissions that show",
+   "keyboard: Right opens a branch and then enters it, Left goes to the parent and then closes it",
+   "keyboard: the tree is 1 tab stop, and each permission has its level and place",
+   "keyboard: Space on a branch checks all of it, Space again clears it, and Enter checks 1 permission",
+   "keyboard: unchecking 1 permission makes each branch above it mixed",
+   "keyboard: a locked permission keeps its state, and its branch stays mixed",
+   "pointer: a click on the arrow opens a branch, and a click on the row checks it",
+   "keyboard: typing a letter moves to the next permission that starts with it",
+   "pattern: the tree passes the tree pattern check",
+   "server: the permission tree renders with no DOM",
+   "direction: Right and Left follow the text direction",
+   "names: the page names the tree, each permission and the button, and shows the 3 states",
+   "keyboard: on the page, Space checks a section and 1 permission, and the status line reports it",
+   "agent: an agent finds the tree, checks a section, unchecks 1 permission and saves, and cannot change a locked one"
+  ]
+ },
+ "snapshotBytes": 318,
+ "treeBytes": 896,
+ "tabStops": 2,
+ "lines": 349
+}
