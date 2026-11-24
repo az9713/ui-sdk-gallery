@@ -1,0 +1,22 @@
+{
+ "at": "2026-11-24 21:35 UTC",
+ "tests": {
+  "passed": 10,
+  "names": [
+   "names: the star list, its trigger and the plot have names, and the Sun is selected at the start",
+   "agent: query finds a star among 5,000 without opening the list, and setValue selects it while the list stays closed",
+   "agent: the scripted task names the star by its label, the list stays closed, and the snapshot stays small",
+   "agent: a star that is not in the catalogue is refused, and the selection stays",
+   "agent: clear empties the star, and the status and the plot say that no star is selected",
+   "keyboard: the star list is 1 tab stop, and only the rows near the scroll position render",
+   "keyboard: typing opens the list with the matching stars, and ArrowDown then Enter chooses one and closes it",
+   "keyboard: ArrowDown and ArrowUp move the highlight through the first rows, and Escape closes the list and keeps the star",
+   "keyboard: a query that matches no star shows the empty message",
+   "motion: with reduced motion, a new star is drawn in 1 frame, and without it the ring animates"
+  ]
+ },
+ "snapshotBytes": 145,
+ "treeBytes": 796,
+ "tabStops": 1,
+ "lines": 412
+}
