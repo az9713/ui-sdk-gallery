@@ -84,6 +84,10 @@ Each one cost a failed run. The docs do not state them.
 - **In a test file, call `mountUI` in the first page test, after the `mount` tests.** Tab in a `mount` view goes to the first control of the document.
 - **axe fails the gate when it cannot decide a contrast.** (A02, A03.) `web.css` draws icons on some parts: the password toggle, the checkbox indicator, the OTP separator, the number-input step buttons. Leave those parts empty, with an `aria-label` where they are buttons. A `−` or `+` character in them fails. The OTP input has inline transparent text: `[data-stage] ui-otp-input input { opacity: 0 !important; }` clears it.
 - **An item label that holds a hint does not match a short label.** (A03.) `setValue "Overnight"` failed on the radio labeled "Overnight ($24.00, next day)". Use the item's value in the step, or keep the hint out of the `<label>`.
+- **Do not name a slot after an HTML void element** (`track`, `source`, `input`, `img`, `col`, `area`). (B03.) `<track value="A">A</track>` put the text outside the part.
+- **The web renderer does not reorder the DOM.** (B03.) For a list whose order changes, the root slot's `bind` subscribes to the store, re-appends the items in the new order, and keeps focus. `mount` from `@ui-sdk/core/testing` does not run the root `bind`: assert order from `view.api` or state there, and assert DOM order in the `mountUI` test.
+- **`checkDirection` fails on a vertical list** ("ArrowRight changes nothing … no direction to check"). (B03.) Write the `direction:` test by hand: set `document.documentElement.dir` to `ltr` and `rtl`, press the same keys, and assert the same result.
+- **Pointer drag in jsdom needs a stub of `getBoundingClientRect`.** (B03.) Use `view.drag` from `mount`.
 - **`checkPattern` has 15 patterns and `grid` is not one of them.** Use it when your pattern is in the list of `references/testing.md`.
 
 ## Your files

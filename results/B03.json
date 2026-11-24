@@ -1,0 +1,24 @@
+{
+ "at": "2026-11-24 07:11 UTC",
+ "tests": {
+  "passed": 12,
+  "names": [
+   "keyboard: the list is 1 tab stop, and the arrow keys move focus without a change of order",
+   "keyboard: Space picks up a track, the arrow keys move it, and Space drops it",
+   "keyboard: Enter picks up and drops, and Home and End send a track to either end",
+   "keyboard: Escape puts a picked-up track back, and Tab puts it back and goes on",
+   "keyboard: a picked-up track stops at both ends of the list",
+   "pointer: a drag moves a track to the place where it is dropped and reports the drag",
+   "pointer: a press without a move is a click and changes nothing",
+   "server: the playlist renders with no DOM",
+   "direction: a right to left page moves tracks with the same keys, and Left and Right change nothing in both",
+   "names: the page names the list and describes how to move a track",
+   "keyboard: on the page, the tracks follow the new order, focus stays on the moved track and the status line reports it",
+   "agent: an agent finds the list and its tracks, and moves 2 tracks"
+  ]
+ },
+ "snapshotBytes": 389,
+ "treeBytes": 556,
+ "tabStops": 1,
+ "lines": 206
+}
