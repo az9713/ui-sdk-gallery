@@ -1,0 +1,18 @@
+{
+ "at": "2026-11-24 07:47 UTC",
+ "tests": {
+  "passed": 6,
+  "names": [
+   "names: each control has the name that the page shows",
+   "keyboard: the filter is 1 tab stop, and typing opens the list with the labels that match",
+   "keyboard: ArrowDown and ArrowUp move the highlight, and Enter chooses a label and keeps the list open",
+   "keyboard: choosing 2 labels narrows the list to the issues that have both, and Backspace removes the last chip",
+   "keyboard: a label that no issue shares with the others leaves an empty list and a status that says so",
+   "agent: an agent finds the labels, chooses 2 and gets the filtered list"
+  ]
+ },
+ "snapshotBytes": 166,
+ "treeBytes": 1159,
+ "tabStops": 1,
+ "lines": 106
+}
