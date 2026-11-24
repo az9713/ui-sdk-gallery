@@ -1,0 +1,24 @@
+{
+ "at": "2026-11-24 19:04 UTC",
+ "tests": {
+  "passed": 12,
+  "names": [
+   "keyboard: the poem is 1 tab stop, and Up, Down, Home and End move between lines",
+   "keyboard: Space and Enter select the focused line",
+   "keyboard: Shift with Down or Up extends the selection by whole lines",
+   "keyboard: Escape clears the selection and the toolbar leaves",
+   "keyboard: the toolbar sits against the selected text and follows it",
+   "pointer: a drag across words becomes the selection, and a click clears it",
+   "visual: a mark is drawn on its words, only a new mark fades in, and not with reduced motion",
+   "server: the poem renders with no DOM",
+   "direction: the lines are vertical, so right to left changes nothing",
+   "names: the page names the poem, its lines, the toolbar and its buttons",
+   "keyboard: on the page, Tab goes into the toolbar, a button marks the text, and focus goes back to the line",
+   "agent: an agent selects a phrase, presses Imagery in the toolbar, and gets an error for a phrase not in the poem"
+  ]
+ },
+ "snapshotBytes": 385,
+ "treeBytes": 1261,
+ "tabStops": 2,
+ "lines": 493
+}

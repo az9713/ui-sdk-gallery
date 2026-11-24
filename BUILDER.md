@@ -167,6 +167,7 @@ Each one cost a failed run. The docs do not state them.
 - **Start Web Audio only in a person's click or key handler** (B35). An agent action sends no DOM event, so it never creates an AudioContext. `createRovingFocus` reads the nearest `dir`; set `dir="ltr"` on a root whose layout must not mirror.
 - **A negative SVG `<rect>` width is a console error that only the browser stage shows** (B33). Clamp generated sizes to 0 or more. jsdom can play the on-screen keyboard: stub `window.visualViewport` before mount, lower its height, dispatch `resize`.
 - **axe fails arrow glyphs `←↑↓→` as a label** ("contains only non-text characters") (B37). `formatShortcut` wraps its text in U+2066 and U+2069; remove them in tests and status text. `isApple` is not exported: test `formatShortcut("mod+k").includes("⌘")`.
+- **`position()` reads `offsetWidth`, `offsetHeight` and `documentElement.clientWidth/clientHeight`, all 0 in jsdom** (B34). Stub the 4 to assert exact coordinates. A `ui-toolbar` inside an own primitive is 1 bridge entry named by its `aria-label`: `{ ref: "Selection tools", action: "press", args: ["Imagery"] }`. The snapshot does not keep the order of `agent.actions`.
 - **jsdom has no `matchMedia`.** Call `window.matchMedia?.(...)`.
 - **The gate does not emulate reduced motion.** Test the reduced-motion path in a unit test with a `matchMedia` stub.
 - **`checkPattern` has 15 patterns and `grid` is not one of them.** Use it when your pattern is in the list of `references/testing.md`.
