@@ -1,0 +1,23 @@
+{
+ "at": "2026-11-24 19:17 UTC",
+ "tests": {
+  "passed": 11,
+  "names": [
+   "keyboard: the grid is 1 tab stop, and the arrow keys move in 2 dimensions past black squares",
+   "keyboard: a letter fills the square and focus goes on along the word, and Space switches to Down",
+   "keyboard: Backspace clears the square, and on an empty square it goes back and clears the one before",
+   "keyboard: Left, Up and End move back and to the row's end, and Delete clears the square",
+   "pointer: a click focuses a white square and makes its word current, and a black square takes no focus",
+   "server: the crossword renders with no DOM",
+   "direction: Left and Right follow the text direction",
+   "names: the page names the grid, its squares and the button, and lists the clues",
+   "keyboard: on the page, Alt+T turns the grid, focus stays on the same square, and typing goes on down the turned word",
+   "keyboard: Turn grid keeps focus on the button and moves the tab stop with the square",
+   "agent: an agent fills a word and turns the grid while a person is on a square, and gets errors it can act on"
+  ]
+ },
+ "snapshotBytes": 701,
+ "treeBytes": 1664,
+ "tabStops": 2,
+ "lines": 429
+}
