@@ -1,0 +1,22 @@
+{
+ "at": "2026-11-24 07:18 UTC",
+ "tests": {
+  "passed": 10,
+  "names": [
+   "names: each control has the name that the page shows",
+   "keyboard: the date is 3 spinbuttons, and ArrowUp and ArrowDown step the day",
+   "keyboard: Tab moves through the month, day and year, then to the time",
+   "keyboard: the page has 7 tab stops, in reading order",
+   "keyboard: a day past the end of a month is moved back, and a weekend date is invalid",
+   "keyboard: ArrowUp steps the hour and minute, and the hour wraps from 23 to 0",
+   "keyboard: Enter in the notes field is left to add a line, and does not book",
+   "keyboard: Enter on Book appointment reports the visit",
+   "keyboard: Book appointment refuses a weekend date",
+   "agent: an agent sets the date, the time and the notes, and the page reports them"
+  ]
+ },
+ "snapshotBytes": 437,
+ "treeBytes": 376,
+ "tabStops": 7,
+ "lines": 74
+}
