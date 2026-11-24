@@ -1,0 +1,16 @@
+{
+ "at": "2026-11-24 15:17 UTC",
+ "tests": {
+  "passed": 4,
+  "names": [
+   "markup: the server markup is not upgraded before it is on the page, and its state carries over",
+   "names: each control has the name that the page shows",
+   "keyboard: Tab reaches the 4 controls in order, Space turns Billable off, and Enter submits",
+   "agent: an agent fills the upgraded form, turns Billable off, and submits"
+  ]
+ },
+ "snapshotBytes": 421,
+ "treeBytes": 591,
+ "tabStops": 4,
+ "lines": 107
+}
