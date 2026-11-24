@@ -145,6 +145,13 @@ Each one cost a failed run. The docs do not state them.
 - **jsdom's `canvas.getContext` prints "Not implemented" and returns nothing.** (B40.) Stub `HTMLCanvasElement.prototype.getContext` to return `null` in the test file.
 - **three 0.186.1 works in the gate's Chrome with 0 console messages** (B40, WebGL2, `antialias: true`). Named imports tree-shake; `WebGLRenderer` alone adds about 1.2 MB to the unminified gate build.
 - **With `closed: true`, the bridge refuses an unknown item before your api's throw runs.** (B40.) Test the api's throw directly, not through an agent step.
+- **The jsdom canvas message makes `npx vitest` exit 255 in Windows PowerShell 5.1** (B27). Run vitest from Bash, or stub `getContext`.
+- **In `mount` of `@ui-sdk/core/testing`, `el.getAttribute` cannot read a part's props.** (B27.) Read them with `elements<Props>(context, "<slot>")`.
+- **A canvas can be painted from the root `render` hook of `createParts`** and redrawn from `instance.subscribe`. (B27.)
+- **matter-js 0.20.0 warns in the console when `Engine.update` steps more than 1000/60 ms.** (B32.) Step by exactly 1000/60 and carry the rest. `Body.setVelocity` takes px per 16.667 ms step. `import Matter from "matter-js"` works with tsc, vitest and the build.
+- **`view.drag` does not control time.** (B32.) To test velocity, dispatch your own `PointerEvent`s and set `timeStamp` with `Object.defineProperty`. A dispatched `PointerEvent` reports `source: "programmatic"`.
+- **When an agent names an item by its label, the bridge passes the item's value to any action** of a primitive with `agent.items` (B32: "Ginkgo" arrives as "ginkgo").
+- **jsdom has no `matchMedia`.** Call `window.matchMedia?.(...)`.
 - **The gate does not emulate reduced motion.** Test the reduced-motion path in a unit test with a `matchMedia` stub.
 - **`checkPattern` has 15 patterns and `grid` is not one of them.** Use it when your pattern is in the list of `references/testing.md`.
 

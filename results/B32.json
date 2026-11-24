@@ -1,0 +1,23 @@
+{
+ "at": "2026-11-24 17:58 UTC",
+ "tests": {
+  "passed": 11,
+  "names": [
+   "keyboard: Tab reaches the 2 flick buttons, and Space and Enter sort the top card",
+   "keyboard: on an empty deck the buttons are disabled and keep focus, and reset brings the cards back",
+   "pointer: at the same distance, a quick flick throws the card, and a slow drag or a stop before release springs back",
+   "pointer: a drag moves the top card and leans it past 60 px, and a card under the top does not move",
+   "server: the deck renders with no DOM",
+   "direction: in right to left, a flick to the right sends the card to Study again",
+   "names: the page names the deck, shows 1 card on top with its leaf, and has 3 tab stops",
+   "keyboard: on the page, the buttons sort the top card, the piles list it, and the status line reports it",
+   "pointer: on the page, a quick flick reports its speed, and a slow drag reports that the card stays",
+   "keyboard: on the page, Start over brings every card back",
+   "agent: an agent finds the deck and its cards, sorts the top 2, and a card that is not on top is refused"
+  ]
+ },
+ "snapshotBytes": 426,
+ "treeBytes": 807,
+ "tabStops": 3,
+ "lines": 569
+}
