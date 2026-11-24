@@ -1,0 +1,16 @@
+{
+ "at": "2026-11-24 07:57 UTC",
+ "tests": {
+  "passed": 4,
+  "names": [
+   "names: each gauge and button has the name that the page shows",
+   "keyboard: the 2 buttons are the only tab stops, and Enter empties the trash",
+   "keyboard: the backup completes at 4 folders, and a 5th press changes nothing",
+   "agent: an agent reads the gauges and presses each button"
+  ]
+ },
+ "snapshotBytes": 457,
+ "treeBytes": 269,
+ "tabStops": 2,
+ "lines": 101
+}
