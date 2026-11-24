@@ -1,0 +1,24 @@
+{
+ "at": "2026-11-24 18:17 UTC",
+ "tests": {
+  "passed": 12,
+  "names": [
+   "keyboard: Space and Enter on a button step 1 gram, and a step at the limit changes nothing",
+   "keyboard: a button at its limit is aria-disabled and stays a tab stop",
+   "keyboard: holding More coffee steps at once, keeps stepping, and stops at the limit",
+   "keyboard: letting go stops the repeat, and Less coffee holds downward",
+   "keyboard: holding Space repeats at the pace of the button, not of the keyboard",
+   "keyboard: a press with a pointer steps once, and the click after it does not step again",
+   "server: the dose control renders with no DOM",
+   "direction: the buttons do the same in left-to-right and right-to-left, and arrows change nothing",
+   "visual: with reduced motion the cup shows the end state, a higher level and a darker colour for a bigger dose",
+   "names: the page names the dose control, its 2 buttons, the cup and the brew button",
+   "keyboard: on the page, the buttons move the dose, the readout and the cup follow, and a button stops at 8 g",
+   "agent: an agent sets 20 g, steps up twice and starts the brew, and a dose out of range is refused"
+  ]
+ },
+ "snapshotBytes": 210,
+ "treeBytes": 390,
+ "tabStops": 3,
+ "lines": 341
+}

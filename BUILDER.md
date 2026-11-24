@@ -154,6 +154,8 @@ Each one cost a failed run. The docs do not state them.
 - **axe cannot decide the contrast of `<text>` inside an inline `<svg>`** ("contains an image node"). (B25.) Put chart labels in HTML and keep only shapes in SVG. A line drawn by `::before` behind text has the same problem; inset `box-shadow` passes.
 - **An option of kind `"value"` that holds an object is not read from an attribute.** (B25.) Pass `options: () => ({ ... })` on the root in `createParts`.
 - **`vi.useFakeTimers()` around a hold made `settle()` hang 5 s on the page.** (B23.) Use real waits. A change that `bindHold` makes after its timer reports `source: "programmatic"`.
+- **The design stage reports `nested-cards` for a shadowed button inside a shadowed panel, and `border-accent-on-rounded` for a thick `border-bottom` with a radius.** (B24.) Use a 1px border and an inset `outline`.
+- **`bindRepeat` ignores the click after a real press only when `event.detail >= 1`.** (B24.) `el.click()` has `detail` 0; send `new MouseEvent("click", { detail: 1 })` in a test. `gsap.to` on SVG `attr` works in jsdom.
 - **jsdom has no `matchMedia`.** Call `window.matchMedia?.(...)`.
 - **The gate does not emulate reduced motion.** Test the reduced-motion path in a unit test with a `matchMedia` stub.
 - **`checkPattern` has 15 patterns and `grid` is not one of them.** Use it when your pattern is in the list of `references/testing.md`.
