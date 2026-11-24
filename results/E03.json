@@ -1,0 +1,15 @@
+{
+ "at": "2026-11-24 20:36 UTC",
+ "tests": {
+  "passed": 3,
+  "names": [
+   "look: the css sets --ui-* tokens, color-scheme, and background and color from tokens on [data-ui=E03]",
+   "keyboard: Space changes a switch",
+   "agent: the bridge finds each control by its name"
+  ]
+ },
+ "snapshotBytes": 588,
+ "treeBytes": 346,
+ "tabStops": 4,
+ "lines": 38
+}
