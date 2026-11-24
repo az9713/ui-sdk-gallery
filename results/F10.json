@@ -1,0 +1,19 @@
+{
+ "at": "2026-11-24 23:27 UTC",
+ "tests": {
+  "passed": 7,
+  "names": [
+   "names: Tip and Custom tip are the 2 controls, with refs c2 and c4",
+   "keyboard: the receipt has 2 tab stops, the Tip trigger and the Custom tip field",
+   "keyboard: Enter opens the Tip list, ArrowDown and Enter choose 20%, and the pie and the status follow",
+   "keyboard: a custom tip replaces the percent, a wrong amount is refused, and an empty field gives the percent back",
+   "agent: the label Tip names 2 components, and the error lists each match with its ref",
+   "agent: a step by ref chooses 15% on the Tip select, and Custom tip by its label is not a collision",
+   "agent: the task sets the custom tip by ref c4, then stops at the refused Tip step, and done reads both"
+  ]
+ },
+ "snapshotBytes": 234,
+ "treeBytes": 1367,
+ "tabStops": 2,
+ "lines": 191
+}
