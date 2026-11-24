@@ -1,0 +1,19 @@
+{
+ "at": "2026-11-24 21:27 UTC",
+ "tests": {
+  "passed": 7,
+  "names": [
+   "names: each control has the name that the page shows, and the trajectory is drawn at mount",
+   "keyboard: the form has 4 tab stops, and the orbit group is 1 of them",
+   "keyboard: the arrow keys check the next and the previous orbit, and the person's change is logged",
+   "keyboard: ArrowRight adds 500 kg to the payload, and End goes to 20,000 kg, which is over capacity",
+   "agent: 1 act call makes 4 changes, and each one reaches the status, the log and the trajectory",
+   "agent: a payload mass outside 500 to 20,000 kg changes nothing",
+   "keyboard: with reduced motion the rocket waits at orbit insertion and the trajectory is drawn at once"
+  ]
+ },
+ "snapshotBytes": 618,
+ "treeBytes": 956,
+ "tabStops": 4,
+ "lines": 275
+}
