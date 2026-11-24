@@ -1,0 +1,25 @@
+{
+ "at": "2026-11-24 07:17 UTC",
+ "tests": {
+  "passed": 13,
+  "names": [
+   "keyboard: arrow keys move in a column and between columns, and Home, End go to the column ends",
+   "keyboard: the board is 1 tab stop, and each column is a named listbox of options",
+   "keyboard: Space picks a card up, Right moves it to the next column, and Space drops it",
+   "keyboard: Enter picks a card up, Down moves it in its column, and Escape puts it back",
+   "keyboard: Doing takes at most 2 cards, so a third card skips it",
+   "pointer: a drag moves a card to another column",
+   "pointer: a drag of New card onto a column adds a card there, and a click adds it to To do",
+   "agent: moveCard and addCard check the card and the column, and refuse a full Doing",
+   "server: the board renders with no DOM",
+   "direction: Left and Right follow the text direction",
+   "names: the page names the board, its 3 columns, each card and the button",
+   "keyboard: on the page, a card moves to its new column with focus on it, and Enter on New card adds a card",
+   "agent: an agent finds the board, moves a card, adds a card, and is refused a third card in Doing"
+  ]
+ },
+ "snapshotBytes": 514,
+ "treeBytes": 645,
+ "tabStops": 2,
+ "lines": 361
+}

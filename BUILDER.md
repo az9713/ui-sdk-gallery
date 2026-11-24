@@ -87,7 +87,11 @@ Each one cost a failed run. The docs do not state them.
 - **Do not name a slot after an HTML void element** (`track`, `source`, `input`, `img`, `col`, `area`). (B03.) `<track value="A">A</track>` put the text outside the part.
 - **The web renderer does not reorder the DOM.** (B03.) For a list whose order changes, the root slot's `bind` subscribes to the store, re-appends the items in the new order, and keeps focus. `mount` from `@ui-sdk/core/testing` does not run the root `bind`: assert order from `view.api` or state there, and assert DOM order in the `mountUI` test.
 - **`checkDirection` fails on a vertical list** ("ArrowRight changes nothing … no direction to check"). (B03.) Write the `direction:` test by hand: set `document.documentElement.dir` to `ltr` and `rtl`, press the same keys, and assert the same result.
+- **The root's `render: (el, instance) => cleanup` hook of `createParts` can move items.** (B02.) It is in the `OwnerConfig` JSDoc of `@ui-sdk/web/dist/define-element.d.ts`. B02 uses it to put each card in its column, and focus stays on the moved card.
+- **The design stage fails a skipped heading level** (`skipped-heading`): the page title is `h1`, so sections start at `h2`. (B02.)
+- **`document.elementFromPoint` returns nothing in a `mount` drag.** (B02.) For an own drop target, test `getBoundingClientRect` of the target elements.
 - **Pointer drag in jsdom needs a stub of `getBoundingClientRect`.** (B03.) Use `view.drag` from `mount`.
+- **In jsdom, setting `.value` from code or sending an `input` event does not fire `valuechange`.** (A05: `ui-textarea`, `ui-date-input`, `ui-time-input`.) In a test, call `element.api.setValue(...)`. In the UI, read the value when the person submits.
 - **`checkPattern` has 15 patterns and `grid` is not one of them.** Use it when your pattern is in the list of `references/testing.md`.
 
 ## Your files
