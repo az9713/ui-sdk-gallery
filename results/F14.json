@@ -1,0 +1,21 @@
+{
+ "at": "2026-11-24 23:30 UTC",
+ "tests": {
+  "passed": 9,
+  "names": [
+   "names: the sign-in controls are in the snapshot, and no part of the vault is",
+   "keyboard: the page has 5 tab stops, and 2 of them are in the vault",
+   "keyboard: Space turns two-step sign-in off and on",
+   "keyboard: Enter opens the vault and shows the codes, and Enter again seals it",
+   "keyboard: Space on Regenerate codes makes 10 new codes",
+   "agent: the open vault and its codes stay out of snapshot and query",
+   "agent: the agent changes the sign-in settings, and a step on the vault fails with nothing opened",
+   "agent: a step on Regenerate codes fails too",
+   "keyboard: with reduced motion the door is open at once"
+  ]
+ },
+ "snapshotBytes": 350,
+ "treeBytes": 852,
+ "tabStops": 5,
+ "lines": 227
+}
