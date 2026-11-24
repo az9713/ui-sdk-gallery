@@ -1,0 +1,14 @@
+{
+ "at": "2026-11-24 08:00 UTC",
+ "tests": {
+  "passed": 2,
+  "names": [
+   "keyboard: Enter on Archive shows a toast, and Enter on its action undoes it",
+   "agent: an agent archives, then presses the toast action"
+  ]
+ },
+ "snapshotBytes": 156,
+ "treeBytes": 150,
+ "tabStops": 2,
+ "lines": 66
+}

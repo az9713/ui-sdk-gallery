@@ -107,6 +107,7 @@ Each one cost a failed run. The docs do not state them.
 - **An item's bridge label is its text content with no added space.** (A13.) `Launch checklist<small>Mara</small>` reads "Launch checklistMara". Put a space before the inner element.
 - **The rating's bridge `setValue` does not work** in `0.1.0-beta.16`: each number fails with "No item 4 in …". (A15.) Leave the rating out of the task and record it with `test.fails`.
 - **jsdom gives a carousel 1 page.** (A15.) Stub `getBoundingClientRect`, `offsetWidth`, `clientWidth`, `scrollWidth` and `offsetLeft` in the test file.
+- **A toast, a drawer and an alert dialog are each 1 bridge entry with their title as the label.** (A20, A21.) Press an inner button by text: `{ ref: "Message archived", action: "press", args: ["Undo archive"] }`. The `keys` helper names Space `"Space"`, not `" "`.
 - **`checkPattern` has 15 patterns and `grid` is not one of them.** Use it when your pattern is in the list of `references/testing.md`.
 
 ## Your files
