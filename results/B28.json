@@ -1,0 +1,26 @@
+{
+ "at": "2026-11-24 18:34 UTC",
+ "tests": {
+  "passed": 14,
+  "names": [
+   "keyboard: the arrow keys choose a theme as they move, and the group is 1 tab stop on the chosen one",
+   "keyboard: Space chooses the focused theme, and a click chooses a theme",
+   "keyboard: the group follows the radio group pattern",
+   "server: the theme switch renders with no DOM",
+   "direction: Left and Right follow the text direction",
+   "direction: ArrowRight moves to the next theme in ltr and to the previous theme in rtl",
+   "agent: the primitive offers setValue for the 3 themes, and a theme that does not exist throws",
+   "names: the page names the switch, its 3 themes, the chart and the 7 days",
+   "storage: with nothing saved, the first theme follows the browser's preference and nothing is written",
+   "storage: with nothing saved and no browser preference, the first theme is Light",
+   "storage: a chosen theme is kept in local storage, and the next mount restores it",
+   "storage: a saved theme wins over the browser's preference, and a value that is not a theme is ignored",
+   "keyboard: on the page, Tab enters the switch on the chosen theme, and the chart and the days stay while the theme changes",
+   "agent: an agent chooses the Sepia theme by its name, the page saves it, and an unknown theme is refused"
+  ]
+ },
+ "snapshotBytes": 205,
+ "treeBytes": 1367,
+ "tabStops": 1,
+ "lines": 357
+}
