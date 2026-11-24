@@ -12,9 +12,16 @@
   },
   "dependencies": {
     "@ui-sdk/core": "0.1.0-beta.16",
-    "@ui-sdk/web": "0.1.0-beta.16"
+    "@ui-sdk/web": "0.1.0-beta.16",
+    "d3": "7.9.0",
+    "gsap": "3.15.0",
+    "matter-js": "0.20.0",
+    "three": "0.186.1"
   },
   "devDependencies": {
+    "@types/d3": "7.4.3",
+    "@types/matter-js": "0.20.2",
+    "@types/three": "0.187.0",
     "axe-core": "4.14.1",
     "jsdom": "31.0.1",
     "puppeteer-core": "25.18.1",

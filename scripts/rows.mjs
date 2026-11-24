@@ -42,6 +42,7 @@ if (id) {
   console.log(`Shows: ${row.shows}`)
   console.log(`Model: ${row.model}  Effort: ${row.effort}  Built: ${built(row.id) ? "yes" : "no"}`)
   if (row.note) console.log(`Note: ${row.note}`)
+  if (row.domain) console.log(`Domain: ${row.domain}\nVisual: ${row.visual}\nLibrary: ${row.lib} (see BUILDER.md, "Visuals and libraries")`)
   console.log(row.adds.length ? "Adds (each must be imported by the UI file):" : "Adds: none")
   for (const add of row.adds) console.log(`  ${add}  ->  ${pointer(add)}`)
   process.exit(0)

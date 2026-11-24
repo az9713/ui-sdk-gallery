@@ -41,6 +41,19 @@ Rules for the file:
 - **Follow state through change events on the element itself**: `valuechange`, `checkedchange`, `openchange`, and `action` on `ui-button`. They do not bubble.
 - **Import each item that your row adds.** The gate compares your imports with `rows.json`.
 
+## Visuals and libraries
+
+Rows with `Domain`, `Visual` and `Library` lines in their brief must show that data domain and that look. The first 50 UIs are mostly text; these rows add variety in data and presentation. The row's "Shows" behavior stays the thing that the tests and the gate prove; the visual is drawn around it.
+
+- **Library values:** `d3` (7.9.0), `gsap` (3.15.0), `three` (0.186.1), `matter` (`matter-js` 0.20.0), `waapi` (`Element.animate`), `canvas` (2D canvas), `svg` (inline SVG), `css`. All are installed. Import only the named items you use: `import { scaleLinear, line } from "d3"`, `import * as THREE from "three"` is too large, import the classes. Do not add other packages.
+- **Data is made in code.** No `fetch`, no files, no URLs. Use a seeded random function for generated data, so the screenshot is the same on each run.
+- **Start drawing, loops and timelines in `mount`.** Module level holds only imports and constants. Stop a `requestAnimationFrame` loop when `root.isConnected` is false.
+- **Reduced motion:** when `matchMedia("(prefers-reduced-motion: reduce)").matches`, show the end state with no animation.
+- **The agent cannot see canvas or WebGL pixels.** Give a `<canvas>` `role="img"` and an `aria-label` that states the data, or `aria-hidden="true"` when an SDK control or the status line already holds it. Decorative SVG gets `aria-hidden="true"`. The values that an agent needs stay in SDK parts or the status line.
+- **Text drawn in SVG counts for axe contrast.** Use the `--ui-*` tokens or colors with 4.5:1 on their background. Text on a gradient or a picture fails.
+- **Size:** keep the visual inside the stage. WebGL: 1 renderer, `antialias: true`, size it to its box, and `dispose()` nothing at module level.
+- **jsdom has no canvas 2D context and no WebGL.** Guard with `const ctx = canvas.getContext("2d"); if (!ctx) return` (and the same for WebGL) so tests run.
+
 ## The test file
 
 - Start each test name with what it proves. The gate requires a minimum of 1 test for each prefix:
