@@ -1,0 +1,27 @@
+{
+ "at": "2026-11-24 18:34 UTC",
+ "tests": {
+  "passed": 15,
+  "names": [
+   "keyboard: arrow keys, Home and End move focus between the choices",
+   "keyboard: the choices are 1 tab stop",
+   "keyboard: Space and Enter choose, and the question gives way to the settings button",
+   "keyboard: a click on a choice chooses it",
+   "api: choose refuses a value that is no choice",
+   "keyboard: a default value starts the bar decided",
+   "server: the consent bar renders with no DOM",
+   "direction: Left and Right follow the text direction",
+   "scene: reduced motion draws 1 frame and a full motion loop stops when the page is gone",
+   "names: the page names the bar and its buttons, and starts with no cookie",
+   "keyboard: Essential only writes the cookie and Cookie settings removes it",
+   "keyboard: after a choice focus moves to Cookie settings, and after Cookie settings back to Accept all",
+   "keyboard: the bar stays usable while a modal layer is open",
+   "keyboard: a saved cookie starts the bar already decided",
+   "agent: an agent finds the bar, chooses, refuses an unknown choice and resets"
+  ]
+ },
+ "snapshotBytes": 322,
+ "treeBytes": 429,
+ "tabStops": 2,
+ "lines": 405
+}
