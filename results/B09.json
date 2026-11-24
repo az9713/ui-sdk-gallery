@@ -1,0 +1,25 @@
+{
+ "at": "2026-11-24 09:12 UTC",
+ "tests": {
+  "passed": 13,
+  "names": [
+   "keyboard: each box is 1 tab stop, followed by its 8 handles, and each handle is a named button",
+   "keyboard: on a box, the arrow keys move it 4 pixels, Shift 40, and the photo's edge stops it",
+   "keyboard: on a corner handle, the arrow keys move 2 edges by 4 pixels, Shift by 40, and the smallest size stops them",
+   "keyboard: on an edge handle, the arrow keys move only that edge, along its own axis",
+   "pointer: a drag on the box moves it on the 4 pixel grid",
+   "pointer: a drag on a handle resizes the box from that side and does not move the other sides",
+   "pointer: during a drag the box shows the draft, and Escape puts it back",
+   "agent: moveBox and resizeBox check their arguments and keep the box in the photo",
+   "server: the annotator renders with no DOM",
+   "direction: in both text directions, Right moves a box right and moves its right edge right",
+   "names: the page names the photo, each box and each of its 8 handles",
+   "keyboard: on the page, Left on the Cyclist box moves it, and Shift with Down on its bottom handle resizes it",
+   "agent: an agent finds the boxes, resizes the Cyclist, moves the Traffic light, and is refused a box that is not there"
+  ]
+ },
+ "snapshotBytes": 384,
+ "treeBytes": 1263,
+ "tabStops": 27,
+ "lines": 298
+}
