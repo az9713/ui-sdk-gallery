@@ -1,0 +1,22 @@
+{
+ "at": "2026-11-24 09:23 UTC",
+ "tests": {
+  "passed": 10,
+  "names": [
+   "keyboard: arrow keys, Home and End pick the option that gets focus",
+   "keyboard: the wheel is 1 tab stop, and it is the picked option",
+   "keyboard: a wheel with no pick has 1 tab stop on its first option",
+   "keyboard: a click picks an option and focuses it",
+   "keyboard: scrolling the wheel picks the option at the center",
+   "server: the wheel renders with no DOM",
+   "direction: Up and Down pick the same options in left to right and right to left text, and Left and Right change nothing",
+   "names: the page names both wheels and the button, and each wheel starts on its default",
+   "keyboard: on the page, arrow keys move each wheel, Tab goes from wheel to wheel to the button, and the status line reports the time",
+   "agent: an agent picks 07:30 and sets the alarm, and a number that is not on the wheel is refused"
+  ]
+ },
+ "snapshotBytes": 259,
+ "treeBytes": 1196,
+ "tabStops": 3,
+ "lines": 210
+}
