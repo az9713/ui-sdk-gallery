@@ -1,0 +1,23 @@
+{
+ "at": "2026-11-24 15:13 UTC",
+ "tests": {
+  "passed": 11,
+  "names": [
+   "keyboard: an arrow key moves focus to the nearest element on screen, across the gaps of the table",
+   "keyboard: Home and End go to the first and last element, and with nothing in line an arrow takes the nearest element that way",
+   "keyboard: the table is 1 tab stop, and only the selected element is marked selected",
+   "keyboard: Space and Enter select the focused element, and the arrow keys do not",
+   "pointer: a click selects an element",
+   "agent: selectNeighbor selects the nearest element on screen in a direction and leaves focus where it is",
+   "server: the table renders with no DOM",
+   "direction: Left and Right mean left and right on screen in both text directions",
+   "names: the page names the grid and each of its 54 elements",
+   "keyboard: on the page, Space selects the focused element and the detail and status lines report it",
+   "agent: an agent selects Iron, then the element below it, and an unknown element or direction is refused"
+  ]
+ },
+ "snapshotBytes": 115,
+ "treeBytes": 4361,
+ "tabStops": 1,
+ "lines": 275
+}
