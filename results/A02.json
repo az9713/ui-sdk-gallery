@@ -1,0 +1,16 @@
+{
+ "at": "2026-11-24 07:03 UTC",
+ "tests": {
+  "passed": 4,
+  "names": [
+   "names: each control has the name that the page shows",
+   "keyboard: the code is 1 tab stop, and the toggle shows and hides the password",
+   "keyboard: Space checks the terms, and a short code is refused",
+   "agent: an agent signs up, and the snapshot never shows the password or the code"
+  ]
+ },
+ "snapshotBytes": 569,
+ "treeBytes": 495,
+ "tabStops": 6,
+ "lines": 90
+}
