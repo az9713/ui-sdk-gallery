@@ -1,0 +1,18 @@
+{
+ "at": "2026-11-24 08:09 UTC",
+ "tests": {
+  "passed": 6,
+  "names": [
+   "names: the group and each radio have the name that the page shows",
+   "keyboard: the group is 1 tab stop and each arrow key moves the choice",
+   "keyboard: in a right-to-left stage, Left moves to the next radio and Right to the previous",
+   "direction: the same key goes the other way when the stage is left to right",
+   "keyboard: Enter on Save language reports the chosen language",
+   "agent: an agent picks Hebrew by the group's name and saves it"
+  ]
+ },
+ "snapshotBytes": 312,
+ "treeBytes": 382,
+ "tabStops": 2,
+ "lines": 64
+}
