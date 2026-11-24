@@ -1,0 +1,18 @@
+{
+ "at": "2026-11-24 08:06 UTC",
+ "tests": {
+  "passed": 6,
+  "names": [
+   "names: each control has the name that the page shows",
+   "keyboard: Tab stops on the name, the rating group once, the suggestion and the 2 buttons",
+   "keyboard: Enter on Send with no answers shows the required-field errors and sends nothing",
+   "keyboard: typing a name clears its error and moves the progress bar to 1 of 3",
+   "keyboard: Space checks a rating, and the arrow keys move the rating both ways",
+   "agent: an agent answers the 3 questions, sends them, and clears the form"
+  ]
+ },
+ "snapshotBytes": 754,
+ "treeBytes": 620,
+ "tabStops": 5,
+ "lines": 137
+}
