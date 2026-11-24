@@ -1,0 +1,19 @@
+{
+ "at": "2026-11-24 21:20 UTC",
+ "tests": {
+  "passed": 7,
+  "names": [
+   "keyboard: the line is 1 tab stop, and Left and Right, Home and End move focus only",
+   "keyboard: typing a name moves focus to that station and picks nothing",
+   "keyboard: Space continues a name that is being typed, and picks the focused station when none is",
+   "keyboard: Space and Enter pick the focused station, and the arrow keys do not",
+   "keyboard: a click picks a station and Plan trip reports the stops from Harbour",
+   "keyboard: Plan trip with no station picked asks for a destination",
+   "keyboard: Left and Right follow the text direction"
+  ]
+ },
+ "snapshotBytes": null,
+ "treeBytes": 410,
+ "tabStops": 2,
+ "lines": 134
+}
