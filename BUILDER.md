@@ -113,6 +113,8 @@ Each one cost a failed run. The docs do not state them.
 - **A design `cramped-padding` finding can come from the shell's snapshot box, not your UI.** (A18.) A snapshot line longer than about 34 characters wraps and fills it. A button inside a list or timeline item adds a `"row"` line with the whole item text. Keep such buttons out of items.
 - **Do not use `data-empty` on your own elements inside a date or time input.** (A24.) The input's separator segments carry it.
 - **The shell's `ui-overlay-host` is hidden from the bridge.** (A29.) For an overlays confirm the bridge must see, use `createOverlays()` from `@ui-sdk/core/overlays` plus `createConfirm({ overlays })`, and put your own host inside the stage. The shell's Allow / Deny prompt takes focus and closes non-modal popovers: set `dismissible="false"` on them while a confirm is pending.
+- **jsdom has no `ClipboardEvent`, and strict mode refuses a plain `Event` for the `paste` reason.** (B04.) Define a `ClipboardEvent` class with a `clipboardData` stub in the test file. A Shift press in jsdom needs a real `PointerEvent`.
+- **The design stage fails text wider than about 80 characters** (`line-length`). (B04.) `max-width: 60ch` passes.
 - **`checkPattern` has 15 patterns and `grid` is not one of them.** Use it when your pattern is in the list of `references/testing.md`.
 
 ## Your files

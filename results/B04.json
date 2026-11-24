@@ -1,0 +1,33 @@
+{
+ "at": "2026-11-24 08:44 UTC",
+ "tests": {
+  "passed": 21,
+  "names": [
+   "keyboard: the grid is 1 tab stop, and the arrow keys, Home and End move the active cell",
+   "keyboard: a cell that gets focus another way, like from a screen reader, is where the keys start",
+   "keyboard: Tab leaves the grid when no cell is edited",
+   "keyboard: Shift with an arrow key selects a block, and a move without Shift drops it",
+   "keyboard: Shift+Space, Control+Space and Control+A select rows, columns and every cell, and Escape drops the block",
+   "pointer: a drag across cells selects the block",
+   "pointer: Shift with a click stretches the block from the active cell",
+   "keyboard: Enter edits a cell with its text, Enter saves, and focus goes back to the cell",
+   "keyboard: F2, a typed character and a double-click start an edit, and Escape cancels it",
+   "keyboard: Tab in the editor saves and moves to the next cell, and Shift+Tab saves and moves back",
+   "keyboard: in the editor the arrow keys move the caret and leave the active cell alone",
+   "keyboard: Control+C copies the selected block as tab-separated text",
+   "keyboard: Control+V pastes from the top left cell of the block and drops what falls past the edges",
+   "keyboard: onValueChange can refuse an edit, and the editor stays open",
+   "agent: setCell, paste and readSheet go through the api, and a cell that does not exist is refused",
+   "server: the sheet renders with no DOM",
+   "direction: Left and Right follow the text direction",
+   "names: the page names the grid, its headers and its 20 cells",
+   "keyboard: on the page, Enter edits a cell, the cell shows the new text and the status line reports it",
+   "keyboard: on the page, Control+C reports how many cells it copied, and Control+V fills the cells",
+   "agent: an agent reads the sheet, sets a cell and pastes a row, and a cell that does not exist is refused"
+  ]
+ },
+ "snapshotBytes": 247,
+ "treeBytes": 1467,
+ "tabStops": 1,
+ "lines": 389
+}
