@@ -1,0 +1,19 @@
+{
+ "at": "2026-11-24 21:25 UTC",
+ "tests": {
+  "passed": 7,
+  "names": [
+   "keyboard: arrow keys move in 2 dimensions and skip a taken seat, and Home and End go to the row ends",
+   "keyboard: the grid is 1 tab stop, and a taken seat does not get focus",
+   "keyboard: Space and Enter select a seat, and Space again clears it",
+   "keyboard: Shift with an arrow key extends the selection",
+   "keyboard: a click selects a free seat and does nothing on a taken seat",
+   "keyboard: Left and Right follow the text direction",
+   "keyboard: Book seats reports the selected seats, or asks for a seat first"
+  ]
+ },
+ "snapshotBytes": null,
+ "treeBytes": 1957,
+ "tabStops": 2,
+ "lines": 166
+}
