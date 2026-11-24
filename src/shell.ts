@@ -44,12 +44,15 @@ function show(entry: Entry, entries: Entry[]) {
     <main class="g-main">
       <section class="g-stage" data-stage data-ui="${row.id}" aria-label="${esc(row.title)}"></section>
       <aside class="g-card" data-agent-hidden aria-label="Card for ${row.id}">
+        <section>
         <h2>Position on the 3 orthogonal axes</h2>
         <dl>
           <dt>Axis 1, role</dt><dd>${row.role}</dd>
           <dt>Axis 2, kind of help</dt><dd>${row.kind}</dd>
           <dt>Axis 3, layer</dt><dd>${row.layer}, ${LAYERS[row.layer]}</dd>
         </dl>
+        </section>
+        <section>
         <h2>Build face</h2>
         <p class="g-request">${esc(def.request)}</p>
         <dl>
@@ -57,6 +60,8 @@ function show(entry: Entry, entries: Entry[]) {
           <dt>Shows</dt><dd>${esc(row.shows)}</dd>
           <dt>Lines</dt><dd>${lines}</dd>
         </dl>
+        </section>
+        <section>
         <h2>Check face</h2>
         ${
           result
@@ -70,12 +75,15 @@ function show(entry: Entry, entries: Entry[]) {
                <ul>${def.breaks.map((b) => `<li>${esc(b.broke)} Caught by the test "${esc(b.caught)}".</li>`).join("")}</ul>`
             : ""
         }
+        </section>
+        <section>
         <h2>Use face</h2>
         <p><button type="button" class="g-run">Run the agent task</button> <span class="g-outcome" role="status"></span></p>
         <p><span class="g-bytes"></span> bytes of bridge snapshot${
           result ? `, ${result.treeBytes} bytes of accessibility tree (my measurement)` : ""
         }.</p>
-        <pre class="g-snapshot" tabindex="0" aria-label="Bridge snapshot"></pre>
+        <details><summary>Bridge snapshot</summary><pre class="g-snapshot"></pre></details>
+        </section>
       </aside>
     </main>
     <div class="g-overlays" data-agent-hidden><ui-overlay-host></ui-overlay-host></div>`

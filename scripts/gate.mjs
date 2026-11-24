@@ -51,7 +51,7 @@ function stageSource(id, row, file) {
   if (/createAgent\s*\(/.test(source)) reasons.push("the shell makes the bridge. Use context.agent.")
   // Module level may only define elements: each UI of the bundle is loaded, 1 is mounted.
   for (const line of source.split("\n"))
-    if (/^[^\s/*}`<].*\b(localStorage|sessionStorage|document\.|window\.|addEventListener)\b/.test(line))
+    if (/^[^\s/*}`<]/.test(line) && /\b(localStorage|sessionStorage|document\.|window\.|addEventListener\()/.test(line))
       reasons.push(`module level touches the page: "${line.trim().slice(0, 70)}". Move it into mount.`)
   if (/\b(test|it|describe)\.(skip|only|todo)\b/.test(test)) reasons.push("the test file has a skipped or focused test")
   if (reasons.length) throw new Fail("source", reasons)
@@ -68,8 +68,8 @@ function stageTypes(id) {
 }
 
 function stageTests(id) {
-  const report = join(here, "dist", `tests-${id ?? "all"}.json`)
-  mkdirSync(join(here, "dist"), { recursive: true })
+  const report = join(here, ".gate", `tests-${id ?? "all"}.json`)
+  mkdirSync(join(here, ".gate"), { recursive: true })
   const out = run(`npx vitest run ${id ? `ui/${id}-` : ""} --reporter=json --outputFile="${report}"`)
   if (!existsSync(report)) throw new Fail("tests", `vitest did not run: ${(out.stdout + out.stderr).slice(-400)}`)
   const json = JSON.parse(readFileSync(report, "utf8"))
@@ -211,7 +211,7 @@ function stageBreaks(id, row, file, breaks) {
   // The find text is also in the breaks list, so only the code before the list is searched and changed.
   const cut = original.indexOf("breaks: [")
   const code = original.slice(0, cut)
-  const report = join(here, "dist", `breaks-${id}.json`)
+  const report = join(here, ".gate", `breaks-${id}.json`)
   const reasons = []
   try {
     for (const b of breaks) {
@@ -233,8 +233,16 @@ function stageBreaks(id, row, file, breaks) {
 
 function stageDesign(id, url) {
   if (!existsSync(IMPECCABLE)) throw new Fail("design", `the detector is not at ${IMPECCABLE}. Set the IMPECCABLE variable.`)
-  const out = run(`"${IMPECCABLE}" detect --no-advisory "${url}?ui=${id}"`)
-  if (out.status !== 0) throw new Fail("design", (out.stderr + out.stdout).trim().split("\n").slice(0, 30))
+  // The exit code is lost on Windows, so the findings are read from the JSON output. No JSON = the detector did not run.
+  const out = run(`"${IMPECCABLE}" detect --json --no-advisory "${url}?ui=${id}"`)
+  let findings
+  try {
+    findings = JSON.parse(out.stdout)
+  } catch {
+    throw new Fail("design", `the detector did not run: ${(out.stderr + out.stdout).slice(0, 300)}`)
+  }
+  if (!Array.isArray(findings)) throw new Fail("design", "the detector output is not a list")
+  if (findings.length) throw new Fail("design", findings.map((f) => `${f.antipattern}: ${f.snippet}`))
 }
 
 async function gate(ids, { full }) {
@@ -248,7 +256,7 @@ async function gate(ids, { full }) {
   const namesOf = stageTests(one)
   for (const id of ids) requireTests(rows.find((r) => r.id === id), namesOf(id))
   console.log("pass tests")
-  const outDir = full ? "dist/gate/all" : `dist/gate/${one}`
+  const outDir = full ? ".gate/all" : `.gate/${one}`
   await build({ ids: full ? null : ids, outDir, strict: true })
   console.log("pass build")
   const url = pathToFileURL(join(here, outDir, "index.html")).href

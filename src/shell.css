@@ -75,24 +75,21 @@ body {
   color: var(--g-muted);
 }
 
-.g-main {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 400px);
-  align-items: start;
-}
-
 .g-stage {
-  min-height: 60vh;
+  min-height: 55vh;
   align-content: start;
   padding: 32px 24px;
 }
 
 .g-card {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 8px 40px;
   padding: 8px 24px 32px;
+  border-top: 1px solid var(--g-line);
   background: var(--g-card);
   color: var(--g-soft);
   font-size: 0.875rem;
-  min-height: 100%;
 }
 
 .g-card h2 {
@@ -156,7 +153,7 @@ body {
 }
 
 .g-run:focus-visible,
-.g-snapshot:focus-visible,
+.g-card summary:focus-visible,
 .g-top a:focus-visible,
 .g-index a:focus-visible {
   outline: 2px solid var(--g-warm);
@@ -164,10 +161,8 @@ body {
 }
 
 .g-snapshot {
-  max-height: 360px;
   margin: 8px 0 0;
   padding: 12px;
-  overflow: auto;
   border: 1px solid var(--g-line);
   border-radius: 6px;
   background: var(--g-bg);
@@ -214,8 +209,8 @@ body {
   font-weight: 600;
 }
 
-@media (max-width: 800px) {
-  .g-main {
-    grid-template-columns: minmax(0, 1fr);
-  }
+.g-card summary {
+  margin-top: 8px;
+  color: var(--g-cool);
+  cursor: pointer;
 }
