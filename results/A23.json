@@ -1,0 +1,21 @@
+{
+ "at": "2026-11-24 08:07 UTC",
+ "tests": {
+  "passed": 9,
+  "names": [
+   "names: each control has the name that the page shows",
+   "keyboard: the page has 2 tab stops, the field and the button",
+   "keyboard: typing shows a loading message, then the airports that load after the delay",
+   "keyboard: ArrowDown and ArrowUp move the highlight, and Enter chooses the airport",
+   "keyboard: a newer search replaces a request that is still loading",
+   "keyboard: Escape closes the list, and a word with no airport shows the empty message",
+   "keyboard: Search flights with text that is no airport asks for a choice and searches nothing",
+   "agent: an agent sets the destination, waits for no list, and searches",
+   "agent: the agent snapshot shows the destination as an autocomplete with its value"
+  ]
+ },
+ "snapshotBytes": 215,
+ "treeBytes": 173,
+ "tabStops": 2,
+ "lines": 108
+}
