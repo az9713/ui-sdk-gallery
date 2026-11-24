@@ -1,0 +1,25 @@
+{
+ "at": "2026-11-24 19:21 UTC",
+ "tests": {
+  "passed": 13,
+  "names": [
+   "keyboard: the queue is 1 tab stop, and the arrow keys move focus",
+   "keyboard: a file is announced at 50% and when it is done, and not at 25% or 75%",
+   "keyboard: a failed file is announced at once and the upload goes on with the next file",
+   "keyboard: R retries the focused file only when it failed",
+   "keyboard: Delete and Backspace cancel a file that is not done",
+   "server: the upload queue renders with no DOM",
+   "direction: a right to left page moves focus and cancels with the same keys",
+   "names: the page names the queue, each file and the buttons, and draws a ring for each file",
+   "keyboard: the queue prepares both live regions when it mounts",
+   "keyboard: on the page, the buttons upload a part and retry, and the status line reports it",
+   "keyboard: on the page, a failure is announced assertively and a finished file politely",
+   "keyboard: on the page, Delete cancels the focused file and the status line reports it",
+   "agent: an agent uploads 2 files, retries the failed file and finishes the queue"
+  ]
+ },
+ "snapshotBytes": 657,
+ "treeBytes": 655,
+ "tabStops": 3,
+ "lines": 439
+}
