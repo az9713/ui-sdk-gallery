@@ -103,6 +103,8 @@ Each one cost a failed run. The docs do not state them.
 - **`mount` renders a slot as `<input>` only when its `attrs` has a string `type`.** (B20.) Without it a `focus: "native"` slot is a `<div>`. A slot named `input` works when the web tag is a wrapper with `target: wrappedChild("input")`.
 - **In `mount`, an absent part is a detached node with `.hidden === false`.** (B20.) Test presence with `isConnected && !hidden`.
 - **axe fails `label-content-name-mismatch` when an `aria-label` does not contain the visible text.** (A10.) Write "Account menu for Hollis Grant", not "Account menu", and use the whole string as the step's ref.
+- **An expanded `ui-tree-item` branch fails axe `label-content-name-mismatch`.** (A12.) Start each branch collapsed. A `setValue` on a file in a closed folder does not reveal it: call `tree.api.reveal(path)` in `valuechange`.
+- **An item's bridge label is its text content with no added space.** (A13.) `Launch checklist<small>Mara</small>` reads "Launch checklistMara". Put a space before the inner element.
 - **`checkPattern` has 15 patterns and `grid` is not one of them.** Use it when your pattern is in the list of `references/testing.md`.
 
 ## Your files

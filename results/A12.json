@@ -1,0 +1,19 @@
+{
+ "at": "2026-11-24 07:46 UTC",
+ "tests": {
+  "passed": 7,
+  "names": [
+   "names: each control has the name that the page shows, and the tree sits in the scroll area",
+   "keyboard: the tree starts closed, and the explorer has 2 tab stops, the tree and then the handle",
+   "keyboard: ArrowDown and ArrowUp move through the rows, and a file opens when it gets focus",
+   "keyboard: ArrowLeft closes a folder, then goes to the parent, and ArrowRight opens it and enters it",
+   "keyboard: the handle moves 1 step with each arrow, 10 with Shift, and stops at the bounds",
+   "agent: an agent resizes the pane and opens a file in a closed folder",
+   "agent: a file that is not in the tree is refused with the real items, and a layout past the bound is fitted"
+  ]
+ },
+ "snapshotBytes": 1487,
+ "treeBytes": 550,
+ "tabStops": 2,
+ "lines": 135
+}
