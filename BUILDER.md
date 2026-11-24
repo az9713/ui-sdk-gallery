@@ -90,6 +90,8 @@ Each one cost a failed run. The docs do not state them.
 - **The root's `render: (el, instance) => cleanup` hook of `createParts` can move items.** (B02.) It is in the `OwnerConfig` JSDoc of `@ui-sdk/web/dist/define-element.d.ts`. B02 uses it to put each card in its column, and focus stays on the moved card.
 - **The design stage fails a skipped heading level** (`skipped-heading`): the page title is `h1`, so sections start at `h2`. (B02.)
 - **`document.elementFromPoint` returns nothing in a `mount` drag.** (B02.) For an own drop target, test `getBoundingClientRect` of the target elements.
+- **`mount` gives each element its own `getBoundingClientRect`** (a stack of 200 x 40 boxes by sibling index). (B05.) A stub on `Element.prototype` has no effect there: define it on each element. `view.drag` starts at the element's center and has no modifier option; dispatch `PointerEvent`s yourself for Shift or Escape during a drag.
+- **An own primitive's `element.api` has only the methods that the root lists**: `createParts(p, { root: { tag: "b05-photo-grid", api: ["clear"] } })`. (B05.)
 - **Pointer drag in jsdom needs a stub of `getBoundingClientRect`.** (B03.) Use `view.drag` from `mount`.
 - **In jsdom, setting `.value` from code or sending an `input` event does not fire `valuechange`.** (A05: `ui-textarea`, `ui-date-input`, `ui-time-input`.) In a test, call `element.api.setValue(...)`. In the UI, read the value when the person submits.
 - **A refused `setValue` returns `ok: true` with `steps[0].result === false`**, not `ok: false`. (A04.)

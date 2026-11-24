@@ -1,0 +1,27 @@
+{
+ "at": "2026-11-24 08:18 UTC",
+ "tests": {
+  "passed": 15,
+  "names": [
+   "keyboard: arrow keys move in 2 dimensions and Home, End go to the row ends",
+   "keyboard: the grid is 1 tab stop, and each photo states that it is not selected",
+   "keyboard: Space and Enter select a photo, and Space again clears it",
+   "keyboard: Shift with an arrow key extends the selection",
+   "keyboard: a click on a photo selects it, and a second click clears it",
+   "pointer: a rectangle across 2 rows selects the 4 photos it touches and reports the lasso",
+   "pointer: with Shift, a rectangle adds to the selection",
+   "pointer: the rectangle shows while it is drawn, and Escape cancels it and keeps the selection",
+   "pointer: a drag that starts on a photo draws no rectangle",
+   "server: the photo grid renders with no DOM",
+   "direction: Left and Right follow the text direction",
+   "names: the page names the grid, each photo and the buttons",
+   "keyboard: on the page, Space selects the focused photo, the status line reports it, and both buttons work",
+   "pointer: on the page, a rectangle selects the photos it touches and the status line lists them",
+   "agent: an agent finds the grid and its photos, selects 2 photos and adds them, and cannot select a photo that is not there"
+  ]
+ },
+ "snapshotBytes": 258,
+ "treeBytes": 1143,
+ "tabStops": 3,
+ "lines": 273
+}
