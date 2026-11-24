@@ -1,0 +1,23 @@
+{
+ "at": "2026-11-24 09:22 UTC",
+ "tests": {
+  "passed": 11,
+  "names": [
+   "keyboard: arrow keys move in 2 dimensions, Home and End go to the row ends, Control+End to the last line",
+   "keyboard: the grid is 1 tab stop",
+   "keyboard: Space and Enter select the line of the focused cell, and a click selects too",
+   "aria: the grid counts every line with its header row, and each row gives its place",
+   "server: the log viewer renders with no DOM",
+   "direction: Left and Right follow the text direction",
+   "names: the page names the log, the grid and its 3 columns",
+   "keyboard: on the page, only the visible rows are in it, and Control+End brings in line 100,000",
+   "keyboard: on the page, the focused row stays in the page when the list scrolls away",
+   "keyboard: on the page, Page Down moves 10 lines, and Enter and Space select a line for the status line",
+   "agent: an agent selects line 87,412, which is not rendered, and a line outside the log is refused"
+  ]
+ },
+ "snapshotBytes": 94,
+ "treeBytes": 2827,
+ "tabStops": 1,
+ "lines": 299
+}
