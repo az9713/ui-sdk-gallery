@@ -1,0 +1,23 @@
+{
+ "at": "2026-11-24 07:29 UTC",
+ "tests": {
+  "passed": 11,
+  "names": [
+   "names: each control has the name that the page shows",
+   "keyboard: Enter on the trigger opens the dialog, the search field has focus, and it is the only tab stop",
+   "keyboard: ArrowDown and ArrowUp move the highlight, and neither stops on the disabled command",
+   "keyboard: Enter runs the highlighted command, closes the dialog and gives focus back to the trigger",
+   "keyboard: typing filters the commands, and the best match runs on Enter",
+   "keyboard: a keyword finds a command that the label does not hold",
+   "keyboard: Escape clears the search first, then closes the dialog with nothing run",
+   "keyboard: a search with no match shows the empty message and hides the groups, and a closed dialog forgets the search",
+   "keyboard: Control+K opens the dialog from anywhere, and Control+S runs Save file while it is open",
+   "agent: an agent opens the palette, searches, runs a command, and the dialog closes",
+   "agent: an agent runs a command by its value, and the disabled command is refused"
+  ]
+ },
+ "snapshotBytes": 131,
+ "treeBytes": 523,
+ "tabStops": 2,
+ "lines": 136
+}

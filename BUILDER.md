@@ -97,6 +97,8 @@ Each one cost a failed run. The docs do not state them.
 - **The design stage measures contrast that axe does not.** (A04.) `web.css` gives `data-disabled` parts opacity 0.5 (1.2:1 on unavailable days). Set `opacity: 1` and mark the state another way.
 - **`web.css` does not style `data-slot="row"`**, which docs examples use. (A04.) Lay out such a row yourself.
 - **`console.log` does not show in Vitest output here.** (A04.) Write probe output to a file in your scratchpad.
+- **A dialog's trigger is not its own bridge entry.** (A06.) The dialog entry has the dialog's title as its name: `{ ref: "Command palette", action: "press" }` opens it.
+- **axe fails a scrollable `<pre>`** (`scrollable-region-focusable`). (A06.) Give it `tabindex="0"`, `role="region"` and an `aria-label`.
 - **`checkPattern` has 15 patterns and `grid` is not one of them.** Use it when your pattern is in the list of `references/testing.md`.
 
 ## Your files
