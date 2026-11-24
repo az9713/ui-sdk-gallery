@@ -1,0 +1,22 @@
+{
+ "at": "2026-11-24 07:37 UTC",
+ "tests": {
+  "passed": 10,
+  "names": [
+   "names: each control has the name that the page shows",
+   "keyboard: Tab visits the brand, each trigger, Pricing, the preview link and the account button, in order",
+   "keyboard: Enter opens a panel, Escape closes it, and focus goes back to the trigger",
+   "keyboard: ArrowRight and ArrowLeft move between the top items, and ArrowDown opens a panel and enters it",
+   "keyboard: Enter on Pricing follows its link",
+   "keyboard: the preview opens when the link keeps focus, Escape closes it, and Enter follows the link",
+   "keyboard: Enter opens the account menu, ArrowDown moves, Enter runs an item, and focus goes back to the button",
+   "keyboard: Escape closes the account menu and runs nothing",
+   "keyboard: Sign out from the keyboard signs out",
+   "agent: an agent opens a panel and the preview link, and the sign out step waits for the person"
+  ]
+ },
+ "snapshotBytes": 502,
+ "treeBytes": 356,
+ "tabStops": 6,
+ "lines": 111
+}
