@@ -1,0 +1,19 @@
+{
+ "at": "2026-11-24 07:47 UTC",
+ "tests": {
+  "passed": 7,
+  "names": [
+   "names: each control has the name that the page shows",
+   "keyboard: Enter opens an answer, Enter closes it, and several answers stay open",
+   "keyboard: each question is 1 tab stop, and the arrow keys do not move focus",
+   "keyboard: Enter and Space open and close the contact section",
+   "keyboard: typing filters the suggestions, Down and Enter fill in the text, and Escape keeps it",
+   "keyboard: Enter in the field searches for the typed text and opens its answer",
+   "agent: an agent searches, opens an answer and shows the contact details"
+  ]
+ },
+ "snapshotBytes": 873,
+ "treeBytes": 507,
+ "tabStops": 7,
+ "lines": 106
+}
