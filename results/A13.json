@@ -1,0 +1,20 @@
+{
+ "at": "2026-11-24 07:43 UTC",
+ "tests": {
+  "passed": 8,
+  "names": [
+   "names: both lists have the name that the page shows",
+   "keyboard: each list is 1 tab stop",
+   "keyboard: ArrowDown in the folders changes the message list, ArrowUp goes back",
+   "keyboard: arrows in the message list open the message in the reading pane",
+   "keyboard: Home and End in the message list move to the first and the last message",
+   "keyboard: a new folder clears the reading pane",
+   "agent: an agent opens a folder and a message",
+   "agent: an agent sees only the messages of the open folder"
+  ]
+ },
+ "snapshotBytes": 513,
+ "treeBytes": 473,
+ "tabStops": 2,
+ "lines": 104
+}
