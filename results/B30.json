@@ -1,0 +1,26 @@
+{
+ "at": "2026-11-24 18:41 UTC",
+ "tests": {
+  "passed": 14,
+  "names": [
+   "keyboard: Tab visits the 4 fields in order, and the root is not a tab stop",
+   "keyboard: typing changes the draft and commits nothing until Enter or a change event ends the step",
+   "keyboard: ArrowUp and ArrowDown step a number and commit each step, and PageUp steps by 5",
+   "keyboard: a number is rounded and kept in its range, and an empty entry returns to the saved value",
+   "server: the trip draft renders with no DOM",
+   "direction: the arrow keys give the same result in left to right and right to left",
+   "names: the page names the draft, each field and the 2 buttons",
+   "keyboard: a committed step is written to session storage, and a typed value is not",
+   "keyboard: after a reload the page shows the saved draft, and Plan trip clears it",
+   "keyboard: a saved draft that is damaged is read field by field",
+   "agent: an agent finds the draft, sets fields that are committed, and plans the trip",
+   "agent: setField commits through the api, refuses an unknown field and text that is not a number",
+   "agent: the elevation profile is redrawn from the values that an agent sets",
+   "agent: Discard draft returns each field to the start and empties session storage"
+  ]
+ },
+ "snapshotBytes": 323,
+ "treeBytes": 691,
+ "tabStops": 6,
+ "lines": 467
+}

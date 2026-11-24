@@ -160,6 +160,7 @@ Each one cost a failed run. The docs do not state them.
 - **Trigger buttons inside an own primitive are folded into the root entry's `buttons`.** (B26.) A `press` step on them fails; use the root's own action, `{ ref: "<root label>", action: "toggle", args: ["Gold"] }`.
 - **The gate serves the page from `file://`.** (B29.) Chrome stores no cookie there and logs a console warning on each `document.cookie` access, which fails the browser stage. Keep a cookie choice in memory on a `file:` page. jsdom does not apply `inert` for a modal popover. CSS anchor positioning works in the gate's Chrome.
 - **`ui-preferences` draws no background, padding or border.** (B28.) Style a `div` inside it. HTML labels over an inline SVG need a solid `background` for axe. An inset `box-shadow` stripe reads as `side-tab`.
+- **The design stage fails `text-occlusion` when 2 axis labels touch** (B30: "0 km" on "0 m"). `onValueCommit` fires a `valuecommit` DOM event (name in `custom-elements.json`). Pass restored data to a root as `data-*` JSON read by `options: (el) => ...`.
 - **jsdom has no `matchMedia`.** Call `window.matchMedia?.(...)`.
 - **The gate does not emulate reduced motion.** Test the reduced-motion path in a unit test with a `matchMedia` stub.
 - **`checkPattern` has 15 patterns and `grid` is not one of them.** Use it when your pattern is in the list of `references/testing.md`.
