@@ -176,6 +176,9 @@ Each one cost a failed run. The docs do not state them.
 - **`data-ui="<ID>"` is on the stage section (`src/shell.ts:45`); `.g-stage` has no background (`src/shell.css:78`)** (E03). A token theme on `[data-ui]` changes the controls, not the stage: the dark page shows through and axe fails contrast. Set `background: var(--ui-background); color: var(--ui-foreground)` in the same block.
 - **`data-slot` is on the native inner element for button, input, tab, trigger and close; on the `ui-*` host for field, switch, select, tabs, panel and content** (E04). Without `web.css`, select content and alert dialog content and backdrop have no position: add `position: fixed` / `absolute` yourself.
 - **`web.css` is at `node_modules/@ui-sdk/core/dist/web.css`** (E05). It has no `forced-colors` rule and almost no transition, so a reduced-motion row must add its own motion first.
+- **`settleDraft`: core.md says Drag and Drop shows it, but no example there uses it** (B39). The wait is only in `dist/foundation/kernel/draft.d.ts`: an owner that keeps the old value shows it again 1 task later. `rerenderOf` is not exported from `@ui-sdk/core/testing`. `bindDrag` `onEnd`'s pointerup gives `view.drag` source "virtual"; pass the pointerdown event for "mouse". `checkDirection` passes on a horizontal listbox.
+- **A listbox `filter` that returns a score does not reorder composed parts** (B38): the list slot's `bind` must re-append them. With `items` data, `listbox.shows(part)` no longer filters (use your own `present`), and `move("first")` is the best score only with `items` set. The snapshot leaves out `items` for a long list (16 items, blank query).
+- **A `python3 - <<EOF` heredoc can hang a Bash call for 300 s** (B38). Use the Edit tool.
 - **The gate prints `ERROR: The process with PID … could not be terminated` while other gates run.** It does not change the result.
 
 ## Your files

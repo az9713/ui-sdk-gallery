@@ -1,0 +1,27 @@
+{
+ "at": "2026-11-24 20:54 UTC",
+ "tests": {
+  "passed": 15,
+  "names": [
+   "keyboard: the column bar is 1 tab stop, and Left and Right move focus without a change of order",
+   "keyboard: Space picks up a column, Right moves it, and Space drops it",
+   "keyboard: Escape puts a picked-up column back, and Home and End send a column to either end",
+   "keyboard: Shift with Right and Left resizes the focused column in steps of 8 px, from 64 to 320 px",
+   "pointer: a drag of a column's edge resizes it and does not move it, and Escape puts the width back",
+   "pointer: a drag of a column title moves the column to the place where it is dropped",
+   "agent: the primitive's actions refuse a column that does not exist and a width that is not a number",
+   "server: the quote table renders with no DOM",
+   "direction: right to left mirrors the arrows for focus and moves",
+   "direction: right to left, Shift with Left widens a column and Shift with Right narrows it",
+   "controlled: a dropped width stays on screen until the owner writes it back a microtask later, then the draft clears",
+   "names: the page names the table and its columns, and describes the keys",
+   "keyboard: on the page, the header and every row follow a moved column, focus stays on it, and the status line reports it",
+   "controlled: the page refuses an order that moves Symbol, and the table goes back to the order the page holds",
+   "agent: an agent finds the table and its columns, moves Change and resizes Company"
+  ]
+ },
+ "snapshotBytes": 509,
+ "treeBytes": 2070,
+ "tabStops": 1,
+ "lines": 456
+}
