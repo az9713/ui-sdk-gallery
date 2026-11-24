@@ -1,0 +1,23 @@
+{
+ "at": "2026-11-24 08:11 UTC",
+ "tests": {
+  "passed": 11,
+  "names": [
+   "names: each control has the name that the page shows",
+   "keyboard: the page starts with a checked pair, and the form has 5 tab stops in reading order",
+   "keyboard: Enter and Space on Check contrast read both fields and report each AA and AAA level",
+   "keyboard: the ratio is cut, not rounded up, and black on white is exactly 21",
+   "keyboard: Swap colors exchanges the 2 fields, the sample follows, and the ratio stays",
+   "keyboard: the arrow keys choose a color format and the readout is written in it",
+   "keyboard: text that is not a color is named in the status, and the old results are cleared",
+   "keyboard: a translucent text color is blended over the background before the ratio is read",
+   "agent: an agent sets a light gray, asks for OKLCH, and checks the pair",
+   "agent: an agent swaps the colors, picks Display P3, and types a color the page cannot read",
+   "agent: an agent step to a format that the page does not offer is refused"
+  ]
+ },
+ "snapshotBytes": 517,
+ "treeBytes": 1070,
+ "tabStops": 5,
+ "lines": 168
+}
