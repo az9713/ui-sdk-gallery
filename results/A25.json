@@ -1,0 +1,15 @@
+{
+ "at": "2026-11-24 08:08 UTC",
+ "tests": {
+  "passed": 3,
+  "names": [
+   "keyboard: the arrow keys move a choice in the file view control, and it has 1 tab stop",
+   "keyboard: ArrowRight on the density control sets the compact density attribute and saves it",
+   "agent: an agent sets each preference and the page keeps them"
+  ]
+ },
+ "snapshotBytes": 384,
+ "treeBytes": 451,
+ "tabStops": 2,
+ "lines": 102
+}
