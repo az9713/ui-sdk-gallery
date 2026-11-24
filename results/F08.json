@@ -1,0 +1,27 @@
+{
+ "at": "2026-11-24 23:08 UTC",
+ "tests": {
+  "passed": 15,
+  "names": [
+   "keyboard: arrow keys, Home and End move focus between steps",
+   "keyboard: the steps are 1 tab stop, and Enter and Space open the focused step",
+   "keyboard: only the current step has aria-current=step, and only its panel shows",
+   "keyboard: a click opens any step, and goTo refuses a step that is not in the list",
+   "server: the stepper renders with no DOM",
+   "direction: Left and Right follow the text direction",
+   "names: the page names the stepper, each step, the fields and the button",
+   "keyboard: the beaker is drawn in its first state and is hidden from the agent",
+   "keyboard: on the page, Enter on a step opens its panel, and the beaker and the status follow",
+   "keyboard: on the page, Tab returns to the current step, not to the step that had focus last",
+   "keyboard: Sign the entry says what is missing, then signs the computed molarity",
+   "keyboard: with reduced motion the beaker changes with no animation",
+   "agent: a field on a closed step is reported as behind the steps that can open it",
+   "agent: the stepper lists its 4 steps, and a step that is not one of them is refused",
+   "agent: an agent opens each step first, fills its field and signs the entry"
+  ]
+ },
+ "snapshotBytes": 360,
+ "treeBytes": 553,
+ "tabStops": 2,
+ "lines": 340
+}
