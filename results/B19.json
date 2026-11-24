@@ -1,0 +1,23 @@
+{
+ "at": "2026-11-24 15:17 UTC",
+ "tests": {
+  "passed": 11,
+  "names": [
+   "keyboard: opening puts focus on the grid, and the grid is 1 tab stop",
+   "keyboard: Left and Right stay in the row, and Home and End go to its ends",
+   "keyboard: Down into a column that the short last row lacks lands on its last emoji",
+   "keyboard: Enter and Space pick the focused emoji and mark it selected",
+   "keyboard: a pick closes the popup and focus goes back to the trigger",
+   "keyboard: a click picks an emoji",
+   "server: the emoji picker renders with no DOM",
+   "direction: Left and Right follow the text direction",
+   "names: the page names the picker, its trigger and each emoji, and the popup starts open",
+   "keyboard: on the page, Down from the fifth column lands on the last emoji, and Enter reports the pick",
+   "agent: an agent opens the picker and picks an emoji, and an emoji that is not in the grid is refused"
+  ]
+ },
+ "snapshotBytes": 155,
+ "treeBytes": 709,
+ "tabStops": 1,
+ "lines": 275
+}
