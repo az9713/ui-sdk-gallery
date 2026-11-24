@@ -1,0 +1,21 @@
+{
+ "at": "2026-11-24 07:35 UTC",
+ "tests": {
+  "passed": 9,
+  "names": [
+   "names: each control has the name that the page shows, and the draft shows 2 tokens",
+   "keyboard: the @ menu opens on the trigger, arrows move the choice, Enter inserts a token",
+   "keyboard: Escape closes the @ menu and adds no token",
+   "keyboard: the attachment list is 1 tab stop, arrows move between files, Delete removes the focused file",
+   "keyboard: Enter in the prompt sends it with the model and the attachments, and the box is empty after",
+   "keyboard: Send with an empty prompt sends nothing and says why",
+   "keyboard: the model select opens with the arrow key, Enter chooses, and Send reports it",
+   "agent: an agent writes the prompt with a file token, attaches a file, picks a model, and sends",
+   "agent: an agent removes an attached file and a token before it sends"
+  ]
+ },
+ "snapshotBytes": 724,
+ "treeBytes": 534,
+ "tabStops": 5,
+ "lines": 139
+}
