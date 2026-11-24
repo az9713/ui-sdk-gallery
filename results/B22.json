@@ -1,0 +1,27 @@
+{
+ "at": "2026-11-24 19:19 UTC",
+ "tests": {
+  "passed": 15,
+  "names": [
+   "keyboard: arrow keys, Home and End move focus between steps",
+   "keyboard: the steps are 1 tab stop, and a step ahead keeps aria-disabled",
+   "keyboard: only the current step has aria-current=step",
+   "keyboard: a step that is not reached yet does not open",
+   "keyboard: Enter opens a step that is reached",
+   "keyboard: next and back stop at the first and the last step, and only the current panel shows",
+   "server: the stepper renders with no DOM",
+   "direction: Left and Right follow the text direction",
+   "names: the page names the steps, the fields and the buttons",
+   "keyboard: the rise chart is drawn in its first state and has a text name",
+   "keyboard: Continue with an empty field stays on the step and says why",
+   "keyboard: Tab returns to the current step, not to the step that had focus last",
+   "keyboard: Continue and Back move focus to the heading of the new step",
+   "keyboard: a reached step opens from the stepper, and the summary shows what was typed",
+   "agent: an agent opens only the steps that are reached, and fills the wizard through Continue"
+  ]
+ },
+ "snapshotBytes": 429,
+ "treeBytes": 468,
+ "tabStops": 3,
+ "lines": 383
+}
