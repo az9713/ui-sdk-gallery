@@ -1,0 +1,20 @@
+{
+ "at": "2026-11-24 08:55 UTC",
+ "tests": {
+  "passed": 8,
+  "names": [
+   "keyboard: arrows step an axis, Shift steps ten, Page Up moves y and Home goes to the start of x",
+   "keyboard: the pad is 1 tab stop and the point stops at the edges",
+   "server: the sound pad renders with no DOM",
+   "direction: Left and Right follow the text direction",
+   "pointer: a press and a drag on the pad move the point and report their reasons",
+   "names: the thumb is 1 slider that reads both axes",
+   "keyboard: on the page, arrows change the status line and Reset pad puts the point back",
+   "agent: an agent sets the point and saves it, and the status line reports both axes"
+  ]
+ },
+ "snapshotBytes": 262,
+ "treeBytes": 254,
+ "tabStops": 3,
+ "lines": 144
+}
