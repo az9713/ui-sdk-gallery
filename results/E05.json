@@ -1,0 +1,17 @@
+{
+ "at": "2026-11-24 20:41 UTC",
+ "tests": {
+  "passed": 5,
+  "names": [
+   "look: the stylesheet answers 3 display modes and leaves web.css on",
+   "look: the high-contrast block draws 2px borders and the forced-colors block uses system colors",
+   "look: the reduced-motion block removes each transition and animation that the base block adds",
+   "keyboard: Space changes a switch",
+   "agent: the bridge finds each control by its name"
+  ]
+ },
+ "snapshotBytes": 588,
+ "treeBytes": 358,
+ "tabStops": 4,
+ "lines": 65
+}
