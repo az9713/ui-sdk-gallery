@@ -1,0 +1,21 @@
+{
+ "at": "2026-11-24 08:05 UTC",
+ "tests": {
+  "passed": 9,
+  "names": [
+   "names: the timeline and each control have the name that the page shows",
+   "keyboard: the clips are 1 tab stop, and it is the clip at the playhead",
+   "keyboard: ArrowRight and ArrowLeft move between clips, and ArrowDown does nothing",
+   "keyboard: Home and End jump to the first and last clip, and the ends do not wrap",
+   "keyboard: Enter and Space on Next clip and Previous clip move the playhead, and each clip shows its state",
+   "keyboard: the playhead stops at the first and the last clip",
+   "keyboard: Go to playhead returns focus to the clip at the playhead",
+   "direction: Left and Right swap in right-to-left text",
+   "agent: an agent moves the playhead and returns focus to its clip"
+  ]
+ },
+ "snapshotBytes": 456,
+ "treeBytes": 789,
+ "tabStops": 4,
+ "lines": 95
+}
