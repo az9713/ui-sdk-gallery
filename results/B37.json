@@ -1,0 +1,28 @@
+{
+ "at": "2026-11-24 19:00 UTC",
+ "tests": {
+  "passed": 16,
+  "names": [
+   "keyboard: the arrow keys move between commands, Home and End go to the ends, and the list is 1 tab stop",
+   "keyboard: Enter and Space start a recording, and a chord records the shortcut",
+   "keyboard: Escape cancels a recording and Backspace clears the shortcut",
+   "keyboard: modifier keys alone light the keyboard and record nothing",
+   "keyboard: a shortcut that another command owns is refused and the recording goes on",
+   "keyboard: a press of a recorded shortcut runs its command and counts the run",
+   "keyboard: a shortcut does not run during a recording",
+   "keyboard: leaving a recording cancels it",
+   "keyboard: aria-keyshortcuts and the label follow the platform",
+   "server: the recorder renders with no DOM",
+   "direction: Up and Down do not change with the text direction",
+   "names: the page names the group, each command and the status line",
+   "keyboard: on the page, the keyboard lights the keys of the focused command",
+   "keyboard: on the page, a recording lights the held keys and the status line reports the result",
+   "keyboard: on the page, a recorded shortcut runs its command from anywhere",
+   "agent: an agent finds the commands, assigns a shortcut, clears one, and is told about a conflict"
+  ]
+ },
+ "snapshotBytes": 628,
+ "treeBytes": 655,
+ "tabStops": 1,
+ "lines": 492
+}

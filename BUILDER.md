@@ -166,6 +166,7 @@ Each one cost a failed run. The docs do not state them.
 - **The design stage reports `text-occlusion` when one button covers part of another button's box** (B35: black piano keys over white keys). Put the covered button's label in a `<span>` in its visible part. A gate that fails at launch with "The browser is already running for …puppeteer_dev_chrome_profile" is a profile clash between 2 gates: run it again.
 - **Start Web Audio only in a person's click or key handler** (B35). An agent action sends no DOM event, so it never creates an AudioContext. `createRovingFocus` reads the nearest `dir`; set `dir="ltr"` on a root whose layout must not mirror.
 - **A negative SVG `<rect>` width is a console error that only the browser stage shows** (B33). Clamp generated sizes to 0 or more. jsdom can play the on-screen keyboard: stub `window.visualViewport` before mount, lower its height, dispatch `resize`.
+- **axe fails arrow glyphs `←↑↓→` as a label** ("contains only non-text characters") (B37). `formatShortcut` wraps its text in U+2066 and U+2069; remove them in tests and status text. `isApple` is not exported: test `formatShortcut("mod+k").includes("⌘")`.
 - **jsdom has no `matchMedia`.** Call `window.matchMedia?.(...)`.
 - **The gate does not emulate reduced motion.** Test the reduced-motion path in a unit test with a `matchMedia` stub.
 - **`checkPattern` has 15 patterns and `grid` is not one of them.** Use it when your pattern is in the list of `references/testing.md`.
