@@ -1,0 +1,21 @@
+{
+ "at": "2026-11-24 08:02 UTC",
+ "tests": {
+  "passed": 9,
+  "names": [
+   "names: the drawer has the name that the page shows, and it starts closed",
+   "keyboard: Enter on the trigger opens a modal drawer named by its title, and focus moves inside",
+   "keyboard: Tab stays inside the drawer and visits the 4 pages and Close menu, in order",
+   "keyboard: Escape closes the drawer, chooses no page, and gives focus back to the trigger",
+   "keyboard: Space on the trigger opens the drawer, and Enter on a page opens it and closes the drawer",
+   "keyboard: Space on a page chooses it, and Close menu closes the drawer with no page",
+   "agent: an agent opens the drawer, and the page behind it shows no change until a page is chosen",
+   "agent: an agent chooses Orders, the drawer closes, and the page changes",
+   "agent: an agent opens the drawer with setOpen and closes it with Close menu"
+  ]
+ },
+ "snapshotBytes": 195,
+ "treeBytes": 203,
+ "tabStops": 1,
+ "lines": 80
+}
