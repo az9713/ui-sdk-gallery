@@ -1,0 +1,26 @@
+{
+  "name": "gallery",
+  "version": "1.0.0",
+  "description": "100 UIs built with UI SDK, sorted on the 3 orthogonal axes",
+  "scripts": {
+    "gate": "node scripts/gate.mjs",
+    "check": "node scripts/gate.mjs --all",
+    "rows": "node scripts/rows.mjs",
+    "build": "node scripts/build.mjs",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@ui-sdk/core": "0.1.0-beta.16",
+    "@ui-sdk/web": "0.1.0-beta.16"
+  },
+  "devDependencies": {
+    "axe-core": "4.14.1",
+    "jsdom": "31.0.1",
+    "puppeteer-core": "25.18.1",
+    "typescript": "7.0.2",
+    "vite": "8.3.8",
+    "vitest": "5.1.1"
+  },
+  "private": true,
+  "type": "module"
+}

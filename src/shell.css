@@ -1,0 +1,221 @@
+@layer ui-sdk;
+
+:root {
+  color-scheme: dark;
+  --g-bg: #0f172a;
+  --g-card: #1e293b;
+  --g-text: #e2e8f0;
+  --g-soft: #cbd5e1;
+  --g-muted: #94a3b8;
+  --g-line: #334155;
+  --g-warm: #fb923c;
+  --g-cool: #2dd4bf;
+}
+
+/* The gallery look: web.css tokens set to the dark palette. A UI with look.tokens false keeps the web.css defaults. */
+:root:not([data-tokens="off"]) {
+  --ui-background: #0f172a;
+  --ui-foreground: #e2e8f0;
+  --ui-muted: #1e293b;
+  --ui-muted-foreground: #94a3b8;
+  --ui-border: #334155;
+  --ui-input: #64748b;
+  --ui-primary: #2dd4bf;
+  --ui-primary-foreground: #0f172a;
+  --ui-destructive: #f87171;
+  --ui-ring: #fb923c;
+  --ui-ring-border: #fb923c;
+  --ui-radius: 6px;
+  --ui-font-size: 0.875rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--g-bg);
+  color: var(--g-text);
+  font: 16px/1.5 system-ui, "Segoe UI", sans-serif;
+}
+
+.g-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 24px;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--g-line);
+}
+
+.g-top h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.g-top nav {
+  display: flex;
+  gap: 16px;
+  font-size: 0.875rem;
+}
+
+.g-id {
+  color: var(--g-warm);
+  font-family: ui-monospace, Consolas, monospace;
+}
+
+.g-top a,
+.g-index a {
+  color: var(--g-cool);
+}
+
+.g-off {
+  color: var(--g-muted);
+}
+
+.g-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 400px);
+  align-items: start;
+}
+
+.g-stage {
+  min-height: 60vh;
+  align-content: start;
+  padding: 32px 24px;
+}
+
+.g-card {
+  padding: 8px 24px 32px;
+  background: var(--g-card);
+  color: var(--g-soft);
+  font-size: 0.875rem;
+  min-height: 100%;
+}
+
+.g-card h2 {
+  margin: 24px 0 8px;
+  color: var(--g-text);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.g-card dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 4px 16px;
+  margin: 0;
+}
+
+.g-card dt {
+  color: var(--g-muted);
+}
+
+.g-card dd,
+.g-card p {
+  margin: 0;
+}
+
+.g-card p + p,
+.g-card p + dl,
+.g-card ul + p {
+  margin-top: 8px;
+}
+
+.g-card ul {
+  margin: 8px 0 0;
+  padding-left: 20px;
+}
+
+.g-card code {
+  color: var(--g-cool);
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.8125rem;
+}
+
+.g-request {
+  color: var(--g-text);
+}
+
+.g-run {
+  padding: 6px 12px;
+  border: 1px solid var(--g-cool);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--g-cool);
+  font: inherit;
+  cursor: pointer;
+}
+
+.g-run:disabled {
+  border-color: var(--g-line);
+  color: var(--g-muted);
+  cursor: default;
+}
+
+.g-run:focus-visible,
+.g-snapshot:focus-visible,
+.g-top a:focus-visible,
+.g-index a:focus-visible {
+  outline: 2px solid var(--g-warm);
+  outline-offset: 2px;
+}
+
+.g-snapshot {
+  max-height: 360px;
+  margin: 8px 0 0;
+  padding: 12px;
+  overflow: auto;
+  border: 1px solid var(--g-line);
+  border-radius: 6px;
+  background: var(--g-bg);
+  color: var(--g-soft);
+  font: 0.75rem/1.5 ui-monospace, Consolas, monospace;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.g-index {
+  max-width: 1100px;
+  padding: 24px;
+}
+
+.g-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 32px;
+  margin: 24px 0;
+}
+
+.g-filters label {
+  display: grid;
+  gap: 6px;
+  color: var(--g-muted);
+  font-size: 0.875rem;
+}
+
+.g-index table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.g-index th,
+.g-index td {
+  padding: 6px 12px 6px 0;
+  border-bottom: 1px solid var(--g-line);
+  text-align: left;
+}
+
+.g-index th {
+  color: var(--g-muted);
+  font-weight: 600;
+}
+
+@media (max-width: 800px) {
+  .g-main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

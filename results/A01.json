@@ -1,0 +1,17 @@
+{
+ "at": "2026-11-24 05:54 UTC",
+ "tests": {
+  "passed": 5,
+  "names": [
+   "names: each control has the name that the page shows",
+   "keyboard: Space changes each switch, and Save reports the 2 states",
+   "keyboard: Cancel closes the dialog and deletes nothing, and focus goes back to the trigger",
+   "keyboard: an empty project name is invalid",
+   "agent: an agent changes each setting, and the delete step waits for the person"
+  ]
+ },
+ "snapshotBytes": 588,
+ "treeBytes": 343,
+ "tabStops": 4,
+ "lines": 111
+}
