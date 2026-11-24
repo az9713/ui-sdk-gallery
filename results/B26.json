@@ -1,0 +1,31 @@
+{
+ "at": "2026-11-24 18:32 UTC",
+ "tests": {
+  "passed": 19,
+  "names": [
+   "keyboard: Tab visits each trigger, and each trigger is 1 tab stop",
+   "keyboard: Space and Enter open and close a panel, and the panels are independent",
+   "keyboard: a click opens a panel and a second click closes it",
+   "keyboard: a trigger reports its panel in aria-expanded and aria-controls",
+   "keyboard: a closed panel is hidden until found, and an open panel is shown",
+   "keyboard: a closed panel leaves the exiting list and is hidden until found again",
+   "find: a beforematch event on a closed panel opens it, at once",
+   "find: a beforematch event on an open panel changes nothing",
+   "find: a beforematch event on the data sources opens them with no panel",
+   "find: a panel opened by a press animates, and the state follows at once",
+   "find: with reduced motion a closing panel is hidden at once",
+   "server: the poster renders with no DOM",
+   "direction: Tab order and Space work the same in left-to-right and right-to-left",
+   "names: the page names the poster, each tile, each panel and each button",
+   "keyboard: on the page, Space opens the focused tile and the status line reports it",
+   "find: on the page, a match in a closed panel opens it and the status line says so",
+   "find: on the page, Close all closes the panels and Open all opens them at once",
+   "find: on the page, the data sources open from their button and from find in page",
+   "agent: an agent toggles tiles by name, and cannot open an unknown panel"
+  ]
+ },
+ "snapshotBytes": 697,
+ "treeBytes": 2056,
+ "tabStops": 11,
+ "lines": 366
+}
