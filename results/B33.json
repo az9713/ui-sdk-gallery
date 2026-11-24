@@ -1,0 +1,27 @@
+{
+ "at": "2026-11-24 18:59 UTC",
+ "tests": {
+  "passed": 15,
+  "names": [
+   "keyboard: Enter and Space on the handle toggle the sheet, and aria-expanded follows",
+   "keyboard: ArrowUp expands and ArrowDown collapses the sheet from the handle",
+   "keyboard: focus in the destination field expands the sheet, and focus on the handle does not",
+   "keyboard: a click on the handle toggles the sheet, and the trip details show only while it is open",
+   "api: expand and collapse change nothing when the sheet is already in that state",
+   "server: the trip sheet renders with no DOM",
+   "direction: ArrowUp and ArrowDown do the same in left-to-right and right-to-left text",
+   "names: the page names the sheet, its handle, the field, the button and the map",
+   "keyboard: Escape and a press on the map collapse the open sheet, and a press in the sheet does not",
+   "keyboard: a press on the handle of the open sheet closes it with 1 change",
+   "keyboard: the sheet rises above the on-screen keyboard while the field has focus",
+   "keyboard: the sheet follows the visual viewport and marks the open keyboard",
+   "keyboard: Request ride reads the field, and an empty field asks for a destination",
+   "motion: reduced motion shows the route with no animation",
+   "agent: an agent expands the sheet, enters a destination and requests the ride"
+  ]
+ },
+ "snapshotBytes": 281,
+ "treeBytes": 543,
+ "tabStops": 3,
+ "lines": 301
+}
