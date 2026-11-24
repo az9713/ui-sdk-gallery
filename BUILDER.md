@@ -172,6 +172,8 @@ Each one cost a failed run. The docs do not state them.
 - **jsdom has no `matchMedia`.** Call `window.matchMedia?.(...)`.
 - **The gate does not emulate reduced motion.** Test the reduced-motion path in a unit test with a `matchMedia` stub.
 - **`checkPattern` has 15 patterns and `grid` is not one of them.** Use it when your pattern is in the list of `references/testing.md`.
+- **A set E row spreads A01 and sets `css: undefined`** (E01, E02). `look: { tokens: false }` sets `data-tokens="off"` on the root (`src/shell.ts:31`); `web.css` stays on.
+- **`data-ui="<ID>"` is on the stage section (`src/shell.ts:45`); `.g-stage` has no background (`src/shell.css:78`)** (E03). A token theme on `[data-ui]` changes the controls, not the stage: the dark page shows through and axe fails contrast. Set `background: var(--ui-background); color: var(--ui-foreground)` in the same block.
 
 ## Your files
 

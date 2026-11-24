@@ -1,0 +1,15 @@
+{
+ "at": "2026-11-24 20:24 UTC",
+ "tests": {
+  "passed": 3,
+  "names": [
+   "look: the definition switches the gallery tokens off and has no CSS of its own",
+   "keyboard: Space changes a switch",
+   "agent: the bridge finds each control by its name"
+  ]
+ },
+ "snapshotBytes": 588,
+ "treeBytes": 344,
+ "tabStops": 4,
+ "lines": 15
+}
