@@ -1,0 +1,23 @@
+{
+ "at": "2026-11-24 17:58 UTC",
+ "tests": {
+  "passed": 11,
+  "names": [
+   "keyboard: the arrow keys move to the nearest star in their direction, and Home, End go to the first and last star",
+   "keyboard: the stars are 1 tab stop, and each star is a named button",
+   "keyboard: Space on a star starts a line, Space on a second star draws it, and Space or Escape on the start drops it",
+   "keyboard: a line that is already drawn, or from a star to itself, is not drawn again",
+   "keyboard: Control+Z undoes the last line, Control+Shift+Z redoes it, and the buttons follow",
+   "pointer: a drag from a star to another star draws a line, and a drop on empty sky draws nothing",
+   "server: the star chart renders with no DOM",
+   "direction: Left and Right move on the sky the same way in both text directions",
+   "names: the page names the chart, each star, the drawing and the buttons",
+   "keyboard: on the page, Space draws a line, Control+Z and the Undo button undo it, and the status line reports each step",
+   "agent: an agent finds the chart and its stars, draws a line, undoes and redoes it, and cannot draw a star that is not there"
+  ]
+ },
+ "snapshotBytes": 496,
+ "treeBytes": 819,
+ "tabStops": 3,
+ "lines": 525
+}
