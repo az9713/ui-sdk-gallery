@@ -1,0 +1,27 @@
+{
+ "at": "2026-11-24 08:49 UTC",
+ "tests": {
+  "passed": 15,
+  "names": [
+   "keyboard: the canvas and the nodes are 2 tab stops, and the arrow keys go to the nearest node on screen",
+   "keyboard: Alt with an arrow moves the focused node 8 units, Shift makes it 80, and the canvas edge stops it",
+   "keyboard: C starts a connection from a node's output, the arrow keys choose an input, and Enter or Space connects",
+   "keyboard: Escape cancels a connection, and an output takes only an input of another node that is not yet connected",
+   "keyboard: on the canvas, the arrow keys pan by 40 pixels, and =, - and 0 zoom",
+   "pointer: a drag on a node moves it by the distance divided by the zoom, on the 8 unit grid, and its wires follow",
+   "pointer: a drag from an output port to an input port connects them and does not move the node",
+   "pointer: a drag on empty canvas pans it, the wheel pans, and Ctrl with the wheel zooms",
+   "pointer: Zoom in, Zoom out and Fit change the zoom",
+   "agent: connectNodes, moveNode, zoomTo and fitView check their arguments",
+   "server: the node editor renders with no DOM",
+   "direction: in both text directions, Right goes to the node on the right, moves it right and pans the same way",
+   "names: the page names the canvas and each node, and draws a wire for each connection",
+   "keyboard: on the page, C and Up connect Filter to Send email, Alt with Down moves it, and Zoom in zooms",
+   "agent: an agent finds the canvas and its nodes, connects 2 nodes, moves 1, zooms, and is refused a connection that exists"
+  ]
+ },
+ "snapshotBytes": 529,
+ "treeBytes": 951,
+ "tabStops": 5,
+ "lines": 475
+}

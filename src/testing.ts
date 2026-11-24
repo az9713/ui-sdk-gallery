@@ -30,6 +30,7 @@ async function keys(...names: string[]) {
       key: key === "Space" ? " " : key,
       shiftKey: parts.includes("Shift"),
       ctrlKey: parts.includes("Control"),
+      altKey: parts.includes("Alt"),
       bubbles: true,
       cancelable: true,
     }
