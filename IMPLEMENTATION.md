@@ -33,7 +33,7 @@ The user has not answered these. Ask 1 time, at the start, in 1 message. Then do
 | `npm run gate -- <ID>` | Runs the 7 stages on 1 UI, on a build that holds only that UI. Safe to run for 2 different IDs at the same time. |
 | `npm run check` | Runs the stages on each built UI on the full bundle, then writes `dist/index.html`. Run it only when no builder runs: the break stage of a builder changes a UI file for some seconds. |
 
-The 7 stages: `source` (files, imports against `rows.json`, module level), `types` (`tsc`, filtered to the UI's files), `tests` (Vitest, required name prefixes), `build`, `browser` (console, tag prefix, snapshot labels, accessibility-tree bytes, Tab walk, axe WCAG A and AA, the scripted agent task with the Allow / Deny prompt, screenshot), `design` (`impeccable detect`, 0 findings), `breaks` (sets B and C: each deliberate break must make its named test fail).
+The 7 stages: `source` (files, imports against `rows.json`, module level), `types` (`tsc`, filtered to the UI's files), `tests` (Vitest, required name prefixes), `build`, `browser` (console, tag prefix, snapshot labels, accessibility-tree bytes, Tab walk, axe WCAG A and AA, the scripted agent task with the Allow / Deny prompt, screenshot), `design` (`impeccable detect`, 0 findings), `breaks` (layer 1 and 2 rows: each deliberate break must make its named test fail).
 
 ## Models and effort
 
@@ -85,7 +85,7 @@ Done when `npm run rows` lists each of the 86 rows as built, or the row is in th
 | Rows | What is not verified | Shared files that can change |
 |---|---|---|
 | A27 | How "server markup first" shows in a bundle that defines each element at load | none expected |
-| C01 to C04 | Which 2 behaviors the package does not ship. If the docs search finds none, change the 4 rows to set B rows in `rows.json` and say so on the index page. | `rows.json`, `src/behaviors/` |
+| C01 to C04 | Which 2 behaviors the package does not ship. If the docs search finds none, change the 4 rows to set B rows in `rows.json` and say so on the index page. The 1-UI gate filters type errors to `ui/<ID>-`, so run `npm run check` after each set C row: it type-checks `src/behaviors/` too. | `rows.json`, `src/behaviors/` |
 | D01 to D05 | The React, Vue, Svelte and Solid adapters, their compilers, and 1 bridge for 5 adapters. Evidence for the bridge: `@ui-sdk/web/agent` re-exports `@ui-sdk/core/agent`. Install each adapter at `0.1.0-beta.16`. | `package.json`, `scripts/build.mjs`, `vite.config.ts`, `scripts/gate.mjs` |
 | F11 | A UI that reads the results of all UIs. `Context` in `src/ui.ts` does not pass them. Build F11 last. | `src/ui.ts`, `src/shell.ts` |
 
@@ -115,7 +115,7 @@ Read BUILDER.md there first and follow it. It defines "done" and your report.
 
 A builder's report is a claim. The gate's exit code is the evidence.
 
-1. Run `npm run gate -- <ID>` yourself. Accept only `GATE PASSED: <ID>`.
+1. Run `npm run gate -- <ID>` yourself, with a timeout of 600,000 ms. Accept only `GATE PASSED: <ID>`. A gate that is killed in the break stage leaves a break in the UI file. The next gate run for that ID restores the file from `.gate/<ID>.orig` and prints "restored".
 2. Run `git status --short`. Expect 4 paths: the 2 `ui/<ID>-` files, `results/<ID>.json`, `shots/<ID>.png`. For a different path, read the diff and keep it only if you decide that the shared file needs it.
 3. Read `shots/<ID>.png`. Accept when it shows the UI of the row's title, with no text cut off and no parts that overlap.
 4. Read the UI file for 2 things that the gate cannot see: a control that the row's title needs but that the page does not have, and a test that asserts nothing about the behavior in its name.

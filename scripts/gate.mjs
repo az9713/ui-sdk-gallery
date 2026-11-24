@@ -2,7 +2,7 @@
 // npm run check          runs them on each built UI, on the full bundle, then writes dist/.
 // Exit code 0 = each stage passed. A stage that fails prints "FAIL <stage>" and the reasons.
 import { spawnSync } from "node:child_process"
-import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs"
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
 import { pathToFileURL } from "node:url"
 import puppeteer from "puppeteer-core"
@@ -13,7 +13,8 @@ const IMPECCABLE =
   process.env.IMPECCABLE ??
   "~/.claude/plugins/cache/impeccable/impeccable/4.4.0/skills/impeccable/scripts/impeccable"
 const rows = JSON.parse(readFileSync(join(here, "rows.json"), "utf8"))
-const PRIMITIVE_SETS = ["B", "C"]
+// A row at layer 1 or 2 holds a primitive of its own. A comparison build (set X) does not use the SDK.
+const isPrimitive = (row) => row.layer <= 2 && row.set !== "X"
 
 class Fail extends Error {
   constructor(stage, reasons) {
@@ -86,7 +87,7 @@ function stageTests(id) {
 
 function requireTests(row, names) {
   const need = row.set === "X" ? ["keyboard:"] : ["keyboard:", "agent:"]
-  if (PRIMITIVE_SETS.includes(row.set)) need.push("server:", "direction:")
+  if (isPrimitive(row)) need.push("server:", "direction:")
   const missing = need.filter((prefix) => !names.some((n) => n.startsWith(prefix)))
   if (missing.length) throw new Fail("tests", `no test name starts with ${missing.map((m) => `"${m}"`).join(", ")}. Tests found: ${names.join(" | ") || "none"}`)
 }
@@ -202,9 +203,19 @@ async function stageBrowser(browser, row, url) {
   }
 }
 
+const backup = (id) => join(here, ".gate", `${id}.orig`)
+
+// If an earlier gate run was killed in the break stage, the UI file still has a break in it. Put the copy back.
+function restore(id, file) {
+  if (!existsSync(backup(id))) return
+  writeFileSync(join(here, "ui", file.ui), readFileSync(backup(id), "utf8"))
+  rmSync(backup(id))
+  console.log(`restored ui/${file.ui} from an earlier run that did not end`)
+}
+
 // Deliberate breaks: each one is applied to the UI file, and the test that it names must fail.
 function stageBreaks(id, row, file, breaks) {
-  if (!PRIMITIVE_SETS.includes(row.set)) return 0
+  if (!isPrimitive(row)) return 0
   if (breaks.length < 3) throw new Fail("breaks", `a primitive needs a minimum of 3 deliberate breaks in its definition. Found: ${breaks.length}`)
   const path = join(here, "ui", file.ui)
   const original = readFileSync(path, "utf8")
@@ -213,6 +224,8 @@ function stageBreaks(id, row, file, breaks) {
   const code = original.slice(0, cut)
   const report = join(here, ".gate", `breaks-${id}.json`)
   const reasons = []
+  // A gate that is killed in this stage does not run its finally block. The copy lets the next run restore the file.
+  writeFileSync(backup(id), original)
   try {
     for (const b of breaks) {
       if (code.split(b.find).length !== 2) {
@@ -226,6 +239,7 @@ function stageBreaks(id, row, file, breaks) {
     }
   } finally {
     writeFileSync(path, original)
+    rmSync(backup(id))
   }
   if (reasons.length) throw new Fail("breaks", reasons)
   return breaks.length
@@ -249,6 +263,7 @@ async function gate(ids, { full }) {
   const one = full ? null : ids[0]
   for (const id of ids) if (!rows.some((r) => r.id === id)) throw new Fail("files", `${id} is not a row of rows.json`)
   const perUI = new Map(ids.map((id) => [id, { file: files(id) }]))
+  for (const [id, u] of perUI) restore(id, u.file)
   for (const [id, u] of perUI) u.lines = stageSource(id, rows.find((r) => r.id === id), u.file)
   console.log("pass source")
   stageTypes(one)

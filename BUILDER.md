@@ -13,7 +13,7 @@ You build 1 row of `rows.json`. Your ID is in your prompt.
    - Own primitive: `ui/B01-seat-map.ts`.
    - Look only: `ui/E01-no-stylesheet.ts`.
 4. **Write your 2 files**: `ui/<ID>-<name>.ts` and `ui/<ID>-<name>.test.ts`. `<name>` is lowercase words with dashes.
-5. **Run the gate until it passes.** Each failure prints `FAIL <stage>` and the reasons. Correct the UI or its tests. The gate is the judge: when you think that the gate is wrong, stop and report it.
+5. **Run the gate until it passes.** Give the command a timeout of 600,000 ms: the gate for B01 takes 64 seconds, and each deliberate break adds a test run. Each failure prints `FAIL <stage>` and the reasons. Correct the UI or its tests. The gate is the judge: when you think that the gate is wrong, stop and report it.
 6. **Look at `shots/<ID>.png`.** Done when a person sees the UI of your row's title, with no text cut off and no parts that overlap.
 7. **Report** in the format at the end of this file.
 
@@ -46,7 +46,7 @@ Rules for the file:
 - Start each test name with what it proves. The gate requires a minimum of 1 test for each prefix:
   - all rows: `keyboard:`
   - all rows except set X: `agent:`
-  - sets B and C: also `server:` (`checkServer`) and `direction:` (`checkDirection`)
+  - layer 1 and 2 rows (an own primitive): also `server:` (`checkServer`) and `direction:` (`checkDirection`)
 - `src/testing.ts` gives you `mountUI(ui)`, `keys(...)`, `settle()` and `tabbable(root)`. `mountUI` makes the 1 bridge of the test file and returns `{ root, agent, person, live }`. Set `person.approves = true` to answer "Allow" to a confirm step. `person.asked` lists the questions.
 - Test a primitive with `mount` from `@ui-sdk/core/testing`, as `B01-seat-map.test.ts` does. Test what you wired on the page with `mountUI`.
 - Follow `skills/ui-sdk/references/testing.md` for what to test: both arrow directions, exactly 1 tab stop, Space and Enter, each state attribute, each button of each dialog.
