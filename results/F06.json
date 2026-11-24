@@ -1,0 +1,23 @@
+{
+ "at": "2026-11-24 23:15 UTC",
+ "tests": {
+  "passed": 11,
+  "names": [
+   "names: each device, the WebMCP switch and each request has the name that the page shows",
+   "webmcp: registerTools puts snapshot, act and query on the mock document.modelContext at mount, with their hints",
+   "visual: the opening snapshot call makes each of the 5 devices glow teal on the isometric plan",
+   "agent: the scripted task turns the kitchen off, then the browser agent's act tool runs the evening scene",
+   "agent: the act tool's allow refuses the front door lock, and the lock stays locked",
+   "agent: unregistering aborts each tool so the mock holds 0, and the re-registered act tool changes a device and refuses the WebMCP switch and a request button",
+   "agent: a tool step that sets the value a device already has leaves no glow and no tool mark",
+   "agent: a change by the page agent is not a tool act, so it does not glow",
+   "keyboard: Space toggles a device switch, the arrows move the thermostat, and Enter runs a request",
+   "keyboard: each control is 1 tab stop, in the order of the page",
+   "motion: with reduced motion, a glow is drawn with no pulse"
+  ]
+ },
+ "snapshotBytes": 1007,
+ "treeBytes": 1411,
+ "tabStops": 10,
+ "lines": 429
+}
