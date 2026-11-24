@@ -1,0 +1,21 @@
+{
+ "at": "2026-11-24 23:21 UTC",
+ "tests": {
+  "passed": 9,
+  "names": [
+   "names: the bridge sees the 4 rover controls and not the console",
+   "schemas: the 3 tabs show the name, description and input schema of each agentTools entry",
+   "visual: the terrain SVG is hidden from the bridge and draws the rover at the status cell",
+   "agent: the task drives the rover, and the drill step waits for the person",
+   "keyboard: a person types act steps, Enter on Run sends them to the bridge, and the rover drives",
+   "keyboard: input that is not JSON runs nothing and says why",
+   "keyboard: a typed drill step asks the person, and a no is reported",
+   "keyboard: Enter on Drive at the grid edge stops the rover, and Space on Drill drills with no prompt",
+   "keyboard: arrow keys pick the tool, and Run calls query, then snapshot"
+  ]
+ },
+ "snapshotBytes": 522,
+ "treeBytes": 3402,
+ "tabStops": 10,
+ "lines": 347
+}
