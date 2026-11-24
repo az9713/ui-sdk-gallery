@@ -1,0 +1,22 @@
+{
+ "at": "2026-11-24 23:57 UTC",
+ "tests": {
+  "passed": 10,
+  "names": [
+   "names: the seeded session fills both lanes, and each control has its name",
+   "agent: the task's edits go on the Agent lane, and observe writes each one to the status line",
+   "keyboard: Space on Snap to grid is Mara's edit, on the Mara lane",
+   "keyboard: Enter on Undo agent edits puts back each agent value and keeps Mara's later edits",
+   "keyboard: Enter on Undo last edit steps back over Mara's last edit",
+   "keyboard: Preview suggestion puts it on the board, and Discard suggestion takes it back",
+   "agent: an agent can preview its suggestion, but Keep suggestion waits for Mara",
+   "agent: Undo agent edits turns Snap to grid off again after the agent turns it on",
+   "keyboard: an undo waits while a preview is on the board, because Discard would bring the values back",
+   "keyboard: after a discard, Undo last edit skips the discarded preview and the hidden restores"
+  ]
+ },
+ "snapshotBytes": 758,
+ "treeBytes": 1328,
+ "tabStops": 7,
+ "lines": 396
+}
