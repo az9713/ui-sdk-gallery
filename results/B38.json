@@ -1,0 +1,32 @@
+{
+ "at": "2026-11-24 21:07 UTC",
+ "tests": {
+  "passed": 20,
+  "names": [
+   "keyboard: the finder is 1 tab stop, and focus stays in the search box",
+   "keyboard: ArrowDown and ArrowUp move the highlight, and aria-activedescendant follows it",
+   "keyboard: letters in order find a file, with other letters between them",
+   "keyboard: the best match comes first, and equal scores keep the order of the repository",
+   "keyboard: each matched letter is inside a mark, and the text keeps its case",
+   "keyboard: typing highlights the best match, so Enter opens it",
+   "keyboard: Enter opens the highlighted file, and Enter with no highlight opens nothing",
+   "keyboard: Escape clears the search text, and with no text it leaves the key alone",
+   "keyboard: a search with no match shows the empty message and highlights nothing",
+   "keyboard: a click opens a file, and a press on a file keeps focus in the search box",
+   "keyboard: moving the mouse over a file highlights it",
+   "agent: search and open run through the api, and a path that is not in the repository is refused",
+   "keyboard: onValueChange can refuse opening a file",
+   "server: the finder renders with no DOM",
+   "direction: the same keys give the same result in left to right and right to left",
+   "names: the page names the finder, the search box, the list and the treemap",
+   "keyboard: on the page, the list is in the order of the score, and Enter opens the best match",
+   "names: the treemap lights the files that match a search and dims the others",
+   "names: the treemap says how many files match a search",
+   "agent: an agent finds the finder, searches, and opens a file that is not an invented one"
+  ]
+ },
+ "snapshotBytes": 111,
+ "treeBytes": 317,
+ "tabStops": 1,
+ "lines": 442
+}
