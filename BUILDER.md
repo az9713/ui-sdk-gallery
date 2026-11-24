@@ -99,6 +99,9 @@ Each one cost a failed run. The docs do not state them.
 - **`console.log` does not show in Vitest output here.** (A04.) Write probe output to a file in your scratchpad.
 - **A dialog's trigger is not its own bridge entry.** (A06.) The dialog entry has the dialog's title as its name: `{ ref: "Command palette", action: "press" }` opens it.
 - **axe fails a scrollable `<pre>`** (`scrollable-region-focusable`). (A06.) Give it `tabindex="0"`, `role="region"` and an `aria-label`.
+- **jsdom lacks `form.requestSubmit()` and `Range.getBoundingClientRect`.** (A07.) Stub them in the test file. A `ui-trigger-menu` gets `label: null` in the snapshot whatever you set; A07 gave it `data-agent-hidden` and let the token input carry the agent's edits.
+- **`mount` renders a slot as `<input>` only when its `attrs` has a string `type`.** (B20.) Without it a `focus: "native"` slot is a `<div>`. A slot named `input` works when the web tag is a wrapper with `target: wrappedChild("input")`.
+- **In `mount`, an absent part is a detached node with `.hidden === false`.** (B20.) Test presence with `isConnected && !hidden`.
 - **`checkPattern` has 15 patterns and `grid` is not one of them.** Use it when your pattern is in the list of `references/testing.md`.
 
 ## Your files

@@ -1,0 +1,28 @@
+{
+ "at": "2026-11-24 07:34 UTC",
+ "tests": {
+  "passed": 16,
+  "names": [
+   "keyboard: the picker is 1 tab stop, and focus stays in the search box",
+   "keyboard: ArrowDown and ArrowUp move the highlight, and aria-activedescendant follows it",
+   "keyboard: typing narrows the list to the matches, and ignores case and where the text sits",
+   "keyboard: typing highlights the first match, so Enter chooses it",
+   "keyboard: Enter chooses the highlighted name, and Enter with no highlight chooses nothing",
+   "keyboard: Escape clears the search text, and with no text it leaves the key alone",
+   "keyboard: the highlight stays on the visible names, and a name with no match shows the empty message",
+   "keyboard: a click chooses a name, and a press on a name keeps focus in the search box",
+   "keyboard: moving the mouse over a name highlights it",
+   "agent: search and choose run through the api, and a name that is not on the page is refused",
+   "keyboard: onValueChange can refuse a choice",
+   "server: the picker renders with no DOM",
+   "direction: the same keys give the same result in left to right and right to left",
+   "names: the page names the picker, the search box and the list",
+   "keyboard: on the page, typing, the arrow keys and Enter choose a teammate and the status line reports it",
+   "agent: an agent finds the picker, searches, and chooses a name that is not an invented one"
+  ]
+ },
+ "snapshotBytes": 483,
+ "treeBytes": 186,
+ "tabStops": 1,
+ "lines": 262
+}
