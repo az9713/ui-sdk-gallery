@@ -1,0 +1,26 @@
+{
+ "at": "2026-11-24 18:15 UTC",
+ "tests": {
+  "passed": 14,
+  "names": [
+   "keyboard: holding Space for the whole delay confirms, and Enter does the same",
+   "keyboard: letting go before the delay deletes nothing",
+   "keyboard: Escape during a hold cancels it, and the sample stays",
+   "keyboard: the button is 1 tab stop and takes focus on Tab",
+   "keyboard: after the deletion the button is aria-disabled and a new hold changes nothing",
+   "keyboard: a click with no hold reports an early release",
+   "pointer: a mouse press confirms after the delay, and moving away cancels it",
+   "server: the hold button renders with no DOM",
+   "direction: a hold works the same in left to right and right to left",
+   "names: the page names the group, the button and the 5 samples of the freezer list",
+   "keyboard: on the page, a short hold keeps the sample and a full hold deletes it",
+   "helix: the 32 strand halves play on a hold, run back on an early release and finish on a delete",
+   "agent: an agent holds the button after the person allows it, and the sample leaves the list",
+   "helix: with reduced motion the strands do not play, and a delete shows the opened helix"
+  ]
+ },
+ "snapshotBytes": 173,
+ "treeBytes": 1166,
+ "tabStops": 1,
+ "lines": 324
+}
