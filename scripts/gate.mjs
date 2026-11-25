@@ -3,6 +3,7 @@
 // Exit code 0 = each stage passed. A stage that fails prints "FAIL <stage>" and the reasons.
 import { spawnSync } from "node:child_process"
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs"
+import { homedir } from "node:os"
 import { join } from "node:path"
 import { pathToFileURL } from "node:url"
 import puppeteer from "puppeteer-core"
@@ -11,7 +12,7 @@ import { build, here, uiFiles } from "./build.mjs"
 const CHROME = process.env.CHROME ?? "C:/Program Files/Google/Chrome/Application/chrome.exe"
 const IMPECCABLE =
   process.env.IMPECCABLE ??
-  "~/.claude/plugins/cache/impeccable/impeccable/4.4.0/skills/impeccable/scripts/impeccable"
+  join(homedir(), ".claude/plugins/cache/impeccable/impeccable/4.4.0/skills/impeccable/scripts/impeccable")
 const rows = JSON.parse(readFileSync(join(here, "rows.json"), "utf8"))
 // A row at layer 1 or 2 holds a primitive of its own. A comparison build (set X) does not use the SDK.
 const isPrimitive = (row) => row.layer <= 2 && row.set !== "X"
