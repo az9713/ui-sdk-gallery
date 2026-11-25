@@ -25,7 +25,7 @@ Each UI has a position on 3 axes:
 
 - **Axis 1, role:** Build (an agent makes the UI) or Use (an agent operates the UI).
 - **Axis 2, kind of help:** Mechanism, Knowledge, Check or Control.
-- **Axis 3, layer:** the lowest layer where the UI needs its own code. 1 behavior, 2 primitive, 3 adapters, 4 complete part, 5 look.
+- **Axis 3, layer:** the lowest layer where the UI needs its own code. 1 behavior, 2 primitive, 3 parts, 4 complete part, 5 style.
 
 ## The sets
 
