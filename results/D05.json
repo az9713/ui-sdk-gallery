@@ -1,0 +1,18 @@
+{
+ "at": "2026-11-25 03:46 UTC",
+ "tests": {
+  "passed": 6,
+  "names": [
+   "names: the page has 5 pickers with 5 distinct labels, and no id occurs 2 times",
+   "keyboard: each picker is 1 tab stop, so the page has 5",
+   "keyboard: ArrowDown and Enter choose a name in 1 picker, and the 4 others do not change",
+   "keyboard: typing narrows only its own list, and Escape clears it",
+   "agent: 1 snapshot lists the 5 pickers, and 1 act chooses a different name in each",
+   "agent: a search through the bridge narrows only the picker that it names"
+  ]
+ },
+ "snapshotBytes": 2464,
+ "treeBytes": 973,
+ "tabStops": 5,
+ "lines": 111
+}
