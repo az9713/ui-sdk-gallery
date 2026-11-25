@@ -1,5 +1,5 @@
 {
- "at": "2026-11-25 00:07 UTC",
+ "at": "2026-11-25 05:10 UTC",
  "tests": {
   "passed": 6,
   "names": [
@@ -11,7 +11,7 @@
    "agent: an agent picks Hebrew by the group's name and saves it"
   ]
  },
- "snapshotBytes": 312,
+ "snapshotBytes": 333,
  "treeBytes": 382,
  "tabStops": 2,
  "lines": 64
