@@ -201,6 +201,7 @@ Each one cost a failed run. The docs do not state them.
 - **Solid adapter, no compiler** (D04): use `createComponent` and `Dynamic` from `@solidjs/web`; an object spread reads getters once, so combine props with `merge` from `solid-js`. A signal write shows after the flush. `onSettled` callbacks must return a function or `undefined`. The empty part shows under a full list at mount: create it after `onSettled`. Ids are `ui-sdk-cl-N`, page-wide.
 - **Rotary knob** (C03): the contract of `createRotary` is in the JSDoc of `src/behaviors/rotary.ts`. Keys do not mirror in right-to-left, so the `direction:` test is hand-written. `bindDrag` `x`/`y` are client coordinates. An own primitive snapshot entry takes `min`, `max`, `step` from state.
 - **The gate does not check layout** (D05): a first run passed while 5 pickers overlapped on screen. Look at the screenshot. A grid card with an `auto` track grows past its column: set `grid-template-columns: minmax(0, 1fr)`.
+- **Chart crosshair** (C01): `createCrosshair` is in `src/behaviors/crosshair.ts`. Strict mode fails the mount when `agent.actions` lists a name that the api does not have. A runtime import from `src/behaviors/` needs no build change. The DevTools MCP snapshot shows `valuetext=""` for each slider: read the attribute from the DOM.
 - **A `python3 - <<EOF` heredoc can hang a Bash call for 300 s** (B38). Use the Edit tool.
 - **The gate prints `ERROR: The process with PID … could not be terminated` while other gates run.** It does not change the result.
 

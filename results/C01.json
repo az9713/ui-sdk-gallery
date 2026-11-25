@@ -1,0 +1,23 @@
+{
+ "at": "2026-11-25 03:55 UTC",
+ "tests": {
+  "passed": 11,
+  "names": [
+   "keyboard: the plot is 1 tab stop, arrows step 1 candle, Page Up and Page Down a week, Home and End go to the ends",
+   "keyboard: Escape hides the crosshair, and an arrow shows it again on the latest candle",
+   "pointer: a hover puts the crosshair on the nearest candle, the cross line follows the pointer, and leaving hides it",
+   "pointer: a press shows the crosshair at once, for touch, which has no hover",
+   "pointer: the vertical line sits on the candle's center and, with no pointer, the cross line on its close",
+   "server: the candle chart renders with no DOM",
+   "direction: Left and Right follow the text direction",
+   "names: the page names the chart and the crosshair, describes its keys, and draws 50 candles",
+   "keyboard: on the page, arrows move the crosshair and the status line reads each candle",
+   "pointer: on the page, a hover moves the crosshair and the price tag reads the price under the pointer",
+   "agent: an agent finds the chart, lists its days, moves the crosshair to Oct 15, is refused a Saturday, and hides it"
+  ]
+ },
+ "snapshotBytes": 115,
+ "treeBytes": 425,
+ "tabStops": 1,
+ "lines": 350
+}
