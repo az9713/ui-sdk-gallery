@@ -1,0 +1,23 @@
+{
+ "at": "2026-11-25 04:21 UTC",
+ "tests": {
+  "passed": 11,
+  "names": [
+   "keyboard: the plot is 1 tab stop, arrows step 1 earthquake, Page Up and Page Down 3, Home and End go to the ends",
+   "keyboard: Escape hides the crosshair, and an arrow shows it again on the latest earthquake",
+   "pointer: a hover puts the crosshair on the earthquake nearest in time, the cross line follows the pointer, and leaving hides it",
+   "pointer: a press shows the crosshair at once, for touch, which has no hover",
+   "pointer: with no pointer, the vertical line sits on the earthquake's time and the cross line on its peak",
+   "server: the seismograph renders with no DOM",
+   "direction: Left and Right follow the text direction",
+   "names: the page names the seismograph and the crosshair, describes its keys, and draws the trace and 12 earthquakes",
+   "keyboard: on the page, arrows move the crosshair and the status line reads each earthquake",
+   "pointer: on the page, a hover moves the crosshair and the velocity tag reads the ground velocity under the pointer",
+   "agent: an agent finds the seismograph, lists its earthquakes, moves the crosshair to 06:42, is refused 05:00, and hides it"
+  ]
+ },
+ "snapshotBytes": 109,
+ "treeBytes": 501,
+ "tabStops": 1,
+ "lines": 369
+}
