@@ -1,0 +1,23 @@
+{
+ "at": "2026-11-25 04:03 UTC",
+ "tests": {
+  "passed": 11,
+  "names": [
+   "keyboard: the arrow keys turn the focused globe 1 degree, Page Up and Page Down 15 degrees, and Home and End go to the ends",
+   "keyboard: the globe turns round past 180 degrees in both directions",
+   "keyboard: the globe is a slider with its bounds, its value and its value text in degrees east or west",
+   "pointer: a drag around the center turns the globe east and back, 1 degree of longitude for each degree of turn",
+   "server: the globe dial renders with no DOM",
+   "direction: Left and Right turn the globe the same way in left to right and right to left",
+   "scene: the turn that brings a longitude to the front is -(longitude + 90) degrees",
+   "names: the page names the globe, the 7 city buttons and the status line",
+   "keyboard: on the page, Tab reaches the globe once, a key turns it, and a city button turns it to the city",
+   "agent: an agent turns the globe past 180 degrees, then presses Tokyo",
+   "pointer: on the page, a drag around the globe turns it and the status follows"
+  ]
+ },
+ "snapshotBytes": 625,
+ "treeBytes": 553,
+ "tabStops": 8,
+ "lines": 422
+}
