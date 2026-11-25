@@ -1,0 +1,21 @@
+{
+ "at": "2026-11-25 02:58 UTC",
+ "tests": {
+  "passed": 9,
+  "names": [
+   "names: the React page names the picker, the search box and the list",
+   "keyboard: the React picker is 1 tab stop, and the arrows keep focus in the search box",
+   "keyboard: ArrowDown and ArrowUp move the highlight, and aria-activedescendant names an element on the page",
+   "keyboard: typing narrows the list and highlights the first match, and Enter chooses it",
+   "keyboard: Escape clears the search text, and with no text it leaves the key alone",
+   "keyboard: a search with no match shows the empty text, and Enter then chooses nothing",
+   "keyboard: a click chooses a name, and a press on a name keeps focus in the search box",
+   "agent: the web bridge sees the React picker, refuses an invented name, and runs search and choose",
+   "keyboard: 2 renderings on 1 page share no id, keep their own state, and unmount clean"
+  ]
+ },
+ "snapshotBytes": 492,
+ "treeBytes": 195,
+ "tabStops": 1,
+ "lines": 95
+}
