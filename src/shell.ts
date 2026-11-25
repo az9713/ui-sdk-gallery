@@ -103,7 +103,7 @@ function show(entry: Entry, entries: Entry[], results: NonNullable<Context["resu
   const refresh = () => {
     const snapshot = agent.snapshot()
     pre.textContent = JSON.stringify(snapshot, null, 1)
-    bytes.textContent = String(JSON.stringify(snapshot).length)
+    bytes.textContent = String(new TextEncoder().encode(JSON.stringify(snapshot)).length)
   }
   const runTask = async () => {
     if (!def.task) return { ok: false, error: { step: 0, message: "This UI has no agent task." } }

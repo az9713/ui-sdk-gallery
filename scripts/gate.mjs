@@ -127,7 +127,7 @@ async function stageBrowser(browser, row, url) {
       for (const e of live) if (!e.label) reasons.push(`snapshot entry ${e.component} ${e.ref} has no label`)
       const text = JSON.stringify(snap)
       if (/Run the agent task|Allow the agent/.test(text)) reasons.push("a control of the shell is in the snapshot")
-      snapshotBytes = text.length
+      snapshotBytes = Buffer.byteLength(text)
     }
 
     // Accessibility tree of the stage, as text: 1 line for each node. My measurement.

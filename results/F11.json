@@ -1,0 +1,19 @@
+{
+ "at": "2026-11-25 05:01 UTC",
+ "tests": {
+  "passed": 7,
+  "names": [
+   "names: Highlight set is the 1 control, and the board draws each measured UI of the fixture",
+   "data: snapshot is across and tree is up on the scatter, and each bar has the value of its set and kind",
+   "keyboard: the select trigger is the 1 tab stop, and Enter, ArrowDown, Enter highlight set A",
+   "keyboard: Escape closes the list and keeps the set that was chosen",
+   "agent: an agent highlights set B, F and X, and the status reports the numbers of each set",
+   "agent: the scripted task highlights set B, and task.done reads it",
+   "data: the own row F11 is not drawn, and a board with no results says so"
+  ]
+ },
+ "snapshotBytes": 149,
+ "treeBytes": 2574,
+ "tabStops": 1,
+ "lines": 244
+}
