@@ -3,6 +3,7 @@
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs"
 import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
+import { svelte } from "@sveltejs/vite-plugin-svelte"
 import { build as vite } from "vite"
 
 const here = join(dirname(fileURLToPath(import.meta.url)), "..")
@@ -34,6 +35,14 @@ async function build({ ids = null, outDir = "dist", strict = false } = {}) {
     root: here,
     configFile: false,
     logLevel: "warn",
+    // Set D: React and Vue read these names at run time, and a lib build does not replace them.
+    plugins: [svelte({ configFile: false })],
+    define: {
+      "process.env.NODE_ENV": '"production"',
+      __VUE_OPTIONS_API__: "false",
+      __VUE_PROD_DEVTOOLS__: "false",
+      __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: "false",
+    },
     build: {
       outDir,
       emptyOutDir: true,

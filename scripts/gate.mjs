@@ -28,7 +28,9 @@ function files(id) {
   const all = readdirSync(join(here, "ui")).filter((f) => f.startsWith(id + "-"))
   const ui = uiFiles([id])
   const tests = all.filter((f) => f.endsWith(".test.ts"))
-  if (ui.length !== 1 || tests.length !== 1 || all.length !== 2)
+  // A Svelte adapter row can hold its component file too (D03).
+  const extra = all.filter((f) => f.endsWith(".svelte"))
+  if (ui.length !== 1 || tests.length !== 1 || all.length !== 2 + extra.length)
     throw new Fail("files", `ui/ must hold 1 file ${id}-<name>.ts and 1 file ${id}-<name>.test.ts. Found: ${all.join(", ") || "none"}`)
   return { ui: ui[0], test: tests[0] }
 }
