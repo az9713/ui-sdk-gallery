@@ -1,0 +1,23 @@
+{
+ "at": "2026-11-25 03:38 UTC",
+ "tests": {
+  "passed": 11,
+  "names": [
+   "keyboard: the arrow keys turn a focused knob, Page Up and Page Down take its large step, and Home and End go to its ends",
+   "keyboard: Phase turns round past its ends, and a knob that stops does not",
+   "keyboard: a knob is a slider with its bounds, its value and its value text with the unit",
+   "pointer: a drag around the center turns a knob clockwise and back, and stops at its end",
+   "server: the knob renders with no DOM",
+   "direction: Left and Right turn a knob the same way in left to right and right to left",
+   "names: the page names the 6 knobs, the save button and the status line",
+   "agent: an agent finds the 6 knobs, sets Cutoff, Resonance and Phase, and saves the patch",
+   "agent: a value past the end of a knob stops at the end, a number in text is read, and Phase turns round",
+   "keyboard: on the page, Tab reaches each knob once, and a key turns it and updates its readout and the status line",
+   "pointer: on the page, a drag around Attack turns it and its readout follows"
+  ]
+ },
+ "snapshotBytes": 789,
+ "treeBytes": 589,
+ "tabStops": 7,
+ "lines": 323
+}
