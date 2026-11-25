@@ -1,0 +1,997 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Gallery review</title>
+<style>
+  body { margin: 0; background: #0f172a; color: #e2e8f0; font: 14px/1.45 system-ui, sans-serif; }
+  header { position: sticky; top: 0; z-index: 1; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; padding: 14px 16px; background: #0f172a; border-bottom: 1px solid #334155; }
+  h1 { margin: 0; font-size: 18px; }
+  .count { color: #94a3b8; }
+  input { flex: 1 1 220px; max-width: 360px; padding: 8px 10px; border-radius: 6px; border: 1px solid #334155; background: #1e293b; color: #e2e8f0; }
+  button { padding: 6px 12px; border-radius: 6px; border: 1px solid #334155; background: #1e293b; color: #cbd5e1; cursor: pointer; }
+  button[aria-pressed="true"] { border-color: #fb923c; color: #fb923c; }
+  main { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; padding: 16px; }
+  .card { display: flex; flex-direction: column; background: #1e293b; border: 1px solid #334155; border-radius: 8px; overflow: hidden; color: inherit; text-decoration: none; }
+  .card:hover, .card:focus-visible { border-color: #2dd4bf; outline: none; }
+  /* ponytail: crops the 1280 x 880 shot to its stage, the left 720 px below the 64 px nav bar. Change both numbers if the shell layout changes. */
+  .thumb { aspect-ratio: 16 / 10; overflow: hidden; background: #0f172a; border-bottom: 1px solid #334155; }
+  .thumb img { display: block; width: 100%; }
+  .body { padding: 10px 12px 12px; display: grid; gap: 6px; }
+  .head b { color: #fb923c; margin-right: 4px; }
+  p { margin: 0; color: #cbd5e1; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tags span { padding: 1px 8px; border-radius: 99px; border: 1px solid #334155; color: #94a3b8; font-size: 12px; }
+  .nums { color: #2dd4bf; font-size: 12px; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Gallery review</h1>
+  <span class="count" id="count">103 UIs</span>
+  <input type="search" id="q" placeholder="Filter: ID, title, axis, component" aria-label="Filter">
+  <button aria-pressed="true" data-set="">All</button>
+  <button aria-pressed="false" data-set="A">Set A</button>
+  <button aria-pressed="false" data-set="B">Set B</button>
+  <button aria-pressed="false" data-set="C">Set C</button>
+  <button aria-pressed="false" data-set="D">Set D</button>
+  <button aria-pressed="false" data-set="E">Set E</button>
+  <button aria-pressed="false" data-set="F">Set F</button>
+  <button aria-pressed="false" data-set="X">Set X</button>
+</header>
+<main id="grid">
+<a class="card" href="./?ui=A01" data-set="A" data-text="a01 project settings, 3 tabs a settings page from shipped components, with a confirm dialog build mechanism layer 4 set a tabs field input select switch button alert-dialog">
+  <div class="thumb"><img src="thumbs/A01.jpg" alt="Screenshot of A01 Project settings, 3 tabs"></div>
+  <div class="body">
+    <div class="head"><b>A01</b> Project settings, 3 tabs</div>
+    <p>A settings page from shipped components, with a confirm dialog</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">5 tests · 4 tab stops · 111 lines · snapshot 588 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=A02" data-set="A" data-text="a02 sign-up with a one-time code password and one-time-code fields, which the bridge treats as secret build mechanism layer 4 set a password-input otp-input checkbox">
+  <div class="thumb"><img src="thumbs/A02.jpg" alt="Screenshot of A02 Sign-up with a one-time code"></div>
+  <div class="body">
+    <div class="head"><b>A02</b> Sign-up with a one-time code</div>
+    <p>Password and one-time-code fields, which the bridge treats as secret</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">4 tests · 6 tab stops · 90 lines · snapshot 569 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=A03" data-set="A" data-text="a03 checkout a radio group and a money field with step 0.01 build mechanism layer 4 set a radio number-input">
+  <div class="thumb"><img src="thumbs/A03.jpg" alt="Screenshot of A03 Checkout"></div>
+  <div class="body">
+    <div class="head"><b>A03</b> Checkout</div>
+    <p>A radio group and a money field with step 0.01</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">8 tests · 3 tab stops · 87 lines · snapshot 510 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=A04" data-set="A" data-text="a04 hotel booking, date range a date range in a picker and an inline month grid build mechanism layer 4 set a date-picker calendar">
+  <div class="thumb"><img src="thumbs/A04.jpg" alt="Screenshot of A04 Hotel booking, date range"></div>
+  <div class="body">
+    <div class="head"><b>A04</b> Hotel booking, date range</div>
+    <p>A date range in a picker and an inline month grid</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">16 tests · 7 tab stops · 114 lines · snapshot 519 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=A05" data-set="A" data-text="a05 clinic appointment typed date and time segments, and a notes field build mechanism layer 4 set a date-input time-input textarea">
+  <div class="thumb"><img src="thumbs/A05.jpg" alt="Screenshot of A05 Clinic appointment"></div>
+  <div class="body">
+    <div class="head"><b>A05</b> Clinic appointment</div>
+    <p>Typed date and time segments, and a notes field</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">10 tests · 7 tab stops · 74 lines · snapshot 437 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=A06" data-set="A" data-text="a06 command palette for an editor search and run commands in a dialog build mechanism layer 4 set a command dialog">
+  <div class="thumb"><img src="thumbs/A06.jpg" alt="Screenshot of A06 Command palette for an editor"></div>
+  <div class="body">
+    <div class="head"><b>A06</b> Command palette for an editor</div>
+    <p>Search and run commands in a dialog</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">11 tests · 2 tab stops · 136 lines · snapshot 131 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=A07" data-set="A" data-text="a07 prompt box with files and a model tokens in text, an @ menu, and file attachments build mechanism layer 4 set a token-input trigger-menu file-input">
+  <div class="thumb"><img src="thumbs/A07.jpg" alt="Screenshot of A07 Prompt box with files and a model"></div>
+  <div class="body">
+    <div class="head"><b>A07</b> Prompt box with files and a model</div>
+    <p>Tokens in text, an @ menu, and file attachments</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">9 tests · 5 tab stops · 139 lines · snapshot 724 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=A08" data-set="A" data-text="a08 profile photo upload crop an image with a zoom slider and show it as an avatar build mechanism layer 4 set a image-cropper avatar slider">
+  <div class="thumb"><img src="thumbs/A08.jpg" alt="Screenshot of A08 Profile photo upload"></div>
+  <div class="body">
+    <div class="head"><b>A08</b> Profile photo upload</div>
+    <p>Crop an image with a zoom slider and show it as an avatar</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">8 tests · 3 tab stops · 118 lines · snapshot 478 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=A09" data-set="A" data-text="a09 brand theme editor a color picker in a popover and a compact mode switch build mechanism layer 4 set a color-picker popover segmented-control">
+  <div class="thumb"><img src="thumbs/A09.jpg" alt="Screenshot of A09 Brand theme editor"></div>
+  <div class="body">
+    <div class="head"><b>A09</b> Brand theme editor</div>
+    <p>A color picker in a popover and a compact mode switch</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">6 tests · 3 tab stops · 106 lines · snapshot 522 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=A10" data-set="A" data-text="a10 site header navigation panels, a link preview and an account menu build mechanism layer 4 set a navigation-menu hover-card menu">
+  <div class="thumb"><img src="thumbs/A10.jpg" alt="Screenshot of A10 Site header"></div>
+  <div class="body">
+    <div class="head"><b>A10</b> Site header</div>
+    <p>Navigation panels, a link preview and an account menu</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">10 tests · 6 tab stops · 111 lines · snapshot 502 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=A11" data-set="A" data-text="a11 document editor top area an application menu bar and a toolbar with 1 tab stop build mechanism layer 4 set a menubar toolbar toggle tooltip separator">
+  <div class="thumb"><img src="thumbs/A11.jpg" alt="Screenshot of A11 Document editor top area"></div>
+  <div class="body">
+    <div class="head"><b>A11</b> Document editor top area</div>
+    <p>An application menu bar and a toolbar with 1 tab stop</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">13 tests · 2 tab stops · 120 lines · snapshot 1315 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=A12" data-set="A" data-text="a12 file explorer a tree in a resizable, scrollable pane build mechanism layer 4 set a tree resizable scroll-area">
+  <div class="thumb"><img src="thumbs/A12.jpg" alt="Screenshot of A12 File explorer"></div>
+  <div class="body">
+    <div class="head"><b>A12</b> File explorer</div>
+    <p>A tree in a resizable, scrollable pane</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">7 tests · 2 tab stops · 135 lines · snapshot 1487 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=A13" data-set="A" data-text="a13 mail client with 3 panes always-visible lists that drive a reading pane build mechanism layer 4 set a listbox">
+  <div class="thumb"><img src="thumbs/A13.jpg" alt="Screenshot of A13 Mail client with 3 panes"></div>
+  <div class="body">
+    <div class="head"><b>A13</b> Mail client with 3 panes</div>
+    <p>Always-visible lists that drive a reading pane</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">8 tests · 2 tab stops · 104 lines · snapshot 513 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=A14" data-set="A" data-text="a14 help center sections that open, and free text with suggestions build mechanism layer 4 set a accordion collapsible autocomplete">
+  <div class="thumb"><img src="thumbs/A14.jpg" alt="Screenshot of A14 Help center"></div>
+  <div class="body">
+    <div class="head"><b>A14</b> Help center</div>
+    <p>Sections that open, and free text with suggestions</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">7 tests · 7 tab stops · 106 lines · snapshot 873 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=A15" data-set="A" data-text="a15 product gallery slides, a score and result pages build mechanism layer 4 set a carousel rating pagination">
+  <div class="thumb"><img src="thumbs/A15.jpg" alt="Screenshot of A15 Product gallery"></div>
+  <div class="body">
+    <div class="head"><b>A15</b> Product gallery</div>
+    <p>Slides, a score and result pages</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">9 tests · 10 tab stops · 134 lines · snapshot 550 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=A16" data-set="A" data-text="a16 issue list with filters search a list and choose several filters build mechanism layer 4 set a combobox">
+  <div class="thumb"><img src="thumbs/A16.jpg" alt="Screenshot of A16 Issue list with filters"></div>
+  <div class="body">
+    <div class="head"><b>A16</b> Issue list with filters</div>
+    <p>Search a list and choose several filters</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">6 tests · 1 tab stops · 106 lines · snapshot 166 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=A17" data-set="A" data-text="a17 request trace viewer request timings on a time axis build mechanism layer 4 set a waterfall">
+  <div class="thumb"><img src="thumbs/A17.jpg" alt="Screenshot of A17 Request trace viewer"></div>
+  <div class="body">
+    <div class="head"><b>A17</b> Request trace viewer</div>
+    <p>Request timings on a time axis</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">8 tests · 3 tab stops · 161 lines · snapshot 741 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=A18" data-set="A" data-text="a18 video clip timeline clips on a timeline build mechanism layer 4 set a timeline">
+  <div class="thumb"><img src="thumbs/A18.jpg" alt="Screenshot of A18 Video clip timeline"></div>
+  <div class="body">
+    <div class="head"><b>A18</b> Video clip timeline</div>
+    <p>Clips on a timeline</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">9 tests · 4 tab stops · 95 lines · snapshot 456 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=A19" data-set="A" data-text="a19 storage dashboard measurements in a range and task progress build mechanism layer 4 set a meter progress">
+  <div class="thumb"><img src="thumbs/A19.jpg" alt="Screenshot of A19 Storage dashboard"></div>
+  <div class="body">
+    <div class="head"><b>A19</b> Storage dashboard</div>
+    <p>Measurements in a range and task progress</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">4 tests · 2 tab stops · 101 lines · snapshot 457 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=A20" data-set="A" data-text="a20 phone navigation drawer a drawer from an edge build mechanism layer 4 set a drawer">
+  <div class="thumb"><img src="thumbs/A20.jpg" alt="Screenshot of A20 Phone navigation drawer"></div>
+  <div class="body">
+    <div class="head"><b>A20</b> Phone navigation drawer</div>
+    <p>A drawer from an edge</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">9 tests · 1 tab stops · 80 lines · snapshot 195 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=A21" data-set="A" data-text="a21 notification center toasts with an action build mechanism layer 4 set a toast">
+  <div class="thumb"><img src="thumbs/A21.jpg" alt="Screenshot of A21 Notification center"></div>
+  <div class="body">
+    <div class="head"><b>A21</b> Notification center</div>
+    <p>Toasts with an action</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">2 tests · 2 tab stops · 66 lines · snapshot 156 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=A22" data-set="A" data-text="a22 survey with a progress bar native form submit, required-field errors and reset (docs/forms.md) build mechanism layer 4 set a">
+  <div class="thumb"><img src="thumbs/A22.jpg" alt="Screenshot of A22 Survey with a progress bar"></div>
+  <div class="body">
+    <div class="head"><b>A22</b> Survey with a progress bar</div>
+    <p>Native form submit, required-field errors and reset (docs/forms.md)</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">6 tests · 5 tab stops · 137 lines · snapshot 754 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=A23" data-set="A" data-text="a23 flight search autocomplete with options that load after a delay build mechanism layer 4 set a createasyncoptions">
+  <div class="thumb"><img src="thumbs/A23.jpg" alt="Screenshot of A23 Flight search"></div>
+  <div class="body">
+    <div class="head"><b>A23</b> Flight search</div>
+    <p>Autocomplete with options that load after a delay</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">9 tests · 2 tab stops · 108 lines · snapshot 215 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=A24" data-set="A" data-text="a24 meeting planner for 3 time zones date arithmetic and localized labels from @ui-sdk/core/date build mechanism layer 4 set a date">
+  <div class="thumb"><img src="thumbs/A24.jpg" alt="Screenshot of A24 Meeting planner for 3 time zones"></div>
+  <div class="body">
+    <div class="head"><b>A24</b> Meeting planner for 3 time zones</div>
+    <p>Date arithmetic and localized labels from @ui-sdk/core/date</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">15 tests · 8 tab stops · 182 lines · snapshot 520 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=A25" data-set="A" data-text="a25 display preferences the preferences component build mechanism layer 4 set a preferences">
+  <div class="thumb"><img src="thumbs/A25.jpg" alt="Screenshot of A25 Display preferences"></div>
+  <div class="body">
+    <div class="head"><b>A25</b> Display preferences</div>
+    <p>The preferences component</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">3 tests · 2 tab stops · 102 lines · snapshot 384 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=A26" data-set="A" data-text="a26 recipe scaler steps, format and parse from @ui-sdk/core/number build mechanism layer 4 set a number">
+  <div class="thumb"><img src="thumbs/A26.jpg" alt="Screenshot of A26 Recipe scaler"></div>
+  <div class="body">
+    <div class="head"><b>A26</b> Recipe scaler</div>
+    <p>Steps, format and parse from @ui-sdk/core/number</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">11 tests · 4 tab stops · 146 lines · snapshot 469 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=A27" data-set="A" data-text="a27 expense report server markup first, then the elements start (docs/server-rendering.md) build mechanism layer 4 set a">
+  <div class="thumb"><img src="thumbs/A27.jpg" alt="Screenshot of A27 Expense report"></div>
+  <div class="body">
+    <div class="head"><b>A27</b> Expense report</div>
+    <p>Server markup first, then the elements start (docs/server-rendering.md)</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">4 tests · 4 tab stops · 107 lines · snapshot 421 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=A28" data-set="A" data-text="a28 language picker, right to left right-to-left layout with no direction provider build mechanism layer 4 set a label">
+  <div class="thumb"><img src="thumbs/A28.jpg" alt="Screenshot of A28 Language picker, right to left"></div>
+  <div class="body">
+    <div class="head"><b>A28</b> Language picker, right to left</div>
+    <p>Right-to-left layout with no direction provider</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">6 tests · 2 tab stops · 64 lines · snapshot 333 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=A29" data-set="A" data-text="a29 task card editor in a dialog 4 nested layers. escape closes 1 layer each time. build mechanism layer 4 set a overlays">
+  <div class="thumb"><img src="thumbs/A29.jpg" alt="Screenshot of A29 Task card editor in a dialog"></div>
+  <div class="body">
+    <div class="head"><b>A29</b> Task card editor in a dialog</div>
+    <p>4 nested layers. Escape closes 1 layer each time.</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">9 tests · 1 tab stops · 169 lines · snapshot 157 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=A30" data-set="A" data-text="a30 palette contrast checker colors as data from @ui-sdk/core/color: parse, convert, contrastratio build mechanism layer 4 set a color">
+  <div class="thumb"><img src="thumbs/A30.jpg" alt="Screenshot of A30 Palette contrast checker"></div>
+  <div class="body">
+    <div class="head"><b>A30</b> Palette contrast checker</div>
+    <p>Colors as data from @ui-sdk/core/color: parse, convert, contrastRatio</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">11 tests · 5 tab stops · 168 lines · snapshot 517 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B01" data-set="B" data-text="b01 cinema seat map a grid of seats with 1 tab stop, taken seats that focus skips, and multiple selection build mechanism layer 2 set b creategridfocus createselection">
+  <div class="thumb"><img src="thumbs/B01.jpg" alt="Screenshot of B01 Cinema seat map"></div>
+  <div class="body">
+    <div class="head"><b>B01</b> Cinema seat map</div>
+    <p>A grid of seats with 1 tab stop, taken seats that focus skips, and multiple selection</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">10 tests · 2 tab stops · 220 lines · snapshot 171 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B02" data-set="B" data-text="b02 card board with columns drag cards between columns, by pointer and by keyboard build mechanism layer 2 set b createtransfer createautoscroll binddragpreview">
+  <div class="thumb"><img src="thumbs/B02.jpg" alt="Screenshot of B02 Card board with columns"></div>
+  <div class="body">
+    <div class="head"><b>B02</b> Card board with columns</div>
+    <p>Drag cards between columns, by pointer and by keyboard</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">13 tests · 2 tab stops · 361 lines · snapshot 514 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B03" data-set="B" data-text="b03 playlist that you reorder reorder a list by drag and by keyboard build mechanism layer 2 set b createreorder">
+  <div class="thumb"><img src="thumbs/B03.jpg" alt="Screenshot of B03 Playlist that you reorder"></div>
+  <div class="body">
+    <div class="head"><b>B03</b> Playlist that you reorder</div>
+    <p>Reorder a list by drag and by keyboard</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">12 tests · 1 tab stops · 206 lines · snapshot 389 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B04" data-set="B" data-text="b04 spreadsheet a block of cells, edit in place, copy and paste build mechanism layer 2 set b createcellrange createinlineedit cellstotext texttocells">
+  <div class="thumb"><img src="thumbs/B04.jpg" alt="Screenshot of B04 Spreadsheet"></div>
+  <div class="body">
+    <div class="head"><b>B04</b> Spreadsheet</div>
+    <p>A block of cells, edit in place, copy and paste</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">21 tests · 1 tab stops · 389 lines · snapshot 247 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B05" data-set="B" data-text="b05 photo grid, select with a rectangle rectangle selection build mechanism layer 2 set b createlasso">
+  <div class="thumb"><img src="thumbs/B05.jpg" alt="Screenshot of B05 Photo grid, select with a rectangle"></div>
+  <div class="body">
+    <div class="head"><b>B05</b> Photo grid, select with a rectangle</div>
+    <p>Rectangle selection</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">15 tests · 3 tab stops · 273 lines · snapshot 258 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B06" data-set="B" data-text="b06 workflow node editor pan and zoom a canvas, move nodes, connect ports build mechanism layer 2 set b createviewport createconnect createmove">
+  <div class="thumb"><img src="thumbs/B06.jpg" alt="Screenshot of B06 Workflow node editor"></div>
+  <div class="body">
+    <div class="head"><b>B06</b> Workflow node editor</div>
+    <p>Pan and zoom a canvas, move nodes, connect ports</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">15 tests · 5 tab stops · 475 lines · snapshot 529 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B07" data-set="B" data-text="b07 project plan on tracks spans on tracks that you move and resize build mechanism layer 2 set b createspans">
+  <div class="thumb"><img src="thumbs/B07.jpg" alt="Screenshot of B07 Project plan on tracks"></div>
+  <div class="body">
+    <div class="head"><b>B07</b> Project plan on tracks</div>
+    <p>Spans on tracks that you move and resize</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">14 tests · 7 tab stops · 289 lines · snapshot 886 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B08" data-set="B" data-text="b08 week calendar events that overlap, placed side by side build mechanism layer 2 set b stackspans">
+  <div class="thumb"><img src="thumbs/B08.jpg" alt="Screenshot of B08 Week calendar"></div>
+  <div class="body">
+    <div class="head"><b>B08</b> Week calendar</div>
+    <p>Events that overlap, placed side by side</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">12 tests · 1 tab stops · 376 lines · snapshot 1168 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B09" data-set="B" data-text="b09 image annotation boxes boxes with resize handles build mechanism layer 2 set b createresize">
+  <div class="thumb"><img src="thumbs/B09.jpg" alt="Screenshot of B09 Image annotation boxes"></div>
+  <div class="body">
+    <div class="head"><b>B09</b> Image annotation boxes</div>
+    <p>Boxes with resize handles</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">13 tests · 27 tab stops · 298 lines · snapshot 384 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B10" data-set="B" data-text="b10 sound pad with 2 axes a 2-axis control build mechanism layer 2 set b createarea">
+  <div class="thumb"><img src="thumbs/B10.jpg" alt="Screenshot of B10 Sound pad with 2 axes"></div>
+  <div class="body">
+    <div class="head"><b>B10</b> Sound pad with 2 axes</div>
+    <p>A 2-axis control</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">8 tests · 3 tab stops · 144 lines · snapshot 262 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B11" data-set="B" data-text="b11 inbox with swipe actions swipe a row for actions. buttons for a mouse. build mechanism layer 2 set b createswipeactions createpointerkind">
+  <div class="thumb"><img src="thumbs/B11.jpg" alt="Screenshot of B11 Inbox with swipe actions"></div>
+  <div class="body">
+    <div class="head"><b>B11</b> Inbox with swipe actions</div>
+    <p>Swipe a row for actions. Buttons for a mouse.</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">15 tests · 1 tab stops · 402 lines · snapshot 461 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B12" data-set="B" data-text="b12 chat thread a list that stays at the bottom, and arrowup for earlier messages build mechanism layer 2 set b createsticktobottom createinputhistory">
+  <div class="thumb"><img src="thumbs/B12.jpg" alt="Screenshot of B12 Chat thread"></div>
+  <div class="body">
+    <div class="head"><b>B12</b> Chat thread</div>
+    <p>A list that stays at the bottom, and ArrowUp for earlier messages</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">14 tests · 3 tab stops · 272 lines · snapshot 106 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B13" data-set="B" data-text="b13 log viewer with 100,000 rows only the visible rows are rendered build mechanism layer 2 set b createvirtualizer">
+  <div class="thumb"><img src="thumbs/B13.jpg" alt="Screenshot of B13 Log viewer with 100,000 rows"></div>
+  <div class="body">
+    <div class="head"><b>B13</b> Log viewer with 100,000 rows</div>
+    <p>Only the visible rows are rendered</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">11 tests · 1 tab stops · 299 lines · snapshot 94 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B14" data-set="B" data-text="b14 time wheel a listbox that you scroll to pick from build mechanism layer 2 set b bindscrollpicker">
+  <div class="thumb"><img src="thumbs/B14.jpg" alt="Screenshot of B14 Time wheel"></div>
+  <div class="body">
+    <div class="head"><b>B14</b> Time wheel</div>
+    <p>A listbox that you scroll to pick from</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">10 tests · 3 tab stops · 210 lines · snapshot 259 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B15" data-set="B" data-text="b15 outline editor, nest by drag reorder and nest tree items build mechanism layer 2 set b createtreereorder createtreecollection">
+  <div class="thumb"><img src="thumbs/B15.jpg" alt="Screenshot of B15 Outline editor, nest by drag"></div>
+  <div class="body">
+    <div class="head"><b>B15</b> Outline editor, nest by drag</div>
+    <p>Reorder and nest tree items</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">16 tests · 1 tab stops · 358 lines · snapshot 681 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B16" data-set="B" data-text="b16 permission tree with 3-state boxes checked, unchecked and mixed states from paths build mechanism layer 2 set b treecheckedstates treefrompaths">
+  <div class="thumb"><img src="thumbs/B16.jpg" alt="Screenshot of B16 Permission tree with 3-state boxes"></div>
+  <div class="body">
+    <div class="head"><b>B16</b> Permission tree with 3-state boxes</div>
+    <p>Checked, unchecked and mixed states from paths</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">14 tests · 2 tab stops · 349 lines · snapshot 318 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B17" data-set="B" data-text="b17 metro line map 1 tab stop on a line of stations, and find a station by typing build mechanism layer 2 set b createrovingfocus createtypeahead">
+  <div class="thumb"><img src="thumbs/B17.jpg" alt="Screenshot of B17 Metro line map"></div>
+  <div class="body">
+    <div class="head"><b>B17</b> Metro line map</div>
+    <p>1 tab stop on a line of stations, and find a station by typing</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">10 tests · 2 tab stops · 206 lines · snapshot 458 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B18" data-set="B" data-text="b18 periodic table arrow keys choose the next item from its position on screen build mechanism layer 2 set b spatialmove nearestindirection">
+  <div class="thumb"><img src="thumbs/B18.jpg" alt="Screenshot of B18 Periodic table"></div>
+  <div class="body">
+    <div class="head"><b>B18</b> Periodic table</div>
+    <p>Arrow keys choose the next item from its position on screen</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">11 tests · 1 tab stops · 275 lines · snapshot 115 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B19" data-set="B" data-text="b19 emoji picker a popup with a flowing grid in it build mechanism layer 2 set b createpopup">
+  <div class="thumb"><img src="thumbs/B19.jpg" alt="Screenshot of B19 Emoji picker"></div>
+  <div class="body">
+    <div class="head"><b>B19</b> Emoji picker</div>
+    <p>A popup with a flowing grid in it</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">11 tests · 1 tab stops · 275 lines · snapshot 155 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B20" data-set="B" data-text="b20 teammate picker a search box over options. the website's example. build mechanism layer 2 set b createlistbox createchange">
+  <div class="thumb"><img src="thumbs/B20.jpg" alt="Screenshot of B20 Teammate picker"></div>
+  <div class="body">
+    <div class="head"><b>B20</b> Teammate picker</div>
+    <p>A search box over options. The website's example.</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">16 tests · 1 tab stops · 262 lines · snapshot 483 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B21" data-set="B" data-text="b21 upload queue that tells a screen reader its progress screen reader messages build mechanism layer 2 set b announce prepareannouncements">
+  <div class="thumb"><img src="thumbs/B21.jpg" alt="Screenshot of B21 Upload queue that tells a screen reader its progress"></div>
+  <div class="body">
+    <div class="head"><b>B21</b> Upload queue that tells a screen reader its progress</div>
+    <p>Screen reader messages</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">13 tests · 3 tab stops · 439 lines · snapshot 657 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B22" data-set="B" data-text="b22 wizard stepper the stepper pattern of skills/ui-sdk/references/patterns.md build mechanism layer 2 set b">
+  <div class="thumb"><img src="thumbs/B22.jpg" alt="Screenshot of B22 Wizard stepper"></div>
+  <div class="body">
+    <div class="head"><b>B22</b> Wizard stepper</div>
+    <p>The stepper pattern of skills/ui-sdk/references/patterns.md</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">15 tests · 3 tab stops · 383 lines · snapshot 429 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B23" data-set="B" data-text="b23 hold-to-delete button press and hold to confirm build mechanism layer 2 set b bindhold">
+  <div class="thumb"><img src="thumbs/B23.jpg" alt="Screenshot of B23 Hold-to-delete button"></div>
+  <div class="body">
+    <div class="head"><b>B23</b> Hold-to-delete button</div>
+    <p>Press and hold to confirm</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">14 tests · 1 tab stops · 324 lines · snapshot 173 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B24" data-set="B" data-text="b24 quantity control that repeats press and hold to repeat build mechanism layer 2 set b bindrepeat">
+  <div class="thumb"><img src="thumbs/B24.jpg" alt="Screenshot of B24 Quantity control that repeats"></div>
+  <div class="body">
+    <div class="head"><b>B24</b> Quantity control that repeats</div>
+    <p>Press and hold to repeat</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">12 tests · 3 tab stops · 341 lines · snapshot 210 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B25" data-set="B" data-text="b25 tag list with remove focus goes to a neighbor when the focused tag leaves build mechanism layer 2 set b createfocusrecovery">
+  <div class="thumb"><img src="thumbs/B25.jpg" alt="Screenshot of B25 Tag list with remove"></div>
+  <div class="body">
+    <div class="head"><b>B25</b> Tag list with remove</div>
+    <p>Focus goes to a neighbor when the focused tag leaves</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">11 tests · 1 tab stops · 300 lines · snapshot 455 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B26" data-set="B" data-text="b26 panels that browser search can open closed panels that find-in-page opens build mechanism layer 2 set b bindpanel bindfindable">
+  <div class="thumb"><img src="thumbs/B26.jpg" alt="Screenshot of B26 Panels that browser search can open"></div>
+  <div class="body">
+    <div class="head"><b>B26</b> Panels that browser search can open</div>
+    <p>Closed panels that find-in-page opens</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">19 tests · 11 tab stops · 366 lines · snapshot 697 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B27" data-set="B" data-text="b27 sketch pad with undo a drag of your own, with undo and redo build mechanism layer 2 set b createundostack binddrag">
+  <div class="thumb"><img src="thumbs/B27.jpg" alt="Screenshot of B27 Sketch pad with undo"></div>
+  <div class="body">
+    <div class="head"><b>B27</b> Sketch pad with undo</div>
+    <p>A drag of your own, with undo and redo</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">11 tests · 3 tab stops · 525 lines · snapshot 496 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B28" data-set="B" data-text="b28 theme switch that stays set a preference kept in local storage build mechanism layer 2 set b createcolorscheme createpreference createlocalstorage">
+  <div class="thumb"><img src="thumbs/B28.jpg" alt="Screenshot of B28 Theme switch that stays set"></div>
+  <div class="body">
+    <div class="head"><b>B28</b> Theme switch that stays set</div>
+    <p>A preference kept in local storage</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">14 tests · 1 tab stops · 357 lines · snapshot 205 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B29" data-set="B" data-text="b29 cookie consent bar a layer that stays over the page, and a cookie build mechanism layer 2 set b createcookiestorage bindpersistentlayer">
+  <div class="thumb"><img src="thumbs/B29.jpg" alt="Screenshot of B29 Cookie consent bar"></div>
+  <div class="body">
+    <div class="head"><b>B29</b> Cookie consent bar</div>
+    <p>A layer that stays over the page, and a cookie</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">15 tests · 2 tab stops · 405 lines · snapshot 322 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B30" data-set="B" data-text="b30 draft form that survives a reload a draft kept in session storage, committed in steps build mechanism layer 2 set b createsessionstorage createcommit">
+  <div class="thumb"><img src="thumbs/B30.jpg" alt="Screenshot of B30 Draft form that survives a reload"></div>
+  <div class="body">
+    <div class="head"><b>B30</b> Draft form that survives a reload</div>
+    <p>A draft kept in session storage, committed in steps</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">14 tests · 6 tab stops · 467 lines · snapshot 323 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B31" data-set="B" data-text="b31 font picker with a preview a preview while an option has the highlight build mechanism layer 2 set b createpreview">
+  <div class="thumb"><img src="thumbs/B31.jpg" alt="Screenshot of B31 Font picker with a preview"></div>
+  <div class="body">
+    <div class="head"><b>B31</b> Font picker with a preview</div>
+    <p>A preview while an option has the highlight</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">15 tests · 1 tab stops · 311 lines · snapshot 461 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B32" data-set="B" data-text="b32 card deck that you flick velocity from pointer positions build mechanism layer 2 set b createvelocitytracker">
+  <div class="thumb"><img src="thumbs/B32.jpg" alt="Screenshot of B32 Card deck that you flick"></div>
+  <div class="body">
+    <div class="head"><b>B32</b> Card deck that you flick</div>
+    <p>Velocity from pointer positions</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">11 tests · 3 tab stops · 569 lines · snapshot 426 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B33" data-set="B" data-text="b33 phone bottom sheet with a text field a sheet that stays above the on-screen keyboard build mechanism layer 2 set b bindavoidkeyboard bindviewport bindlayer">
+  <div class="thumb"><img src="thumbs/B33.jpg" alt="Screenshot of B33 Phone bottom sheet with a text field"></div>
+  <div class="body">
+    <div class="head"><b>B33</b> Phone bottom sheet with a text field</div>
+    <p>A sheet that stays above the on-screen keyboard</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">15 tests · 3 tab stops · 301 lines · snapshot 281 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B34" data-set="B" data-text="b34 toolbar that follows a text selection position an element against a rectangle build mechanism layer 2 set b position">
+  <div class="thumb"><img src="thumbs/B34.jpg" alt="Screenshot of B34 Toolbar that follows a text selection"></div>
+  <div class="body">
+    <div class="head"><b>B34</b> Toolbar that follows a text selection</div>
+    <p>Position an element against a rectangle</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">12 tests · 2 tab stops · 493 lines · snapshot 385 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B35" data-set="B" data-text="b35 piano keyboard 2 roving groups in 1 primitive (patterns.md, &quot;two groups of the same kind&quot;) build mechanism layer 2 set b">
+  <div class="thumb"><img src="thumbs/B35.jpg" alt="Screenshot of B35 Piano keyboard"></div>
+  <div class="body">
+    <div class="head"><b>B35</b> Piano keyboard</div>
+    <p>2 roving groups in 1 primitive (patterns.md, &quot;Two groups of the same kind&quot;)</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">13 tests · 3 tab stops · 411 lines · snapshot 172 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B36" data-set="B" data-text="b36 crossword grid focus stays with a cell through a change that moves it build mechanism layer 2 set b keepfocus">
+  <div class="thumb"><img src="thumbs/B36.jpg" alt="Screenshot of B36 Crossword grid"></div>
+  <div class="body">
+    <div class="head"><b>B36</b> Crossword grid</div>
+    <p>Focus stays with a cell through a change that moves it</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">11 tests · 2 tab stops · 429 lines · snapshot 701 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B37" data-set="B" data-text="b37 shortcut recorder record, match and show keyboard shortcuts build mechanism layer 2 set b matchesshortcut formatshortcut ariakeyshortcuts">
+  <div class="thumb"><img src="thumbs/B37.jpg" alt="Screenshot of B37 Shortcut recorder"></div>
+  <div class="body">
+    <div class="head"><b>B37</b> Shortcut recorder</div>
+    <p>Record, match and show keyboard shortcuts</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">16 tests · 1 tab stops · 492 lines · snapshot 628 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B38" data-set="B" data-text="b38 file finder with fuzzy search rank what someone searches for and highlight the match build mechanism layer 2 set b fuzzyscore matchsegments">
+  <div class="thumb"><img src="thumbs/B38.jpg" alt="Screenshot of B38 File finder with fuzzy search"></div>
+  <div class="body">
+    <div class="head"><b>B38</b> File finder with fuzzy search</div>
+    <p>Rank what someone searches for and highlight the match</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">20 tests · 1 tab stops · 442 lines · snapshot 111 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B39" data-set="B" data-text="b39 table with columns that resize and reorder a controlled column order build mechanism layer 2 set b settledraft">
+  <div class="thumb"><img src="thumbs/B39.jpg" alt="Screenshot of B39 Table with columns that resize and reorder"></div>
+  <div class="body">
+    <div class="head"><b>B39</b> Table with columns that resize and reorder</div>
+    <p>A controlled column order</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">15 tests · 1 tab stops · 456 lines · snapshot 509 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=B40" data-set="B" data-text="b40 media player with 2 control areas change a component from outside its tree build mechanism layer 2 set b createcontroller">
+  <div class="thumb"><img src="thumbs/B40.jpg" alt="Screenshot of B40 Media player with 2 control areas"></div>
+  <div class="body">
+    <div class="head"><b>B40</b> Media player with 2 control areas</div>
+    <p>Change a component from outside its tree</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">8 tests · 6 tab stops · 386 lines · snapshot 620 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=C01" data-set="C" data-text="c01 first ui of new behavior 1 a behavior that the package does not ship build mechanism layer 1 set c">
+  <div class="thumb"><img src="thumbs/C01.jpg" alt="Screenshot of C01 First UI of new behavior 1"></div>
+  <div class="body">
+    <div class="head"><b>C01</b> First UI of new behavior 1</div>
+    <p>A behavior that the package does not ship</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 1</span></div>
+    <div class="nums">11 tests · 1 tab stops · 350 lines · snapshot 115 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=C02" data-set="C" data-text="c02 second ui of new behavior 1 the second user of the same behavior build mechanism layer 1 set c">
+  <div class="thumb"><img src="thumbs/C02.jpg" alt="Screenshot of C02 Second UI of new behavior 1"></div>
+  <div class="body">
+    <div class="head"><b>C02</b> Second UI of new behavior 1</div>
+    <p>The second user of the same behavior</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 1</span></div>
+    <div class="nums">11 tests · 1 tab stops · 369 lines · snapshot 109 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=C03" data-set="C" data-text="c03 first ui of new behavior 2 a second behavior that the package does not ship build mechanism layer 1 set c">
+  <div class="thumb"><img src="thumbs/C03.jpg" alt="Screenshot of C03 First UI of new behavior 2"></div>
+  <div class="body">
+    <div class="head"><b>C03</b> First UI of new behavior 2</div>
+    <p>A second behavior that the package does not ship</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 1</span></div>
+    <div class="nums">11 tests · 7 tab stops · 323 lines · snapshot 789 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=C04" data-set="C" data-text="c04 second ui of new behavior 2 the second user of the same behavior build mechanism layer 1 set c">
+  <div class="thumb"><img src="thumbs/C04.jpg" alt="Screenshot of C04 Second UI of new behavior 2"></div>
+  <div class="body">
+    <div class="head"><b>C04</b> Second UI of new behavior 2</div>
+    <p>The second user of the same behavior</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 1</span></div>
+    <div class="nums">11 tests · 8 tab stops · 422 lines · snapshot 625 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=D01" data-set="D" data-text="d01 teammate picker in react the primitive of b20 through the react adapter build mechanism layer 3 set d">
+  <div class="thumb"><img src="thumbs/D01.jpg" alt="Screenshot of D01 Teammate picker in React"></div>
+  <div class="body">
+    <div class="head"><b>D01</b> Teammate picker in React</div>
+    <p>The primitive of B20 through the React adapter</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 3</span></div>
+    <div class="nums">9 tests · 1 tab stops · 95 lines · snapshot 492 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=D02" data-set="D" data-text="d02 teammate picker in vue the primitive of b20 through the vue adapter build mechanism layer 3 set d">
+  <div class="thumb"><img src="thumbs/D02.jpg" alt="Screenshot of D02 Teammate picker in Vue"></div>
+  <div class="body">
+    <div class="head"><b>D02</b> Teammate picker in Vue</div>
+    <p>The primitive of B20 through the Vue adapter</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 3</span></div>
+    <div class="nums">9 tests · 1 tab stops · 90 lines · snapshot 490 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=D03" data-set="D" data-text="d03 teammate picker in svelte the primitive of b20 through the svelte adapter build mechanism layer 3 set d">
+  <div class="thumb"><img src="thumbs/D03.jpg" alt="Screenshot of D03 Teammate picker in Svelte"></div>
+  <div class="body">
+    <div class="head"><b>D03</b> Teammate picker in Svelte</div>
+    <p>The primitive of B20 through the Svelte adapter</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 3</span></div>
+    <div class="nums">9 tests · 1 tab stops · 55 lines · snapshot 493 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=D04" data-set="D" data-text="d04 teammate picker in solid the primitive of b20 through the solid adapter build mechanism layer 3 set d">
+  <div class="thumb"><img src="thumbs/D04.jpg" alt="Screenshot of D04 Teammate picker in Solid"></div>
+  <div class="body">
+    <div class="head"><b>D04</b> Teammate picker in Solid</div>
+    <p>The primitive of B20 through the Solid adapter</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 3</span></div>
+    <div class="nums">9 tests · 1 tab stops · 117 lines · snapshot 492 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=D05" data-set="D" data-text="d05 5 renderings on 1 page with 1 bridge 1 snapshot lists the 5 pickers build mechanism layer 3 set d">
+  <div class="thumb"><img src="thumbs/D05.jpg" alt="Screenshot of D05 5 renderings on 1 page with 1 bridge"></div>
+  <div class="body">
+    <div class="head"><b>D05</b> 5 renderings on 1 page with 1 bridge</div>
+    <p>1 snapshot lists the 5 pickers</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 3</span></div>
+    <div class="nums">6 tests · 5 tab stops · 111 lines · snapshot 2464 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=E01" data-set="E" data-text="e01 a01 with no stylesheet the parts work with no design build mechanism layer 5 set e">
+  <div class="thumb"><img src="thumbs/E01.jpg" alt="Screenshot of E01 A01 with no stylesheet"></div>
+  <div class="body">
+    <div class="head"><b>E01</b> A01 with no stylesheet</div>
+    <p>The parts work with no design</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 5</span></div>
+    <div class="nums">3 tests · 4 tab stops · 14 lines · snapshot 588 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=E02" data-set="E" data-text="e02 a01 with web.css defaults the starter stylesheet with its own tokens build mechanism layer 5 set e">
+  <div class="thumb"><img src="thumbs/E02.jpg" alt="Screenshot of E02 A01 with web.css defaults"></div>
+  <div class="body">
+    <div class="head"><b>E02</b> A01 with web.css defaults</div>
+    <p>The starter stylesheet with its own tokens</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 5</span></div>
+    <div class="nums">3 tests · 4 tab stops · 15 lines · snapshot 588 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=E03" data-set="E" data-text="e03 a01 with a second token set a light, compact theme from tokens only. no selector is written. build mechanism layer 5 set e">
+  <div class="thumb"><img src="thumbs/E03.jpg" alt="Screenshot of E03 A01 with a second token set"></div>
+  <div class="body">
+    <div class="head"><b>E03</b> A01 with a second token set</div>
+    <p>A light, compact theme from tokens only. No selector is written.</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 5</span></div>
+    <div class="nums">3 tests · 4 tab stops · 38 lines · snapshot 588 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=E04" data-set="E" data-text="e04 a01 with an own stylesheet styles on data-slot and state attributes. no web.css. build mechanism layer 5 set e">
+  <div class="thumb"><img src="thumbs/E04.jpg" alt="Screenshot of E04 A01 with an own stylesheet"></div>
+  <div class="body">
+    <div class="head"><b>E04</b> A01 with an own stylesheet</div>
+    <p>Styles on data-slot and state attributes. No web.css.</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 5</span></div>
+    <div class="nums">3 tests · 4 tab stops · 72 lines · snapshot 588 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=E05" data-set="E" data-text="e05 a01 in high contrast and reduced motion operating-system display modes build mechanism layer 5 set e">
+  <div class="thumb"><img src="thumbs/E05.jpg" alt="Screenshot of E05 A01 in high contrast and reduced motion"></div>
+  <div class="body">
+    <div class="head"><b>E05</b> A01 in high contrast and reduced motion</div>
+    <p>Operating-system display modes</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 5</span></div>
+    <div class="nums">5 tests · 4 tab stops · 65 lines · snapshot 588 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=F01" data-set="F" data-text="f01 deploy form that 1 act call fills 4 changes in 1 act call use mechanism layer 4 set f">
+  <div class="thumb"><img src="thumbs/F01.jpg" alt="Screenshot of F01 Deploy form that 1 act call fills"></div>
+  <div class="body">
+    <div class="head"><b>F01</b> Deploy form that 1 act call fills</div>
+    <p>4 changes in 1 act call</p>
+    <div class="tags"><span>Use</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">7 tests · 4 tab stops · 275 lines · snapshot 618 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=F02" data-set="F" data-text="f02 country list with 5,000 options query finds an option and the list stays closed use mechanism layer 4 set f">
+  <div class="thumb"><img src="thumbs/F02.jpg" alt="Screenshot of F02 Country list with 5,000 options"></div>
+  <div class="body">
+    <div class="head"><b>F02</b> Country list with 5,000 options</div>
+    <p>query finds an option and the list stays closed</p>
+    <div class="tags"><span>Use</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">10 tests · 1 tab stops · 412 lines · snapshot 145 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=F03" data-set="F" data-text="f03 page with 150 controls the more entry after 100 components use mechanism layer 4 set f">
+  <div class="thumb"><img src="thumbs/F03.jpg" alt="Screenshot of F03 Page with 150 controls"></div>
+  <div class="body">
+    <div class="head"><b>F03</b> Page with 150 controls</div>
+    <p>The more entry after 100 components</p>
+    <div class="tags"><span>Use</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">9 tests · 150 tab stops · 168 lines · snapshot 10843 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=F04" data-set="F" data-text="f04 team settings: 24 members, row menus, confirm dialog the same shape as vercel's benchmark screen. my build, not their code. use mechanism layer 4 set f">
+  <div class="thumb"><img src="thumbs/F04.jpg" alt="Screenshot of F04 Team settings: 24 members, row menus, confirm dialog"></div>
+  <div class="body">
+    <div class="head"><b>F04</b> Team settings: 24 members, row menus, confirm dialog</div>
+    <p>The same shape as Vercel's benchmark screen. My build, not their code.</p>
+    <div class="tags"><span>Use</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">10 tests · 26 tab stops · 240 lines · snapshot 3431 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=F05" data-set="F" data-text="f05 tool console the 3 tool schemas. a person types the steps. no model call. use mechanism layer 4 set f agenttools">
+  <div class="thumb"><img src="thumbs/F05.jpg" alt="Screenshot of F05 Tool console"></div>
+  <div class="body">
+    <div class="head"><b>F05</b> Tool console</div>
+    <p>The 3 tool schemas. A person types the steps. No model call.</p>
+    <div class="tags"><span>Use</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">9 tests · 10 tab stops · 347 lines · snapshot 522 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=F06" data-set="F" data-text="f06 webmcp registration registertools with a mock of document.modelcontext use mechanism layer 4 set f registertools">
+  <div class="thumb"><img src="thumbs/F06.jpg" alt="Screenshot of F06 WebMCP registration"></div>
+  <div class="body">
+    <div class="head"><b>F06</b> WebMCP registration</div>
+    <p>registerTools with a mock of document.modelContext</p>
+    <div class="tags"><span>Use</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">11 tests · 10 tab stops · 429 lines · snapshot 1007 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=F07" data-set="F" data-text="f07 size picker closed: true. a wrong value is refused with the valid values. use knowledge layer 2 set f">
+  <div class="thumb"><img src="thumbs/F07.jpg" alt="Screenshot of F07 Size picker"></div>
+  <div class="body">
+    <div class="head"><b>F07</b> Size picker</div>
+    <p>closed: true. A wrong value is refused with the valid values.</p>
+    <div class="tags"><span>Use</span><span>Knowledge</span><span>layer 2</span></div>
+    <div class="nums">11 tests · 2 tab stops · 258 lines · snapshot 438 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=F08" data-set="F" data-text="f08 stepper with hidden content items and reveals: true use knowledge layer 2 set f">
+  <div class="thumb"><img src="thumbs/F08.jpg" alt="Screenshot of F08 Stepper with hidden content"></div>
+  <div class="body">
+    <div class="head"><b>F08</b> Stepper with hidden content</div>
+    <p>items and reveals: true</p>
+    <div class="tags"><span>Use</span><span>Knowledge</span><span>layer 2</span></div>
+    <div class="nums">15 tests · 2 tab stops · 340 lines · snapshot 360 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=F09" data-set="F" data-text="f09 field that matters only with an error shown use knowledge layer 2 set f">
+  <div class="thumb"><img src="thumbs/F09.jpg" alt="Screenshot of F09 Field that matters only with an error"></div>
+  <div class="body">
+    <div class="head"><b>F09</b> Field that matters only with an error</div>
+    <p>shown</p>
+    <div class="tags"><span>Use</span><span>Knowledge</span><span>layer 2</span></div>
+    <div class="nums">11 tests · 3 tab stops · 338 lines · snapshot 288 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=F10" data-set="F" data-text="f10 two labels that collide &quot;tip&quot; and &quot;custom tip&quot;: the error lists each match with its ref use knowledge layer 4 set f">
+  <div class="thumb"><img src="thumbs/F10.jpg" alt="Screenshot of F10 Two labels that collide"></div>
+  <div class="body">
+    <div class="head"><b>F10</b> Two labels that collide</div>
+    <p>&quot;Tip&quot; and &quot;Custom tip&quot;: the error lists each match with its ref</p>
+    <div class="tags"><span>Use</span><span>Knowledge</span><span>layer 4</span></div>
+    <div class="nums">7 tests · 2 tab stops · 191 lines · snapshot 234 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=F11" data-set="F" data-text="f11 measurement board for all uis snapshot bytes against accessibility-tree bytes for each built ui. my measurement. use check layer 4 set f">
+  <div class="thumb"><img src="thumbs/F11.jpg" alt="Screenshot of F11 Measurement board for all UIs"></div>
+  <div class="body">
+    <div class="head"><b>F11</b> Measurement board for all UIs</div>
+    <p>Snapshot bytes against accessibility-tree bytes for each built UI. My measurement.</p>
+    <div class="tags"><span>Use</span><span>Check</span><span>layer 4</span></div>
+    <div class="nums">7 tests · 1 tab stops · 244 lines · snapshot 149 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=F12" data-set="F" data-text="f12 pay button data-agent-confirm with the allow / deny prompt of the page use control layer 4 set f">
+  <div class="thumb"><img src="thumbs/F12.jpg" alt="Screenshot of F12 Pay button"></div>
+  <div class="body">
+    <div class="head"><b>F12</b> Pay button</div>
+    <p>data-agent-confirm with the Allow / Deny prompt of the page</p>
+    <div class="tags"><span>Use</span><span>Control</span><span>layer 4</span></div>
+    <div class="nums">6 tests · 2 tab stops · 191 lines · snapshot 258 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=F13" data-set="F" data-text="f13 tax id and card fields data-agent-secret use control layer 4 set f">
+  <div class="thumb"><img src="thumbs/F13.jpg" alt="Screenshot of F13 Tax ID and card fields"></div>
+  <div class="body">
+    <div class="head"><b>F13</b> Tax ID and card fields</div>
+    <p>data-agent-secret</p>
+    <div class="tags"><span>Use</span><span>Control</span><span>layer 4</span></div>
+    <div class="nums">11 tests · 7 tab stops · 170 lines · snapshot 659 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=F14" data-set="F" data-text="f14 recovery codes data-agent-hidden use control layer 4 set f">
+  <div class="thumb"><img src="thumbs/F14.jpg" alt="Screenshot of F14 Recovery codes"></div>
+  <div class="body">
+    <div class="head"><b>F14</b> Recovery codes</div>
+    <p>data-agent-hidden</p>
+    <div class="tags"><span>Use</span><span>Control</span><span>layer 4</span></div>
+    <div class="nums">9 tests · 5 tab stops · 227 lines · snapshot 350 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=F15" data-set="F" data-text="f15 region rule details.source === &quot;agent&quot;, cancel, and an allow list use control layer 4 set f">
+  <div class="thumb"><img src="thumbs/F15.jpg" alt="Screenshot of F15 Region rule"></div>
+  <div class="body">
+    <div class="head"><b>F15</b> Region rule</div>
+    <p>details.source === &quot;agent&quot;, cancel, and an allow list</p>
+    <div class="tags"><span>Use</span><span>Control</span><span>layer 4</span></div>
+    <div class="nums">6 tests · 12 tab stops · 278 lines · snapshot 1560 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=F16" data-set="F" data-text="f16 audit log with undo person or agent, undo, preview of a suggestion use control layer 4 set f createhistory observe">
+  <div class="thumb"><img src="thumbs/F16.jpg" alt="Screenshot of F16 Audit log with undo"></div>
+  <div class="body">
+    <div class="head"><b>F16</b> Audit log with undo</div>
+    <p>Person or agent, undo, preview of a suggestion</p>
+    <div class="tags"><span>Use</span><span>Control</span><span>layer 4</span></div>
+    <div class="nums">10 tests · 7 tab stops · 396 lines · snapshot 758 B</div>
+  </div>
+</a>
+<a class="card" href="./?ui=X01" data-set="X" data-text="x01 a01 with no ui sdk the comparison build of a01: same request, plain html and script build mechanism layer 4 set x">
+  <div class="thumb"><img src="thumbs/X01.jpg" alt="Screenshot of X01 A01 with no UI SDK"></div>
+  <div class="body">
+    <div class="head"><b>X01</b> A01 with no UI SDK</div>
+    <p>The comparison build of A01: same request, plain HTML and script</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 4</span></div>
+    <div class="nums">5 tests · 4 tab stops · 177 lines</div>
+  </div>
+</a>
+<a class="card" href="./?ui=X02" data-set="X" data-text="x02 b01 with no ui sdk the comparison build of b01: same request, plain html and script build mechanism layer 2 set x">
+  <div class="thumb"><img src="thumbs/X02.jpg" alt="Screenshot of X02 B01 with no UI SDK"></div>
+  <div class="body">
+    <div class="head"><b>X02</b> B01 with no UI SDK</div>
+    <p>The comparison build of B01: same request, plain HTML and script</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">7 tests · 2 tab stops · 166 lines</div>
+  </div>
+</a>
+<a class="card" href="./?ui=X03" data-set="X" data-text="x03 b17 with no ui sdk the comparison build of b17: same request, plain html and script build mechanism layer 2 set x">
+  <div class="thumb"><img src="thumbs/X03.jpg" alt="Screenshot of X03 B17 with no UI SDK"></div>
+  <div class="body">
+    <div class="head"><b>X03</b> B17 with no UI SDK</div>
+    <p>The comparison build of B17: same request, plain HTML and script</p>
+    <div class="tags"><span>Build</span><span>Mechanism</span><span>layer 2</span></div>
+    <div class="nums">7 tests · 2 tab stops · 134 lines</div>
+  </div>
+</a>
+</main>
+<script>
+  const q = document.getElementById("q"), count = document.getElementById("count")
+  const cards = [...document.querySelectorAll(".card")]
+  let set = ""
+  function apply() {
+    const words = q.value.toLowerCase().split(/\s+/).filter(Boolean)
+    let shown = 0
+    for (const c of cards) {
+      const hide = (set && c.dataset.set !== set) || !words.every((w) => c.dataset.text.includes(w))
+      c.hidden = hide
+      if (!hide) shown++
+    }
+    count.textContent = shown + " of " + cards.length + " UIs"
+  }
+  q.addEventListener("input", apply)
+  for (const b of document.querySelectorAll("button[data-set]"))
+    b.addEventListener("click", () => {
+      set = b.dataset.set
+      for (const o of document.querySelectorAll("button[data-set]")) o.setAttribute("aria-pressed", String(o === b))
+      apply()
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,812 @@
+<title>UI SDK, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="color-scheme" content="dark light">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column of short "stations"; each has 1–3 short lines, then something to touch. Dark-first. */
+:root{
+  --bg:#0f172a; --card:#1e293b; --line:#334155; --line2:#1e293b;
+  --fg:#e2e8f0; --fg2:#cbd5e1; --muted:#94a3b8;
+  --orange:#fb923c; --teal:#2dd4bf; --bad:#f87171; --ok:#4ade80;
+  --code:#0b1222; --on:#0b1222;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){
+  --bg:#f6f7fb; --card:#ffffff; --line:#cfd6e3; --line2:#e4e8f0;
+  --fg:#0f172a; --fg2:#1e293b; --muted:#55627a;
+  --orange:#a84a08; --teal:#0f766e; --bad:#b42318; --ok:#1f7a44; --code:#eef1f7; --on:#ffffff; color-scheme:light}}
+:root[data-theme="light"]{
+  --bg:#f6f7fb; --card:#ffffff; --line:#cfd6e3; --line2:#e4e8f0;
+  --fg:#0f172a; --fg2:#1e293b; --muted:#55627a;
+  --orange:#a84a08; --teal:#0f766e; --bad:#b42318; --ok:#1f7a44; --code:#eef1f7; --on:#ffffff; color-scheme:light}
+
+body{background:var(--bg);color:var(--fg2);font:17px/1.6 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:940px;margin:0 auto;padding-block:40px 80px;display:grid;gap:60px}
+h1,h2,h3{font-family:var(--display);color:var(--fg);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(2.1rem,6vw,3.4rem);font-weight:700;letter-spacing:-.02em}
+h2{font-size:clamp(1.45rem,3.5vw,2rem);font-weight:700}
+h3{font-size:1.1rem;font-weight:500}
+p{margin:0;max-width:62ch}
+code,.mono{font-family:var(--mono);font-size:.86em}
+code{color:var(--teal)}
+.eyebrow{font:600 .75rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--orange)}
+.sec{display:grid;gap:16px}
+.lede{font-size:1.15rem}
+.muted{color:var(--muted)} .small{font-size:.88rem}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;min-width:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media (max-width:820px){.grid3,.grid4{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.grid2,.grid3,.grid4{grid-template-columns:1fr}}
+button{font:500 .92rem var(--body);color:var(--fg);background:transparent;border:1px solid var(--line);border-radius:8px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--teal)}
+button.primary{background:var(--orange);border-color:var(--orange);color:var(--on);font-weight:600}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+pre{margin:0;background:var(--code);border:1px solid var(--line);border-radius:8px;padding:14px;overflow-x:auto;font:13px/1.55 var(--mono);color:var(--fg2)}
+.note{font-size:.84rem;color:var(--muted);border-left:2px solid var(--line);padding-left:10px}
+ul.tight{margin:0;padding-left:20px;display:grid;gap:6px}
+kbd{font:600 .8em var(--mono);border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:1px 6px;color:var(--fg)}
+
+/* jargon terms */
+.t{all:unset;cursor:help;color:var(--fg);border-bottom:1.5px dotted var(--teal);font-weight:500}
+.t:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+#pop{position:absolute;z-index:20;max-width:min(340px,calc(100vw - 32px));background:var(--card);border:1px solid var(--teal);border-radius:8px;padding:12px 14px;font-size:.9rem;border-width:2px}
+#pop b{display:block;color:var(--teal);font-family:var(--display);font-weight:500;margin-bottom:4px}
+#pop i{display:block;color:var(--muted);font-style:normal;margin-top:6px;font-size:.84rem}
+
+/* analogy */
+.analogy{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center}
+.analogy .arrow{color:var(--muted);font-size:1.4rem}
+@media (max-width:560px){.analogy{grid-template-columns:1fr}.analogy .arrow{transform:rotate(90deg);justify-self:center}}
+.big{font-family:var(--display);font-size:1.25rem;color:var(--fg)}
+
+/* take-apart */
+.steps{display:flex;gap:8px;flex-wrap:wrap}
+.steps button[aria-pressed="true"]{border-color:var(--orange);color:var(--orange)}
+.fake-select{position:relative;max-width:300px}
+.fs-btn{width:100%;text-align:left;display:flex;justify-content:space-between}
+.fs-list{list-style:none;margin:6px 0 0;padding:4px;border:1px solid var(--line);border-radius:8px;background:var(--code)}
+.fs-list li{padding:6px 10px;border-radius:6px}
+.fs-list li.sel{background:var(--teal);color:var(--on)}
+.fs-list li.hl{outline:1px solid var(--orange)}
+.job{outline:2px solid var(--orange);outline-offset:3px;border-radius:8px}
+.explain{min-height:3.2em}
+
+/* behavior cards */
+.bcard{display:grid;gap:6px;align-content:start}
+.bcard .name{font:600 .82rem var(--mono);color:var(--teal)}
+.bcard .plain{font-family:var(--display);font-size:1.05rem;color:var(--fg)}
+.bcard .seen{font-size:.86rem;color:var(--muted)}
+
+/* mixer */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:500 .85rem var(--body);padding:7px 12px;border-radius:999px}
+.chip[aria-pressed="true"]{background:color-mix(in srgb,var(--teal) 18%,transparent);border-color:var(--teal);color:var(--teal)}
+.result{display:grid;gap:8px;margin-top:14px}
+.recipe{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;padding:10px 12px;border:1px solid var(--orange);border-radius:8px}
+.recipe.none{border-color:var(--line)}
+.recipe b{color:var(--fg);font-family:var(--display);font-weight:500;font-size:1.05rem}
+.tag{font:600 .75rem var(--mono);padding:2px 7px;border-radius:4px;border:1px solid var(--line);color:var(--muted)}
+.tag.src{color:var(--orange);border-color:var(--orange)}
+
+/* keyboard demo */
+.corners{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.corner{font:500 .82rem var(--body);padding:6px 9px}
+.corner[aria-selected="true"]{background:var(--orange);color:var(--on);border-color:var(--orange)}
+.listbox{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0;padding:6px;border:1px dashed var(--line);border-radius:8px}
+.listbox [role=option]{font:500 .82rem var(--body);padding:6px 9px;border:1px solid var(--line);border-radius:8px;cursor:pointer;user-select:none}
+.listbox [role=option][aria-selected="true"]{background:var(--teal);color:var(--on);border-color:var(--teal)}
+.listbox [role=option]:focus-visible{outline:2px solid var(--orange)}
+.stat{font:600 .82rem var(--mono);color:var(--muted)}
+.stat b{color:var(--fg);font-size:1.1rem}
+
+/* two halves */
+.half h3{margin-bottom:6px}
+.half.b h3{color:var(--orange)} .half.u h3{color:var(--teal)}
+
+/* race */
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tabs button[aria-pressed="true"]{border-color:var(--orange);color:var(--orange)}
+.lanes{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+@media (max-width:720px){.lanes{grid-template-columns:1fr}}
+.lane h3{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.log{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:4px;font:12.5px/1.45 var(--mono);min-height:10em}
+.log li{display:flex;justify-content:space-between;gap:10px;padding:4px 8px;border-radius:4px;background:var(--code);animation:in .25s ease-out}
+.log li span:last-child{color:var(--muted);white-space:nowrap}
+@keyframes in{from{opacity:.2;transform:translateX(-4px)}}
+.meter{height:10px;border-radius:5px;background:var(--line2);overflow:hidden;margin-top:8px}
+.meter i{display:block;height:100%;width:100%;transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.lane.bb .meter i{background:var(--bad)} .lane.gg .meter i{background:var(--teal)}
+.bars{display:grid;gap:14px;margin-top:6px}
+.barrow{display:grid;grid-template-columns:8rem 1fr;gap:10px;align-items:center;font-size:.88rem}
+@media (max-width:480px){.barrow{grid-template-columns:1fr}}
+.barrow .two{display:grid;gap:4px}
+.bar{height:18px;border-radius:3px;display:flex;align-items:center;padding-left:6px;font:600 .75rem var(--mono);color:var(--on);white-space:nowrap;min-width:fit-content}
+.bar.b{background:var(--bad)} .bar.g{background:var(--teal)}
+
+/* approval */
+.prompt{border:1px solid var(--orange);border-radius:8px;padding:14px;display:grid;gap:10px;background:color-mix(in srgb,var(--orange) 8%,var(--card))}
+.prompt .row{display:flex;gap:8px}
+.verdict{font:600 .92rem var(--mono)}
+.verdict.sent{color:var(--bad)} .verdict.held{color:var(--ok)}
+label.toggle{display:flex;gap:10px;align-items:center;cursor:pointer}
+input[type=checkbox]{width:18px;height:18px;accent-color:var(--orange);flex:none}
+
+/* fit */
+.yes h3{color:var(--ok)} .no h3{color:var(--bad)}
+.scen{display:grid;gap:6px;align-content:start}
+.scen .who{font:600 .78rem var(--mono);color:var(--orange)}
+.quiz{display:grid;gap:10px}
+.quiz-out{margin-top:6px;padding:12px;border-radius:8px;border:1px solid var(--line);font-weight:500;color:var(--fg)}
+
+/* glossary */
+.gloss{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media (max-width:640px){.gloss{grid-template-columns:1fr}}
+.gloss details{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 14px}
+.gloss summary{cursor:pointer;color:var(--fg);font-weight:500}
+.gloss details p{margin-top:6px;font-size:.92rem}
+.gloss details p.ex{color:var(--muted);font-size:.86rem}
+details.dev{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 18px}
+details.dev summary{cursor:pointer;font-family:var(--display);color:var(--fg);font-size:1.05rem}
+details.dev[open]{display:grid;gap:12px}
+.copyrow{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap}
+.copyrow pre{flex:1;min-width:0}
+footer{font-size:.84rem;color:var(--muted);border-top:1px solid var(--line);padding-top:18px;display:grid;gap:6px}
+a{color:var(--teal)}
+
+/* top-level views: Guide / Map */
+.views{display:flex;gap:28px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin-top:12px}
+.views [role=tab]{border:0;border-bottom:3px solid transparent;border-radius:0;padding:8px 2px;margin-bottom:-1px;text-align:left;font:700 1.25rem var(--display);color:var(--muted)}
+.views [role=tab]:hover{color:var(--fg)}
+.views [role=tab][aria-selected="true"]{color:var(--fg);border-bottom-color:var(--orange)}
+.views small{display:block;font:400 .82rem var(--body);color:var(--muted)}
+.view{display:grid;grid-template-columns:minmax(0,1fr);gap:60px}
+[hidden]{display:none!important}
+.next{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+
+/* map tab: the grid of axis 1 x axis 2 */
+.mapgrid{display:grid;grid-template-columns:8.5rem 1fr 1fr;gap:10px}
+.mapgrid .hd{font:600 .78rem var(--mono);letter-spacing:.12em;text-transform:uppercase;align-self:end;padding:0 4px}
+.mapgrid .hd.b,.cap.b{color:var(--orange)} .mapgrid .hd.u,.cap.u{color:var(--teal)}
+.rowhd{display:grid;gap:2px;align-content:start;padding-top:12px}
+.rowhd b{font-family:var(--display);font-weight:500;color:var(--fg)}
+.rowhd span{font-size:.8rem;color:var(--muted)}
+.cell{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px;display:grid;gap:8px;align-content:start;min-width:0}
+.cell.empty{background:transparent;border-style:dashed}
+.cap{display:none;font:600 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase}
+.item{width:100%;text-align:left;font-size:.9rem;padding:8px 10px}
+.item small{display:block;font-size:.78rem;color:var(--muted)}
+.item[aria-pressed="true"]{border-color:var(--orange);background:color-mix(in srgb,var(--orange) 12%,transparent)}
+@media (max-width:560px){.mapgrid{grid-template-columns:1fr}.mapgrid .mg0,.mapgrid .hd{display:none}.rowhd{padding-top:8px}.cap{display:block}}
+.detail{display:grid;gap:10px}
+.coords{display:flex;gap:6px;flex-wrap:wrap}
+.tag.b{color:var(--orange);border-color:var(--orange)} .tag.u{color:var(--teal);border-color:var(--teal)}
+
+/* map tab: the 5 layers */
+.ladder{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.ladder li{display:grid;grid-template-columns:2.2rem minmax(0,1fr);gap:12px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.lnum{font:700 1.4rem/1.2 var(--display);color:var(--orange)}
+.lbody{display:grid;gap:4px}
+.lbody h3 span{font:600 .72rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-left:8px}
+.drop-out{padding:12px;border-radius:8px;border:1px solid var(--line);color:var(--fg);min-height:4.6em}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="wrap">
+
+<header class="sec">
+  <span class="eyebrow">Vercel Labs · beta</span>
+  <h1>UI SDK: building blocks that AI agents use to make and work apps</h1>
+  <p class="lede">UI SDK is a free toolkit from Vercel and shadcn, released 12 November 2026. It lets an <button class="t" data-t="agent">AI agent</button> build the buttons, menus and lists of an app, and then use them.</p>
+  <p class="muted small">No experience needed. Every <span class="t" tabindex="0" data-t="jargon">dotted word</span> is a technical term: click or tap it to see what it means.</p>
+  <div class="views" role="tablist" aria-label="Views of this page">
+    <button role="tab" id="tabGuide" data-view="guide" aria-controls="viewGuide" aria-selected="true">Guide<small>the idea, step by step</small></button>
+    <button role="tab" id="tabMap" data-view="map" aria-controls="viewMap" aria-selected="false" tabindex="-1">Map<small>each item, on 3 orthogonal axes</small></button>
+  </div>
+</header>
+
+<div class="view" id="viewGuide" role="tabpanel" aria-labelledby="tabGuide">
+
+<section class="sec">
+  <span class="eyebrow">1 · The idea in one picture</span>
+  <h2>Ready-made toys versus a box of bricks</h2>
+  <div class="analogy">
+    <div class="panel"><div class="big">Ready-made toy</div><p class="small">A toy car does one thing. A normal <button class="t" data-t="component">component</button> library gives you finished parts: "here is a dropdown".</p></div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="panel"><div class="big">Box of bricks</div><p class="small">With bricks you can build a car, a house, or something new. UI SDK gives the agent the small "bricks" that make parts work. It calls them <button class="t" data-t="behavior">behaviors</button>.</p></div>
+  </div>
+</section>
+
+<section class="sec">
+  <span class="eyebrow">2 · Try it · a dropdown</span>
+  <h2>One dropdown is three separate jobs</h2>
+  <p>A <button class="t" data-t="dropdown">dropdown</button> looks like one thing. Click each job to see the part of the dropdown that does it.</p>
+  <div class="panel grid2">
+    <div style="display:grid;gap:12px;align-content:start">
+      <div class="steps" role="group" aria-label="Jobs of a dropdown">
+        <button data-job="popup" aria-pressed="false">1. Open and close</button>
+        <button data-job="select" aria-pressed="false">2. Pick an item</button>
+        <button data-job="type" aria-pressed="false">3. Type to jump</button>
+      </div>
+      <p class="explain small" id="jobText">Pick a job above.</p>
+    </div>
+    <div class="fake-select" id="fs">
+      <button class="fs-btn" id="fsBtn" aria-expanded="true"><span id="fsVal">Choose a country</span><span aria-hidden="true">▾</span></button>
+      <ul class="fs-list" id="fsList"><li>France</li><li>Germany</li><li>Norway</li><li>Portugal</li><li>Spain</li></ul>
+    </div>
+  </div>
+  <p>UI SDK makes each job a separate brick. The names are <code>createPopup</code>, <code>createSelection</code> and <code>createTypeahead</code>. The same 3 bricks also build other parts, such as a search box with suggestions.</p>
+</section>
+
+<section class="sec">
+  <span class="eyebrow">3 · The bricks</span>
+  <h2>You already use these behaviors every day</h2>
+  <p>UI SDK has more than 50 behaviors. Here are 8 of them, with a place where you met each one.</p>
+  <div class="grid4">
+    <div class="panel bcard"><span class="name">createPopup</span><span class="plain">A box appears next to a button</span><span class="seen">Seen: the menu after you right-click on your desktop.</span></div>
+    <div class="panel bcard"><span class="name">createSelection</span><span class="plain">Pick one item, or many</span><span class="seen">Seen: Shift-click to pick many files in File Explorer.</span></div>
+    <div class="panel bcard"><span class="name">createTypeahead</span><span class="plain">Type letters to jump</span><span class="seen">Seen: type "N" in a country list to jump to Norway.</span></div>
+    <div class="panel bcard"><span class="name">createRovingFocus</span><span class="plain">Arrow keys move inside a group</span><span class="seen">Seen: arrows move between photos in a gallery.</span></div>
+    <div class="panel bcard"><span class="name">createReorder</span><span class="plain">Drag items into a new order</span><span class="seen">Seen: drag songs up and down a playlist.</span></div>
+    <div class="panel bcard"><span class="name">createResize</span><span class="plain">Drag an edge to change size</span><span class="seen">Seen: drag the edge of a window.</span></div>
+    <div class="panel bcard"><span class="name">createViewport</span><span class="plain">Move and zoom a big picture</span><span class="seen">Seen: pinch to zoom on a map app.</span></div>
+    <div class="panel bcard"><span class="name">createVirtualizer</span><span class="plain">Show only what fits on screen</span><span class="seen">Seen: an inbox with 10,000 emails that still scrolls fast.</span></div>
+  </div>
+</section>
+
+<section class="sec">
+  <span class="eyebrow">4 · Try it · mix bricks</span>
+  <h2>Same bricks, different parts</h2>
+  <p>Turn bricks on and off. The list shows which familiar parts you can build from the bricks you picked.</p>
+  <div class="panel">
+    <div class="chips" id="chips"></div>
+    <div class="result" id="recipes" aria-live="polite"></div>
+    <p class="note" style="margin-top:14px"><span class="tag src">sourced</span> = from the UI SDK website or the review video. <span class="tag">typical</span> = my own example of a likely combination.</p>
+  </div>
+</section>
+
+<section class="sec">
+  <span class="eyebrow">5 · Try it · keyboard</span>
+  <h2>Why good behaviors matter</h2>
+  <p>Some people cannot use a mouse. They move through a page with the <kbd>Tab</kbd> key. Each place that <kbd>Tab</kbd> stops on is a <button class="t" data-t="tabstop">Tab stop</button>.</p>
+  <p>Click into each list below. Then press <kbd>Tab</kbd>, the arrow keys, or a letter such as <kbd>J</kbd>.</p>
+  <div class="grid2">
+    <div class="panel">
+      <h3>Without behaviors</h3>
+      <p class="muted small">12 race-track corners, 12 Tab stops.</p>
+      <div class="corners" id="naive"></div>
+      <div class="stat">Tab presses: <b id="naiveCount">0</b></div>
+    </div>
+    <div class="panel">
+      <h3>With 2 behaviors</h3>
+      <p class="muted small">Roving focus + typeahead: 1 Tab stop.</p>
+      <div class="listbox" id="roving" role="listbox" aria-label="Interlagos corners"></div>
+      <div class="stat">Tab presses: <b>1</b> · Picked: <b id="picked">none</b></div>
+    </div>
+  </div>
+  <p class="note">In the review video, an agent built a map of the Interlagos race track (Brazil). Without UI SDK the map had 15 Tab stops. With UI SDK it had 1, and it scored 100 out of 100 in Google's <button class="t" data-t="lighthouse">Lighthouse</button> <button class="t" data-t="a11y">accessibility</button> test on the first try. This demo copies the idea by hand; it is not UI SDK code.</p>
+</section>
+
+<section class="sec">
+  <span class="eyebrow">6 · The two halves</span>
+  <h2>Agents as builders, and agents as users</h2>
+  <div class="grid2">
+    <div class="panel half b">
+      <h3>Half 1 · Build</h3>
+      <ul class="tight small">
+        <li>You add a <button class="t" data-t="skill">skill</button> to your agent.</li>
+        <li>The agent learns all the bricks.</li>
+        <li>It builds the part you ask for, in your <button class="t" data-t="framework">framework</button>.</li>
+        <li>It also writes tests that check the keyboard works.</li>
+      </ul>
+    </div>
+    <div class="panel half u">
+      <h3>Half 2 · Use (the "bridge")</h3>
+      <ul class="tight small">
+        <li>Today an agent reads the whole page, clicks, then reads it all again.</li>
+        <li>The <button class="t" data-t="bridge">bridge</button> gives it a short list of parts instead.</li>
+        <li>The agent tells each part what to do, directly.</li>
+        <li>It does several steps in 1 <button class="t" data-t="toolcall">tool call</button>.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="panel analogy">
+    <div><div class="big">Without the bridge</div><p class="small">Find a phone number by reading every page of a book, each time you need one.</p></div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div><div class="big">With the bridge</div><p class="small">Look in the index. It lists each part, its value, and what it can do.</p></div>
+  </div>
+</section>
+
+<section class="sec">
+  <span class="eyebrow">7 · Try it · agent race</span>
+  <h2>How much does the agent have to read?</h2>
+  <p>Less reading means lower cost, because AI services charge per <button class="t" data-t="token">token</button>. Press <strong>Run</strong>.</p>
+  <div class="panel">
+    <div class="tabs" role="group" aria-label="Test">
+      <button aria-pressed="true" data-scn="f1">Reviewer's F1 app</button>
+      <button aria-pressed="false" data-scn="vercel">Vercel's own test</button>
+    </div>
+    <div id="scnF1">
+      <p class="small" style="margin-top:14px"><strong>The job:</strong> compare 2 drivers, change speed to mph, turn on corner names, say who is fastest in one part of the track, and send the result to an engineer.</p>
+      <div class="lanes">
+        <div class="lane bb"><h3>Normal browser agent <span class="stat"><b id="bCalls">0</b> calls · <b id="bKB">0</b> <button class="t" data-t="kb">KB</button></span></h3><div class="meter"><i id="bMeter"></i></div><ol class="log" id="bLog"></ol></div>
+        <div class="lane gg"><h3>Agent with the bridge <span class="stat"><b id="gCalls">0</b> calls · <b id="gKB">0</b> KB</span></h3><div class="meter"><i id="gMeter"></i></div><ol class="log" id="gLog"></ol></div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap"><button class="primary" id="run">Run</button><button id="reset">Reset</button></div>
+      <ul class="tight note" style="margin-top:14px">
+        <li>Totals from the video: 8 calls and about 63 KB, against 5 calls and about 13 KB. That is about 5 times less reading.</li>
+        <li>Time was almost the same: 28 s against 27 s.</li>
+        <li>Total tokens fell only about 8%, because the agent's own instructions use most tokens.</li>
+        <li>The step names here are examples I wrote. All agents got the right answer.</li>
+      </ul>
+    </div>
+    <div id="scnV" hidden>
+      <p class="small" style="margin-top:14px"><strong>The job:</strong> on a settings screen with 24 team members, rename the project, change who can see it, promote one person, remove another, flip 2 email switches, and save.</p>
+      <div class="bars" id="vbars"></div>
+      <p class="note" style="margin-top:14px">Vercel's own numbers, as reported in the video. Bars are to scale in each row. Across 3 frameworks, the bridge was 54–68% cheaper.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <span class="eyebrow">8 · Try it · safety</span>
+  <h2>Stop the agent before it sends</h2>
+  <p>Some buttons should need a person, for example "Send" or "Pay". With UI SDK, the developer adds a short label to that button. Then the agent must ask first.</p>
+  <p><strong>Warning:</strong> if the developer adds no label, the bridge allows the action.</p>
+  <div class="grid2">
+    <div class="panel" style="display:grid;gap:12px">
+      <label class="toggle"><input type="checkbox" id="mark" checked> Add the "ask a person first" label</label>
+      <pre id="markup"></pre>
+      <button class="primary" id="runSend">Agent: send the result</button>
+      <div id="promptBox"></div>
+      <div class="verdict" id="bridgeOut" aria-live="polite"></div>
+    </div>
+    <div class="panel" style="display:grid;gap:10px;align-content:start">
+      <h3>Normal browser agent</h3>
+      <p class="small">It clicks like a person. It has no label to obey.</p>
+      <div class="verdict" id="browserOut"></div>
+      <p class="note">In the video, all 3 normal agents sent the message. The 3 bridge agents asked, got no answer, and did not send.</p>
+    </div>
+  </div>
+  <ul class="tight small muted">
+    <li><strong>Hide:</strong> a developer can hide a whole area of the page from the agent.</li>
+    <li><strong>Secret:</strong> a field such as a password shows to the agent only as "redacted".</li>
+    <li><strong>Log:</strong> each change from an agent is marked "from the agent", so the app can record or cancel it.</li>
+  </ul>
+</section>
+
+<section class="sec">
+  <span class="eyebrow">9 · When is it useful?</span>
+  <h2>Who would care, with examples</h2>
+  <div class="grid3">
+    <div class="panel scen"><span class="who">ONLINE SHOP</span><p class="small">A help bot changes a customer's delivery address in the account page, but asks before it cancels an order.</p></div>
+    <div class="panel scen"><span class="who">OFFICE TOOL</span><p class="small">"Move the project to Asia Pacific and switch to Pro." The agent fills the settings form for you. (A demo on the UI SDK website.)</p></div>
+    <div class="panel scen"><span class="who">NEW KIND OF SCREEN</span><p class="small">A team asks an agent for a race-track map or a timeline that no library has. The agent builds it from bricks.</p></div>
+    <div class="panel scen"><span class="who">TEAM TASKS</span><p class="small">"Build me a picker for assigning a teammate to a task." The agent uses 4 bricks. (Example on the UI SDK website.)</p></div>
+    <div class="panel scen"><span class="who">TESTING</span><p class="small">An agent clicks through every screen of an app each night to check it still works, and reads 5 times less.</p></div>
+    <div class="panel scen"><span class="who">ACCESSIBILITY</span><p class="small">A company must support keyboard and screen-reader users. Bricks give correct keyboard behavior by default.</p></div>
+  </div>
+  <div class="grid2">
+    <div class="panel yes"><h3>Useful when</h3><ul class="tight small">
+      <li>An AI agent builds parts of your app.</li>
+      <li>An AI agent will use your app for people.</li>
+      <li>Your screens have many menus, pop-up boxes and tabs.</li>
+      <li>Some actions must wait for a person to approve.</li>
+    </ul></div>
+    <div class="panel no"><h3>Not useful (yet) when</h3><ul class="tight small">
+      <li>You want the app to look better. UI SDK has no colors or styles.</li>
+      <li>Your team already uses similar tools, such as React Aria or Zag.js.</li>
+      <li>You need it to stay the same. It is a <button class="t" data-t="beta">beta</button>.</li>
+      <li>You expect a faster agent on a simple page. The test showed about the same time.</li>
+    </ul></div>
+  </div>
+  <div class="panel quiz">
+    <h3>Quick check for your project</h3>
+    <label class="toggle"><input type="checkbox" class="q" data-w="2"> AI agents build parts of my app</label>
+    <label class="toggle"><input type="checkbox" class="q" data-w="2"> AI agents will use my app for people</label>
+    <label class="toggle"><input type="checkbox" class="q" data-w="1"> My app has many menus or custom screens</label>
+    <label class="toggle"><input type="checkbox" class="q" data-w="-2"> I need it stable in a live product now</label>
+    <label class="toggle"><input type="checkbox" class="q" data-w="-1"> My real problem is how the app looks</label>
+    <div class="quiz-out" id="quizOut" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="sec">
+  <span class="eyebrow">10 · Words</span>
+  <h2>All the terms on one page</h2>
+  <div class="gloss" id="gloss"></div>
+</section>
+
+<section class="sec">
+  <span class="eyebrow">For developers</span>
+  <details class="dev">
+    <summary>Show the code and install commands</summary>
+    <p class="small">An agent writes this, not you. It is the README's search field: the "Clear" button shows only when there is text, and after a click the cursor goes back to the box.</p>
+    <pre>import { createFocusRecovery, definePrimitive } from "@ui-sdk/core"
+
+const searchField = definePrimitive({
+  name: "search-field",
+  state: () => ({ value: "" }),
+  api: (context) => ({
+    set: (value: string) => context.store.set({ value }),
+    recovery: createFocusRecovery({ fallback: () => context.element("input") }),
+  }),
+  slots: (slot) => ({
+    input: slot({
+      attrs: (state) => ({ value: state.value }),
+      on: { input: (event, { api }) => api.set((event.target as HTMLInputElement).value) },
+    }),
+    clear: slot({
+      present: (state) => state.value !== "",
+      attrs: () => ({ type: "button" }),
+      press: ({ api }) => api.set(""),
+      bind: (el, part) => part.api.recovery.bind(el, part),
+    }),
+  }),
+})
+
+const parts = createParts(searchField, { input: "input", clear: "button" })</pre>
+    <div class="copyrow"><pre id="cmd1">npm install @ui-sdk/react @ui-sdk/core</pre><button data-copy="cmd1">Copy</button></div>
+    <div class="copyrow"><pre id="cmd2">npx skills@latest add vercel-labs/ui --skill ui-sdk</pre><button data-copy="cmd2">Copy</button></div>
+    <p class="small muted">Other frameworks: replace <code>@ui-sdk/react</code> with <code>@ui-sdk/vue</code>, <code>@ui-sdk/svelte</code>, <code>@ui-sdk/solid</code> or <code>@ui-sdk/web</code>. The bridge is <code>createAgent</code>, with tools <code>snapshot</code>, <code>query</code>, <code>act</code>; the approval label is <code>data-agent-confirm</code>, the hide label is <code>data-agent-hidden</code>.</p>
+  </details>
+</section>
+
+<div class="panel next">
+  <p class="small"><strong>Next:</strong> the Map tab sorts each item that UI SDK gives you into one grid.</p>
+  <button class="primary" data-go="map">Open the Map</button>
+</div>
+
+</div>
+
+<div class="view" id="viewMap" role="tabpanel" aria-labelledby="tabMap" hidden>
+
+<section class="sec">
+  <span class="eyebrow">Map · the 3 axes</span>
+  <h2>Everything UI SDK gives you, on 3 orthogonal axes</h2>
+  <p>The Guide tab explains the idea. This tab is an inventory. UI SDK gives you 11 items. 3 orthogonal axes sort them, and each axis is 1 question about an item. Each item gets a position that no other item has.</p>
+  <p><button class="t" data-t="axis">Orthogonal</button> means independent: the answer to one question does not tell you the answer to another.</p>
+  <div class="grid3">
+    <div class="panel scen">
+      <span class="who">AXIS 1</span>
+      <h3>Who is the agent?</h3>
+      <ul class="tight small">
+        <li><strong>Build:</strong> the agent makes the screen.</li>
+        <li><strong>Use:</strong> the agent operates the screen. The website's word is "drive".</li>
+      </ul>
+      <p class="small muted">From the sources. The website says "build and drive".</p>
+    </div>
+    <div class="panel scen">
+      <span class="who">AXIS 2</span>
+      <h3>What kind of help is it?</h3>
+      <ul class="tight small">
+        <li><strong>Mechanism:</strong> the code that does the work.</li>
+        <li><strong>Knowledge:</strong> tells the agent what exists.</li>
+        <li><strong>Check:</strong> shows that the result is correct.</li>
+        <li><strong>Control:</strong> limits or records what the agent does.</li>
+      </ul>
+      <p class="small muted">My own sorting. No source uses these 4 words.</p>
+    </div>
+    <div class="panel scen">
+      <span class="who">AXIS 3</span>
+      <h3>How large is the piece?</h3>
+      <ul class="tight small">
+        <li>5 layers, from the smallest brick to the finished look.</li>
+        <li>Behavior, <button class="t" data-t="primitive">primitive</button>, parts, complete part, style.</li>
+      </ul>
+      <p class="small muted">The sources' terms, in my sequence.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <span class="eyebrow">Map · try it · the grid</span>
+  <h2>Axes 1 and 2 make a grid of 8 cells</h2>
+  <p>Click an item. The panel below the grid shows what the item is, an example, and where the fact comes from.</p>
+  <div class="mapgrid" id="mapGrid"></div>
+  <div class="panel detail" id="mapDetail" aria-live="polite"></div>
+  <p class="note">7 cells have items. 1 cell is empty: Build × Control. The bridge and the agent controls are groups: click them to see their parts.</p>
+</section>
+
+<section class="sec">
+  <span class="eyebrow">Map · axis 3</span>
+  <h2>Five layers, from brick to finished part</h2>
+  <p>The Build × Mechanism cell holds 5 items. Axis 3 separates them by size. Layers 2 to 4 are each made from the layer before it. Layer 5 is put on a complete part. The example is the teammate picker from the UI SDK website.</p>
+  <ol class="ladder">
+    <li><span class="lnum">1</span><div class="lbody"><h3>Behavior <span>no framework</span></h3><p class="small">The agent takes 4 bricks: <code>createPopup</code>, <code>createListbox</code>, <code>createSelection</code>, <code>createChange</code>. Each brick does 1 job: open a box, move in a list, remember the choice, tell the app.</p></div></li>
+    <li><span class="lnum">2</span><div class="lbody"><h3>Primitive <span>no framework</span></h3><p class="small"><code>definePrimitive</code> joins the 4 bricks into 1 unit named <code>user-picker</code>. The unit has 3 named places for elements: trigger, content, option.</p></div></li>
+    <li><span class="lnum">3</span><div class="lbody"><h3>Parts <span>1 of 5 frameworks</span></h3><p class="small"><code>createParts</code> from the React <button class="t" data-t="adapter">adapter</button> changes the unit into 4 parts: <code>UserPicker</code>, <code>UserPickerTrigger</code>, <code>UserPickerContent</code>, <code>UserPickerOption</code>. The other 4 adapters give the same parts for Vue, Svelte, Solid and Web Components.</p></div></li>
+    <li><span class="lnum">4</span><div class="lbody"><h3>Complete part <span>1 of 5 frameworks</span></h3><p class="small">A part that is ready to use. The starter library gives you these. The website shows 12, such as Calendar, Tree and Tabs.</p></div></li>
+    <li><span class="lnum">5</span><div class="lbody"><h3>Style <span>optional</span></h3><p class="small">The look: colors, fonts, spacing. UI SDK gives only optional starter stylesheets. You supply the remaining design.</p></div></li>
+  </ol>
+  <ul class="tight small muted">
+    <li><strong>The framework is not a 4th axis.</strong> Layers 1 and 2 have no framework. The choice of framework starts at layer 3, thus it is a detail of axis 3.</li>
+    <li><strong>Style is not a 4th axis.</strong> It has 1 item only. The reviewer says design is not the job of UI SDK.</li>
+  </ul>
+</section>
+
+<section class="sec">
+  <span class="eyebrow">Map · try it · smallest set</span>
+  <h2>Why 3 axes, and not 2</h2>
+  <p>The rule for "smallest": use the fewest axes that give each item a different position. Remove an axis to see which items become the same.</p>
+  <div class="panel" style="display:grid;gap:12px">
+    <div class="steps" role="group" aria-label="Remove an axis">
+      <button data-drop="0" aria-pressed="true">Keep all 3</button>
+      <button data-drop="1" aria-pressed="false">Remove axis 1</button>
+      <button data-drop="2" aria-pressed="false">Remove axis 2</button>
+      <button data-drop="3" aria-pressed="false">Remove axis 3</button>
+    </div>
+    <div class="drop-out" id="dropOut" aria-live="polite"></div>
+  </div>
+  <p class="note">The count of 11 uses 2 groups: the bridge with WebMCP, and the 4 agent controls. The parts in a group have the same position, and a 4th axis would be necessary to separate them. This is one correct set, not the only one. Axis 3 separates items in 1 cell only. Thus "2 axes and 1 ordered list" is an equally accurate description.</p>
+</section>
+
+<section class="sec">
+  <span class="eyebrow">Map · checks</span>
+  <h2>Where the grid is correct, and its limits</h2>
+  <div class="grid2">
+    <div class="panel yes"><h3>Correct</h3><ul class="tight small">
+      <li>Each of the 11 items has a position that no other item has.</li>
+      <li>All 8 combinations of axis 1 and axis 2 are possible.</li>
+      <li>The 1 empty cell is a gap, not an impossible combination. A rule that limits which bricks an agent uses could fill it.</li>
+    </ul></div>
+    <div class="panel"><h3>Limits</h3><ul class="tight small">
+      <li><strong>The grid sorts items. It does not show what you can adopt alone.</strong> The Use column needs the Build column, because the bridge reads parts that describe themselves. The Build column does not need the Use column.</li>
+      <li>That dependency is my conclusion. The sources show the bridge only with UI SDK parts, and no source says it directly.</li>
+      <li>Axis 2 is my own sorting. A different person could select different words.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section class="sec">
+  <span class="eyebrow">Map · what it shows</span>
+  <h2>Four things you can read from the grid</h2>
+  <div class="grid2">
+    <div class="panel scen"><span class="who">BUILD COLUMN</span><h3>The bricks are not a new idea</h3><p class="small">The creator of React Aria says its hooks have been battle-tested since 2020. The creator of Zag.js says it has done this for years with state machines. The reviewer's result was correct work on the first try: 1 Tab stop against 15, a Lighthouse accessibility score of 100, and tests.</p></div>
+    <div class="panel scen"><span class="who">USE COLUMN</span><h3>The reviewer calls this the more important half</h3><p class="small">In his test the agent read about 13 KB against about 63 KB, which is about 5 times less. Time was 27 s against 28 s. Total tokens fell about 8%.</p></div>
+    <div class="panel scen"><span class="who">CONTROL ROW</span><h3>Only the Use side has limits</h3><p class="small">A person can approve, hide, redact and record what an agent does on the page. No item limits what an agent builds. Warning: without rules, the bridge accepts each action that has no label.</p></div>
+    <div class="panel scen"><span class="who">OUTSIDE THE GRID</span><h3>Design gets 1 optional item</h3><p class="small">A common reply on X: agents can already build working screens, and design is where they have difficulty. UI SDK does not correct that.</p></div>
+  </div>
+</section>
+
+<section class="sec">
+  <span class="eyebrow">Map · evidence</span>
+  <h2>How much the sources support each cell</h2>
+  <ul class="tight small">
+    <li>The website, the README and the launch post describe the Build column. The README and the launch post describe only that column.</li>
+    <li>The testing kit, the bridge tools and the agent controls come from the review video only.</li>
+    <li>The benchmark numbers are Vercel's numbers, as the video reports them. I did not open the benchmark folder.</li>
+    <li>I did not read the UI SDK documentation pages, and I did not run the website demos.</li>
+  </ul>
+  <div class="panel next">
+    <p class="small"><strong>Back:</strong> the Guide tab explains the idea with examples that you can try.</p>
+    <button data-go="guide">Open the Guide</button>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div>Sources: <a href="https://ui-sdk.dev/">ui-sdk.dev</a> · <a href="https://github.com/vercel-labs/ui">github.com/vercel-labs/ui</a> · <a href="https://x.com/shadcn/status/2120951116682682646">shadcn's launch post</a> · <a href="https://www.youtube.com/watch?v=ubK6Q53jKg8">Better Stack review video</a></div>
+  <div>Test numbers are as reported in the video. Everyday examples in sections 3 and 9 (shop, testing, accessibility) are my illustrations.</div>
+  <div>The sorting on the Map tab is mine. Axis 1 uses the sources' own words.</div>
+</footer>
+</div>
+<div id="pop" role="tooltip" hidden></div>
+
+<script>
+// ---- glossary data (also feeds the dotted-word popups) ----
+const G={
+  jargon:["Dotted word","A technical term. Click it to see a short meaning and an example."],
+  agent:["AI agent","An AI program that does tasks for you, not only answers. It can write code or click through a website.","Example: Claude asked to 'book the cheapest flight' opens the site and fills the form."],
+  component:["Component","One reusable piece of an app screen: a button, a menu, a calendar.","Example: the 'Like' button under a post is a component used thousands of times."],
+  behavior:["Behavior","How a piece reacts to you: what happens on a click, a key press, or a drag. It is not how the piece looks.","Example: 'press Escape and the menu closes' is a behavior."],
+  dropdown:["Dropdown","A button that opens a list when you click it. You pick one item and the list closes.","Example: the 'Country' box in an online form."],
+  tabstop:["Tab stop","A place on the page where the Tab key stops. Keyboard users press Tab to move from place to place.","Example: in a login form, Tab goes email → password → 'Sign in'."],
+  lighthouse:["Lighthouse","A free test from Google, built into Chrome. It gives a page a score from 0 to 100.","Example: 100 for accessibility means it found no problems it can check."],
+  a11y:["Accessibility","Making apps work for everyone, including people who are blind, cannot use a mouse, or use other tools.","Example: a screen reader reads a page aloud for a blind person."],
+  skill:["Skill","A file of instructions that teaches an AI agent how to do one kind of job well.","Example: a 'UI SDK' skill tells the agent which bricks exist and how they fit."],
+  framework:["Framework","A ready-made toolkit that developers build apps with. UI SDK works with 5: React, Vue, Svelte, Solid and Web Components.","Example: Facebook's site is built with React."],
+  bridge:["Bridge","The UI SDK part that lets an agent talk to the app's parts directly. It gives 3 tools: snapshot (list the parts), query (search a list), act (do steps).","Example: 'pick driver NOR, then open corner Senna S' in one message."],
+  toolcall:["Tool call","One action an agent asks for, such as 'read the page' or 'click this'. Each one takes time and costs money.","Example: 17 tool calls means the agent asked for 17 separate actions."],
+  token:["Token","The unit AI services count and charge by. One token is about 3–4 letters of text.","Example: 70,000 tokens is about the length of a short novel."],
+  kb:["KB (kilobyte)","A unit of text size. 1 KB is about 1,000 letters.","Example: 63 KB is about 30 printed pages; 13 KB is about 6."],
+  beta:["Beta","An early test version. It works, but its makers can still change how it works.","Example: code written for the beta may need changes later."],
+  headless:["Headless / unstyled","Parts that work but have no colors, fonts or design. You add the look yourself.","Example: a dropdown that opens and closes, but looks like plain text."],
+  atree:["Accessibility tree","A text list of everything on a page, made by the browser for screen readers. Normal agents read it to 'see' the page.","Example: 'button: Sign in, text box: Email, link: Help'."],
+  api:["API","A fixed set of commands a program accepts from another program.","Example: 'set value to Norway' is a command to a dropdown's API."],
+  webmcp:["WebMCP","A new browser feature that lets a web page offer tools to AI agents. Few browsers support it yet.","Example: UI SDK can list its bridge tools through it."],
+  axis:["Orthogonal axes","Independent questions. The answer to one question does not tell you the answer to another.","Example: a shirt has a size and a color. You know the size, but you still do not know the color."],
+  primitive:["Primitive","A unit that joins several behaviors with their data and their commands. It has no framework and no look.","Example: 'user-picker' joins a pop-up box, a list, a selection and a change message."],
+  adapter:["Adapter","A small package that connects UI SDK to one framework. There are 5.","Example: @ui-sdk/vue is the adapter for Vue."],
+};
+const gloss=document.getElementById("gloss");
+Object.entries(G).filter(([k])=>k!=="jargon").sort((a,b)=>a[1][0].localeCompare(b[1][0])).forEach(([k,[n,d,e]])=>{
+  const el=document.createElement("details");el.innerHTML=`<summary>${n}</summary><p>${d}</p>${e?`<p class="ex">${e}</p>`:""}`;gloss.append(el)});
+const pop=document.getElementById("pop");let popFor=null;
+function showPop(el){const [n,d,e]=G[el.dataset.t];pop.innerHTML=`<b>${n}</b>${d}${e?`<i>${e}</i>`:""}`;pop.hidden=false;
+  const r=el.getBoundingClientRect(),w=pop.offsetWidth;let x=r.left+scrollX;x=Math.max(16,Math.min(x,document.documentElement.clientWidth-w-16));
+  pop.style.left=x+"px";pop.style.top=(r.bottom+scrollY+8)+"px";popFor=el}
+document.addEventListener("click",e=>{const t=e.target.closest(".t");if(t){e.preventDefault();popFor===t&&!pop.hidden?(pop.hidden=true,popFor=null):showPop(t)}else if(!pop.contains(e.target)){pop.hidden=true;popFor=null}});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){pop.hidden=true;popFor=null}
+  const t=e.target.closest&&e.target.closest(".t[tabindex]");if(t&&(e.key==="Enter"||e.key===" ")){e.preventDefault();showPop(t)}});
+
+// ---- take apart ----
+const JOBS={popup:["fsBtn","Job 1 · createPopup: the box opens next to the button, stays on screen, and closes when you press Escape or click away."],
+  select:["fsList","Job 2 · createSelection: you pick Norway, it is marked as picked, and the button shows it."],
+  type:["fsList","Job 3 · createTypeahead: you type the letter P, and the list jumps to Portugal."]};
+const fsItems=[...document.querySelectorAll("#fsList li")];
+document.querySelectorAll("[data-job]").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll("[data-job]").forEach(x=>x.setAttribute("aria-pressed",x===b));
+  document.querySelectorAll(".job").forEach(x=>x.classList.remove("job"));fsItems.forEach(li=>li.className="");
+  const [id,txt]=JOBS[b.dataset.job];document.getElementById(id).classList.add("job");document.getElementById("jobText").textContent=txt;
+  if(b.dataset.job==="select"){fsItems[2].className="sel";document.getElementById("fsVal").textContent="Norway"}
+  else if(b.dataset.job==="type"){fsItems[3].className="hl"}
+  else document.getElementById("fsVal").textContent="Choose a country"});
+
+// ---- mixer ----
+const BEH=[["createPopup","Pop-up box"],["createSelection","Pick items"],["createTypeahead","Type to jump"],["createListbox","List of options"],["createRovingFocus","Arrow keys"],["createChange","Tell the app"],["createReorder","Drag to reorder"],["createResize","Drag to resize"],["createViewport","Pan and zoom"],["createVirtualizer","Show only visible"]];
+const RECIPES=[
+  {n:"Dropdown (Select)",need:["createPopup","createSelection","createTypeahead"],src:1,d:"The UI SDK website's first example."},
+  {n:"Teammate picker",need:["createPopup","createListbox","createSelection","createChange"],src:1,d:"Website example: assign a person to a task."},
+  {n:"Race-track map",need:["createRovingFocus","createSelection","createTypeahead","createChange"],src:1,d:"Built by Claude in the video, about 200 lines."},
+  {n:"Tabs",need:["createRovingFocus","createSelection"],d:"Like the tabs at the top of a browser."},
+  {n:"Toolbar",need:["createRovingFocus"],d:"Like the Bold / Italic buttons in Word."},
+  {n:"Right-click menu",need:["createPopup","createRovingFocus","createTypeahead"],d:"Opens, arrows move, letters jump."},
+  {n:"Playlist editor",need:["createRovingFocus","createReorder"],d:"Drag songs into a new order."},
+  {n:"Split screen",need:["createResize"],d:"Drag the line between two panels."},
+  {n:"Drawing canvas",need:["createViewport","createSelection"],d:"Like a whiteboard app: zoom and pick shapes."},
+  {n:"Huge inbox",need:["createVirtualizer","createRovingFocus","createSelection"],d:"10,000 emails that still scroll fast."},
+];
+const on=new Set(["createPopup","createSelection","createTypeahead"]);
+const chips=document.getElementById("chips"),rec=document.getElementById("recipes");
+BEH.forEach(([b,label])=>{const c=document.createElement("button");c.className="chip";c.textContent=label;c.title=b;c.setAttribute("aria-pressed",on.has(b));
+  c.onclick=()=>{on.has(b)?on.delete(b):on.add(b);c.setAttribute("aria-pressed",on.has(b));drawRec()};chips.append(c)});
+function drawRec(){
+  const hits=RECIPES.filter(r=>r.need.every(x=>on.has(x))).sort((a,b)=>b.need.length-a.need.length);
+  rec.innerHTML=hits.length?hits.map(r=>`<div class="recipe"><b>${r.n}</b><span class="tag ${r.src?'src':''}">${r.src?'sourced':'typical'}</span><span class="small muted">${r.d}</span></div>`).join("")
+    :`<div class="recipe none"><span class="muted">No familiar part uses only these bricks. An agent could still combine them into something new.</span></div>`;
+}
+drawRec();
+
+// ---- keyboard demo ----
+const CORNERS=["Senna S","Curva do Sol","Reta Oposta","Descida do Lago","Ferradura","Laranjinha","Pinheirinho","Bico de Pato","Mergulho","Junção","Subida dos Boxes","Arquibancadas"];
+const naive=document.getElementById("naive");let nc=0;
+CORNERS.forEach(c=>{const b=document.createElement("button");b.className="corner";b.textContent=c;
+  b.onclick=()=>{naive.querySelectorAll("button").forEach(x=>x.setAttribute("aria-selected","false"));b.setAttribute("aria-selected","true")};
+  b.addEventListener("keydown",e=>{if(e.key==="Tab"){nc++;document.getElementById("naiveCount").textContent=nc}});naive.append(b)});
+naive.addEventListener("focusin",e=>{if(!naive.contains(e.relatedTarget)){nc=1;document.getElementById("naiveCount").textContent=nc}});
+const lb=document.getElementById("roving");let active=0,buf="",bufT;
+CORNERS.forEach((c,i)=>{const o=document.createElement("div");o.setAttribute("role","option");o.textContent=c;o.tabIndex=i===0?0:-1;o.setAttribute("aria-selected","false");
+  o.onclick=()=>{move(i);pick(i)};lb.append(o)});
+const opts=[...lb.children];
+function move(i){opts[active].tabIndex=-1;active=(i+opts.length)%opts.length;opts[active].tabIndex=0;opts[active].focus()}
+function pick(i){opts.forEach(o=>o.setAttribute("aria-selected","false"));opts[i].setAttribute("aria-selected","true");document.getElementById("picked").textContent=CORNERS[i]}
+lb.addEventListener("keydown",e=>{const k=e.key;
+  if(k==="ArrowRight"||k==="ArrowDown"){e.preventDefault();move(active+1)}
+  else if(k==="ArrowLeft"||k==="ArrowUp"){e.preventDefault();move(active-1)}
+  else if(k==="Home"){e.preventDefault();move(0)} else if(k==="End"){e.preventDefault();move(opts.length-1)}
+  else if(k==="Enter"||k===" "){e.preventDefault();pick(active)}
+  else if(k.length===1&&/\S/.test(k)){clearTimeout(bufT);buf+=k.toLowerCase();bufT=setTimeout(()=>buf="",600);
+    const start=buf.length===1?active+1:active;
+    for(let n=0;n<opts.length;n++){const i=(start+n)%opts.length;if(CORNERS[i].toLowerCase().startsWith(buf)){move(i);break}}}});
+
+// ---- race ----
+const BR=[["Read the whole page",12],["Click Russell's menu",0.5],["Read the whole page again",9],["Click the compare tab",0.5],["Read the whole page again",10],["Open settings, switch to mph",1],["Read the whole page again",10],["Click Send",20]];
+const GR=[["Get the list of parts",5],["Search the driver list",0.5],["Compare RUS and NOR",3],["Settings: mph + names, save",1.5],["Send (asks a person first)",3]];
+let timers=[];
+function lane(p,steps,max){const log=document.getElementById(p+"Log");let kb=0;
+  steps.forEach((s,i)=>timers.push(setTimeout(()=>{kb+=s[1];const li=document.createElement("li");li.innerHTML=`<span>${i+1}. ${s[0]}</span><span>${s[1]} KB</span>`;log.append(li);
+    document.getElementById(p+"Calls").textContent=i+1;document.getElementById(p+"KB").textContent=Math.round(kb);
+    document.getElementById(p+"Meter").style.transform=`scaleX(${Math.min(kb/max,1)})`},(i+1)*650)))}
+function resetRace(){timers.forEach(clearTimeout);timers=[];["b","g"].forEach(p=>{document.getElementById(p+"Log").innerHTML="";document.getElementById(p+"Calls").textContent=0;document.getElementById(p+"KB").textContent=0;document.getElementById(p+"Meter").style.transform="scaleX(0)"})}
+document.getElementById("run").onclick=()=>{resetRace();lane("b",BR,63);lane("g",GR,63)};
+document.getElementById("reset").onclick=resetRace;
+const V=[["Tool calls",17,7],["Tokens",292000,70000],["Time (seconds)",53,31],["Cost (US$)",0.14,0.04]];
+document.getElementById("vbars").innerHTML=V.map(([l,b,g])=>{const f=v=>l.startsWith("Cost")?"$"+v.toFixed(2)+(v===0.04?"+":""):l==="Tokens"?"~"+(v/1000)+"k":v;
+  return `<div class="barrow"><span>${l}</span><div class="two"><div class="bar b" style="width:100%">Normal agent · ${f(b)}</div><div class="bar g" style="width:${g/b*100}%">Bridge · ${f(g)}</div></div></div>`}).join("");
+document.querySelectorAll("[data-scn]").forEach(btn=>btn.onclick=()=>{document.querySelectorAll("[data-scn]").forEach(x=>x.setAttribute("aria-pressed",x===btn));
+  document.getElementById("scnF1").hidden=btn.dataset.scn!=="f1";document.getElementById("scnV").hidden=btn.dataset.scn!=="vercel"});
+
+// ---- approval ----
+const mark=document.getElementById("mark"),markup=document.getElementById("markup"),pb=document.getElementById("promptBox"),bo=document.getElementById("bridgeOut"),br=document.getElementById("browserOut");
+const SENT="Send the comparison to Russell's race engineer.";
+function drawMarkup(){markup.textContent=mark.checked?`<button\n  data-agent-confirm="${SENT}">\n  Send\n</button>`:`<button>Send</button>\n<!-- no label: the agent may click it -->`;pb.innerHTML="";bo.textContent="";br.textContent=""}
+mark.onchange=drawMarkup;drawMarkup();
+document.getElementById("runSend").onclick=()=>{
+  br.className="verdict sent";br.textContent="→ Sent. Nothing stopped it.";
+  if(!mark.checked){pb.innerHTML="";bo.className="verdict sent";bo.textContent="Bridge → Sent. There was no label, so it was allowed.";return}
+  bo.textContent="";pb.innerHTML=`<div class="prompt" role="dialog" aria-label="The agent wants to act"><div class="small"><strong>The agent wants to:</strong> ${SENT}</div><div class="row"><button class="primary" id="allow">Allow</button><button id="deny">Deny</button></div></div>`;
+  const done=ok=>{pb.innerHTML="";bo.className="verdict "+(ok?"sent":"held");bo.textContent=ok?"Bridge → Sent, after you said yes.":"Bridge → Stopped. Nothing was sent."};
+  document.getElementById("allow").onclick=()=>done(true);document.getElementById("deny").onclick=()=>done(false);document.getElementById("allow").focus()};
+
+// ---- quiz ----
+const qs=[...document.querySelectorAll(".q")],qo=document.getElementById("quizOut");
+function quiz(){const s=qs.reduce((a,q)=>a+(q.checked?+q.dataset.w:0),0),any=qs.some(q=>q.checked);
+  qo.textContent=!any?"Tick what is true for your project.":s>=3?"Good fit. Try it on one screen first.":s>=1?"Maybe. Test it on one screen that is not critical.":"Wait. Look again when it leaves beta."}
+qs.forEach(q=>q.onchange=quiz);quiz();
+
+// ---- copy ----
+document.querySelectorAll("[data-copy]").forEach(b=>b.onclick=()=>{const el=document.getElementById(b.dataset.copy);
+  navigator.clipboard.writeText(el.textContent).then(()=>{b.textContent="Copied";setTimeout(()=>b.textContent="Copy",1500)}).catch(()=>{const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent="Press Ctrl+C"})});
+
+// ---- map tab: the grid (axis 1 = role r, axis 2 = kind k, axis 3 = layer l) ----
+const KINDS=[["mech","Mechanism","the code that does the work"],["know","Knowledge","tells the agent what exists"],["check","Check","shows that the result is correct"],["ctrl","Control","limits or records agent actions"]];
+const ROLES=[["b","Build"],["u","Use"]];
+const LAYERS=["","Behavior","Primitive","Parts","Complete part","Style"];
+const ITEMS=[
+  {id:"beh",r:"b",k:"mech",l:1,n:"50+ behaviors",s:"the bricks",
+   what:"Small tested pieces of interaction, such as <code>createPopup</code> and <code>createRovingFocus</code>. All of them are in 1 package, <code>@ui-sdk/core</code>.",
+   ex:"<code>createTypeahead</code>: type the letter N in a country list, and the list jumps to Norway.",src:"the UI SDK website, the README and the review video."},
+  {id:"prim",r:"b",k:"mech",l:2,n:"definePrimitive",s:"joins bricks into 1 unit",
+   what:"A function that joins behaviors into a unit called a primitive. The primitive holds the data (state), the commands (api) and the named places for elements (slots).",
+   ex:"the website's teammate picker is a primitive named <code>user-picker</code> with 3 slots: trigger, content, option.",src:"the README and the UI SDK website."},
+  {id:"parts",r:"b",k:"mech",l:3,n:"createParts + 5 adapters",s:"connects to your framework",
+   what:"<code>createParts</code> changes a primitive into parts that your framework can show. There is 1 adapter for each of React, Vue, Svelte, Solid and Web Components.",
+   ex:"<code>user-picker</code> becomes <code>UserPicker</code>, <code>UserPickerTrigger</code>, <code>UserPickerContent</code> and <code>UserPickerOption</code>.",src:"the README and the UI SDK website."},
+  {id:"lib",r:"b",k:"mech",l:4,n:"Starter component library",s:"complete parts",
+   what:"Complete parts that are built from the same behaviors and work in all 5 frameworks. The website shows 12: Color Picker, Token Input, Number Input, resizable panels, Command, Accordion, Segmented Control, Calendar, Tabs, OTP Input, Tree and Toolbar.",
+   ex:"the website also shows 6 larger demos: Timeline, Week, Agents, Spreadsheet, Canvas and Workflow.",src:"the UI SDK website."},
+  {id:"css",r:"b",k:"mech",l:5,n:"Starter stylesheets",s:"an optional look",
+   what:"Optional files that give the parts a basic look. Without them the parts work but have no design. This is the only item for visual style.",
+   ex:"the reviewer's F1 app worked correctly, but he says its design looks \"AI heavy\".",src:"the review video. It gives no detail about the stylesheets."},
+  {id:"skill",r:"b",k:"know",n:"The skill",s:"teaches the agent",
+   what:"A file of instructions for the agent. It tells the agent which behaviors exist and how they go together.",
+   ex:"you install it with <code>npx skills@latest add vercel-labs/ui --skill ui-sdk</code>. The reviewer asks how much of his good result came from this skill, and how much from the behaviors.",src:"the README and the review video."},
+  {id:"test",r:"b",k:"check",n:"Testing kit",s:"tests the keyboard",
+   what:"Tools that let the agent check the keyboard focus and the accessibility of the part that it built.",
+   ex:"in the video, the agent's race-track map passed its keyboard and focus test on the first run. The map that was built without UI SDK had no tests.",src:"the review video only."},
+  {id:"bridge",r:"u",k:"mech",n:"The bridge",s:"createAgent, with 3 tools",
+   what:"One line of code, <code>createAgent</code>, gives the agent 3 tools. A 4th item is a second door to the same tools.",
+   parts:["<strong>snapshot:</strong> a short list of the parts on the page. Each part has its label, its value and the action that it accepts.","<strong>query:</strong> searches the options of a list, and the list stays closed.","<strong>act:</strong> does several steps in 1 call, through the commands of each part.","<strong>WebMCP registration:</strong> offers the same 3 tools through the browser. Few browsers support it."],
+   ex:"in 1 <code>act</code> call, an agent picked the driver Norris, opened the corner Senna S, and read the card that appeared.",src:"the review video. The website gives the speed and cost claim."},
+  {id:"self",r:"u",k:"know",n:"Self-description",s:"parts say what they can do",
+   what:"Each part tells the agent its label, its value and its permitted action. This is not a separate product. Each part that is built from UI SDK has it.",
+   ex:"the reviewer's own map appeared in the snapshot as \"Interlagos corners\" with a \"select corner\" action. A request for \"Lando Norris\" was refused, and the error gave the valid codes, such as <code>NOR</code>.",src:"the review video."},
+  {id:"bench",r:"u",k:"check",n:"Benchmark",s:"a test that you can run",
+   what:"A test in the repository that a person with Claude Code can run. It compares the bridge with normal browser tools on 1 settings screen. It is evidence, not a feature of your app.",
+   ex:"the React results, on a settings screen with 24 team members: 17 tool calls against 7, about 292,000 tokens against about 70,000, 53 s against 31 s, and $0.14 against a little more than $0.04.",src:"Vercel's numbers, as the review video reports them. I did not open the benchmark folder."},
+  {id:"ctrl",r:"u",k:"ctrl",n:"Agent controls",s:"approve, hide, redact, record",
+   what:"Labels and settings that limit or record what an agent does when it uses the page.",
+   parts:["<strong>Approve:</strong> <code>data-agent-confirm</code> on a button, with an <code>allow</code> callback. The agent must ask a person first.","<strong>Hide:</strong> <code>data-agent-hidden</code> removes a full area from the agent's view.","<strong>Redact:</strong> the agent sees a secret field only as a redacted value.","<strong>Record:</strong> each change from an agent arrives with a mark that says it is from the agent. The app can log it or cancel it."],
+   ex:"in the video, 3 bridge agents asked before they sent a message, got no answer, and did not send it. All 3 normal browser agents sent it.",src:"the review video only."},
+  {id:"gap",r:"b",k:"ctrl",gap:1,n:"Nothing shipped",s:"an empty cell",
+   what:"No item limits what an agent can build. This cell could have an item. For example, a rule could limit which behaviors an agent uses. Thus it is a gap, not an impossible combination.",
+   src:"my reading of the 4 sources."},
+];
+const mg=document.getElementById("mapGrid"),md=document.getElementById("mapDetail");
+mg.innerHTML=`<div class="mg0"></div>`+ROLES.map(([r,n])=>`<div class="hd ${r}">${n}</div>`).join("")+
+  KINDS.map(([k,kn,kd])=>`<div class="rowhd"><b>${kn}</b><span>${kd}</span></div>`+ROLES.map(([r,rn])=>{
+    const its=ITEMS.filter(i=>i.r===r&&i.k===k);
+    return `<div class="cell${its[0].gap?" empty":""}"><span class="cap ${r}">${rn} · ${kn}</span>${its.map(i=>`<button class="item" data-item="${i.id}" aria-pressed="false">${i.n}<small>${i.s}</small></button>`).join("")}</div>`}).join("")).join("");
+function showItem(id){const i=ITEMS.find(x=>x.id===id),kn=KINDS.find(k=>k[0]===i.k)[1];
+  mg.querySelectorAll(".item").forEach(b=>b.setAttribute("aria-pressed",b.dataset.item===id));
+  md.innerHTML=`<h3>${i.n}</h3><div class="coords"><span class="tag ${i.r}">Axis 1 · ${i.r==="b"?"Build":"Use"}</span><span class="tag">Axis 2 · ${kn}</span><span class="tag">Axis 3 · ${i.l?`layer ${i.l} of 5, ${LAYERS[i.l]}`:"no layer"}</span></div><p>${i.what}</p>`+
+    (i.parts?`<ul class="tight small">${i.parts.map(p=>`<li>${p}</li>`).join("")}</ul>`:"")+(i.ex?`<p class="small"><strong>Example:</strong> ${i.ex}</p>`:"")+`<p class="note">Source: ${i.src}</p>`}
+mg.addEventListener("click",e=>{const b=e.target.closest(".item");if(b)showItem(b.dataset.item)});
+showItem("beh");
+
+// ---- map tab: remove an axis ----
+const DROP=["With all 3 axes, each of the 11 items has a different position.",
+  "Without axis 1, 2 pairs become the same. The skill and self-description are both Knowledge. The testing kit and the benchmark are both Check.",
+  "Without axis 2, 6 items lose their position. On the Use side, the bridge, self-description, the benchmark and the agent controls become the same. On the Build side, the skill and the testing kit become the same.",
+  "Without axis 3, the 5 items in Build × Mechanism become the same: the behaviors, definePrimitive, createParts, the starter library and the starter stylesheets."];
+const dropBtns=[...document.querySelectorAll("[data-drop]")],dropOut=document.getElementById("dropOut");
+dropBtns.forEach(b=>b.onclick=()=>{dropBtns.forEach(x=>x.setAttribute("aria-pressed",x===b));dropOut.textContent=DROP[b.dataset.drop]});
+dropOut.textContent=DROP[0];
+
+// ---- top-level views: Guide / Map, routed on the hash (#map) ----
+const vtabs=[...document.querySelectorAll(".views [role=tab]")];
+function showView(name){pop.hidden=true;popFor=null;vtabs.forEach(t=>{const on=t.dataset.view===name;t.setAttribute("aria-selected",on);t.tabIndex=on?0:-1;document.getElementById(t.getAttribute("aria-controls")).hidden=!on})}
+function goView(name){showView(name);try{location.hash=name}catch(e){}}
+vtabs.forEach((t,n)=>{t.onclick=()=>goView(t.dataset.view);
+  t.addEventListener("keydown",e=>{if(e.key==="ArrowRight"||e.key==="ArrowLeft"){const o=vtabs[(n+1)%vtabs.length];goView(o.dataset.view);o.focus()}})});
+document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{goView(b.dataset.go);document.querySelector(".views").scrollIntoView()});
+addEventListener("hashchange",()=>showView(location.hash==="#map"?"map":"guide"));
+if(location.hash==="#map")showView("map");
+</script>

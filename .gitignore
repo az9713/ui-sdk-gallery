@@ -3,4 +3,4 @@ dist
 .entries
 .vitest
 .gate
-review.html
+/review.html

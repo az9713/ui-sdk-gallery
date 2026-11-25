@@ -1,0 +1,610 @@
+<title>UI SDK 100-UI Plan</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="color-scheme" content="dark light">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column of numbered sections. Each section gives the conclusion first, then the evidence as a table or a grid. Dark-first, same tokens as the UI SDK explainer. */
+:root{
+  --bg:#0f172a; --card:#1e293b; --line:#334155; --line2:#1e293b;
+  --fg:#e2e8f0; --fg2:#cbd5e1; --muted:#94a3b8;
+  --orange:#fb923c; --teal:#2dd4bf; --bad:#f87171; --ok:#4ade80;
+  --code:#0b1222; --on:#0b1222;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){
+  --bg:#f6f7fb; --card:#ffffff; --line:#cfd6e3; --line2:#e4e8f0;
+  --fg:#0f172a; --fg2:#1e293b; --muted:#55627a;
+  --orange:#a84a08; --teal:#0f766e; --bad:#b42318; --ok:#1f7a44; --code:#eef1f7; --on:#ffffff; color-scheme:light}}
+:root[data-theme="light"]{
+  --bg:#f6f7fb; --card:#ffffff; --line:#cfd6e3; --line2:#e4e8f0;
+  --fg:#0f172a; --fg2:#1e293b; --muted:#55627a;
+  --orange:#a84a08; --teal:#0f766e; --bad:#b42318; --ok:#1f7a44; --code:#eef1f7; --on:#ffffff; color-scheme:light}
+
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--fg2);font:17px/1.6 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:960px;margin:0 auto;padding-block:40px 80px;display:grid;gap:64px}
+h1,h2,h3{font-family:var(--display);color:var(--fg);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(2rem,5.6vw,3.2rem);font-weight:700;letter-spacing:-.02em}
+h2{font-size:clamp(1.4rem,3.4vw,1.95rem);font-weight:700}
+h3{font-size:1.08rem;font-weight:500}
+p{margin:0;max-width:66ch}
+code{font-family:var(--mono);font-size:.86em;color:var(--teal);overflow-wrap:anywhere}
+strong{color:var(--fg);font-weight:600}
+a{color:var(--teal)}
+.eyebrow{font:600 .75rem/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--orange)}
+.sec{display:grid;gap:18px;min-width:0}
+.lede{font-size:1.15rem}
+.muted{color:var(--muted)} .small{font-size:.88rem}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;min-width:0;display:grid;gap:10px;align-content:start}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:820px){.grid3{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.grid2,.grid3{grid-template-columns:1fr}}
+ul,ol{margin:0;padding-left:22px;display:grid;gap:8px;max-width:68ch}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.note{font-size:.86rem;color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+
+/* inventory figures */
+.facts{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.facts div{padding:14px 16px;border-right:1px solid var(--line);display:grid;gap:2px;min-width:0}
+.facts div:last-child{border-right:0}
+.facts b{font:700 1.7rem/1.1 var(--display);color:var(--fg);font-variant-numeric:tabular-nums}
+.facts span{font-size:.82rem;color:var(--muted)}
+@media (max-width:760px){.facts{grid-template-columns:1fr 1fr}.facts div{border-right:0;border-bottom:1px solid var(--line)}.facts div:last-child{border-bottom:0}}
+
+/* tables */
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:0}
+th{font:600 .72rem/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-bottom-color:var(--muted);white-space:nowrap}
+td.id{font-family:var(--mono);font-size:.84rem;color:var(--fg);white-space:nowrap}
+td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* derivation steps */
+.steps{list-style:none;padding:0;max-width:none;gap:0;counter-reset:s;border-top:1px solid var(--line)}
+.steps>li{counter-increment:s;display:grid;grid-template-columns:3.2rem 1fr;gap:6px 14px;padding:18px 0;border-bottom:1px solid var(--line)}
+.steps>li::before{content:counter(s);font:700 1.5rem/1 var(--display);color:var(--orange);font-variant-numeric:tabular-nums}
+.steps>li>div{display:grid;gap:8px;min-width:0}
+@media (max-width:560px){.steps>li{grid-template-columns:1fr}}
+
+/* axes grid */
+.mg{display:grid;grid-template-columns:minmax(120px,1fr) 2fr 2fr;gap:8px}
+.mg .hd{font:600 .78rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:4px 2px}
+.mg .rh{padding:10px 2px;display:grid;gap:2px;align-content:center}
+.mg .rh b{color:var(--fg);font-weight:600}
+.mg .rh span{font-size:.8rem;color:var(--muted)}
+.cellb{font:inherit;text-align:left;background:var(--card);color:var(--fg2);border:1px solid var(--line);border-radius:8px;padding:12px 14px;display:grid;gap:2px;min-width:0;cursor:pointer}
+.cellb b{font:700 1.5rem/1.1 var(--display);color:var(--fg);font-variant-numeric:tabular-nums}
+.cellb span{font-size:.82rem;color:var(--muted)}
+.cellb:hover{border-color:var(--teal)}
+.cellb[aria-pressed="true"]{border-color:var(--orange)}
+.cellb[aria-pressed="true"] b{color:var(--orange)}
+.cellb.ev{cursor:default;border-style:dashed;background:transparent}
+.cellb.ev:hover{border-color:var(--line)}
+@media (max-width:600px){.mg{grid-template-columns:1fr 1fr}.mg .hd.c0{display:none}.mg .rh{grid-column:1/-1;padding-bottom:0}}
+
+/* layer bars */
+.bars{display:grid;gap:8px}
+.bar{display:grid;grid-template-columns:11.5rem 1fr 3rem;gap:12px;align-items:center;font-size:.9rem}
+.bar i{display:block;height:14px;border-radius:3px;background:var(--teal);min-width:3px}
+.bar .n{text-align:right;color:var(--fg);font-variant-numeric:tabular-nums}
+@media (max-width:560px){.bar{grid-template-columns:8.5rem 1fr 2.4rem}}
+
+/* filters */
+.filters{display:grid;gap:10px}
+.fgroup{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.fgroup>span{font:600 .72rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);width:4.2rem}
+.chip{font:500 .86rem var(--body);color:var(--fg2);background:transparent;border:1px solid var(--line);border-radius:999px;padding:5px 12px;cursor:pointer}
+.chip:hover{border-color:var(--teal)}
+.chip[aria-pressed="true"]{background:var(--orange);border-color:var(--orange);color:var(--on);font-weight:600}
+.tag{display:inline-block;font:600 .72rem var(--mono);border:1px solid var(--line);border-radius:4px;padding:1px 6px;color:var(--muted);white-space:nowrap}
+.tag.ext{border-color:var(--orange);color:var(--orange)}
+
+/* decisions */
+.dec{display:grid;grid-template-columns:2.6rem 1fr;gap:4px 14px;padding:18px 0;border-bottom:1px solid var(--line)}
+.dec:first-of-type{border-top:1px solid var(--line)}
+.dec>b{font:700 1.5rem/1 var(--display);color:var(--orange)}
+.dec>div{display:grid;gap:6px;min-width:0}
+.pick{color:var(--ok);font-weight:600}
+@media (max-width:560px){.dec{grid-template-columns:1fr}}
+footer{border-top:1px solid var(--line);padding-top:20px;display:grid;gap:8px}
+</style>
+
+<div class="wrap">
+
+<header class="sec">
+  <span class="eyebrow">Plan · 23 November 2026</span>
+  <h1>A plan for 100 UIs that show the range of UI SDK</h1>
+  <p class="lede"><strong>Status, 24 November 2026:</strong> the build is complete, with 103 UIs. <a href="./">Open the gallery.</a> The text below is the plan as written before the build.</p>
+  <p class="lede">This is a plan. At the time of writing, no UI was built. Each UI gets a position on the 3 orthogonal axes. A coverage rule decides what must be in the set. This page gives the set, the decisions, and the reasons.</p>
+  <div class="facts" role="list" aria-label="What the set must cover">
+    <div role="listitem"><b>55</b><span>shipped components, each used a minimum of 1 time</span></div>
+    <div role="listitem"><b>50</b><span>stateful behaviors, each used a minimum of 1 time</span></div>
+    <div role="listitem"><b>5</b><span>layers of axis 3, each with UIs (layer 1 is provisional)</span></div>
+    <div role="listitem"><b>7</b><span>non-empty cells of the Map grid, each with evidence</span></div>
+    <div role="listitem"><b>5</b><span>adapters, for 1 primitive</span></div>
+  </div>
+  <p class="note">All counts are from the npm packages <code>@ui-sdk/core</code> and <code>@ui-sdk/web</code> at version <code>0.1.0-beta.16</code>, which I installed and inspected on 23 November 2026. Section 7 says how I counted.</p>
+</header>
+
+<section class="sec" id="answer">
+  <span class="eyebrow">1 · The answer in short</span>
+  <h2>One set, 100 positions, no repeated idea</h2>
+  <ul>
+    <li><strong>Axis 3, layer.</strong> The set has UIs at each of the 5 layers, from a new behavior to a change of look only. Layer 1 is provisional (see set C).</li>
+    <li><strong>Axis 1, role.</strong> Each of the 100 UIs has a Build face and a Use face. The agent bridge connects to each UI.</li>
+    <li><strong>Axis 2, kind of help.</strong> Mechanism, knowledge, check and control each have evidence on the page. The empty cell Build × Control stays empty.</li>
+    <li><strong>Coverage rule.</strong> The set uses each of the 55 shipped components and each of the 50 stateful behaviors a minimum of 1 time.</li>
+    <li><strong>No padding.</strong> Each UI must add 1 component, behavior, public entry or documented capability that no other UI adds. The same UI in a different subject does not count.</li>
+    <li><strong>With the 6 decisions of section 6,</strong> the build is 100 UIs plus 3 comparison builds that do not use UI SDK. The total is 103.</li>
+  </ul>
+</section>
+
+<section class="sec" id="how">
+  <span class="eyebrow">2 · How I arrived at the set</span>
+  <h2>Six steps</h2>
+  <ol class="steps">
+    <li><div>
+      <h3>The axes sort offerings, so each UI needs a record</h3>
+      <p>The 3 orthogonal axes of the Map tab sort the 11 offerings of UI SDK. They do not sort UIs. A UI is not "the bridge" or "the testing kit". A UI uses them.</p>
+      <p>Thus each UI gets a record with 3 values: the lowest layer where code must be written for it (axis 3), and the 1 cell of role × kind of help that the UI exists to show (axes 1 and 2).</p>
+    </div></li>
+    <li><div>
+      <h3>"Versatile" must be a claim that a reader can check</h3>
+      <p>A count of 100 proves nothing. 100 settings forms show 1 ability 100 times. So I replaced the count with a rule: the set must use each item of the package's own lists.</p>
+      <p>The lists come from the package, not from me: 55 component pages, 50 behaviors whose names start with <code>create</code> or <code>bind</code>, 5 adapters, 5 layers, and the documented functions of the agent bridge.</p>
+    </div></li>
+    <li><div>
+      <h3>52 rows carry a list item, and 30 rows are my allocation</h3>
+      <p>I first set the size of each set: 30, 40, 4, 5, 5 and 16. After that, I counted what each row carries. 52 rows each carry an item of the 2 counted lists that no other row carries. 30 rows are my allocation to layers 1, 3 and 5 and to the Use column.</p>
+      <div class="scroll"><table>
+        <thead><tr><th>Basis</th><th>Rows</th><th>Where</th></tr></thead>
+        <tbody>
+          <tr><td>55 shipped components</td><td class="n">23</td><td>Set A. One screen uses 1 to 7 components that no earlier screen used.</td></tr>
+          <tr><td>48 behaviors (37 <code>create*</code>, 11 <code>bind*</code>)</td><td class="n">29</td><td>Set B. One component uses 1 to 3 behaviors that no earlier one used.</td></tr>
+          <tr><td><strong>Rows that carry a list item</strong></td><td class="n"><strong>52</strong></td><td>The 2 lists are complete after these rows.</td></tr>
+          <tr><td>Layer 1, new behaviors</td><td class="n">4</td><td>Set C. 2 behaviors with 2 users each, as the skill requires.</td></tr>
+          <tr><td>5 adapters</td><td class="n">5</td><td>Set D. 4 other adapters, plus 1 page with all 5.</td></tr>
+          <tr><td>Layer 5, look</td><td class="n">5</td><td>Set E. 5 different methods to style the same markup.</td></tr>
+          <tr><td>Bridge functions and agent controls</td><td class="n">16</td><td>Set F. 1 UI for each documented function. This set uses the last 2 behaviors, <code>createAgent</code> and <code>createHistory</code>.</td></tr>
+          <tr><td><strong>Rows that are my allocation</strong></td><td class="n"><strong>30</strong></td><td>No count from the package fixes these 4 sizes.</td></tr>
+        </tbody>
+      </table></div>
+    </div></li>
+    <li><div>
+      <h3>18 rows extend the lists</h3>
+      <p>The number 100 was given. The 2 counted lists are complete after 52 rows, and my allocation adds 30. I gave each of the other 18 rows (7 in set A, 11 in set B) an item of the package that the 2 lists do not contain.</p>
+      <p>52 is not a proven minimum. A different author could cover the 55 components with fewer than 23 screens.</p>
+      <p>Examples: <code>@ui-sdk/core/date</code> (A24), server rendering (A27), <code>announce</code> for screen-reader messages (B21), <code>position</code> (B34), <code>fuzzyScore</code> (B38). The table in section 4 marks these rows "extends".</p>
+    </div></li>
+    <li><div>
+      <h3>A test build changed 3 parts of the design</h3>
+      <p>Before I fixed the design, I built 1 page with 4 controls. Three results changed the plan:</p>
+      <ul>
+        <li><strong>The no-build path has no bridge.</strong> The package's <code>browser</code> bundle does not contain <code>createAgent</code>. Thus the gallery needs a bundler (Vite).</li>
+        <li><strong>The bridge is not smaller on a small page.</strong> The bridge snapshot was 432 bytes. The accessibility-tree text for the same 4 controls was 291 bytes. Thus each card must show a measurement, not a claim.</li>
+        <li><strong>A removed component stays in the snapshot</strong> with <code>offPage: true</code>. Thus the gallery loads 1 UI for each page load.</li>
+      </ul>
+    </div></li>
+    <li><div>
+      <h3>A review removed the rows that broke my own rule</h3>
+      <ul>
+        <li><strong>10 rows added nothing new.</strong> For example, a second <code>createTransfer</code> list and a second <code>createViewport</code> plan. I replaced each with a row that adds a public entry or helper.</li>
+        <li><strong>1 row was counted 2 times.</strong> The Web Components picker of set D was the same UI as B20. Set D now has 4 other adapters and 1 page that puts all 5 under 1 bridge.</li>
+        <li><strong>My 2 ideas for set C are already in the package.</strong> <code>createRovingFocus</code> with wrapping covers a circle, and <code>scrubTo</code> has <code>snap</code> points. Set C is provisional until a search finds 2 behaviors that the package does not ship.</li>
+      </ul>
+    </div></li>
+  </ol>
+</section>
+
+<section class="sec" id="axes">
+  <span class="eyebrow">3 · On the 3 orthogonal axes</span>
+  <h2>Where the 100 UIs are</h2>
+  <p><strong>Axis 1 × axis 2.</strong> The number in each cell is the count of UIs that exist to show that cell. Select a cell to filter the table in section 4.</p>
+  <div class="mg" id="grid">
+    <div class="hd c0"></div><div class="hd">Axis 1 · Build</div><div class="hd">Axis 1 · Use</div>
+    <div class="rh"><b>Mechanism</b><span>the code that does the work</span></div>
+    <button class="cellb" data-cell="bm" aria-pressed="false"><b>84</b><span>Sets A to E, on the 5 layers of axis 3</span></button>
+    <button class="cellb" data-cell="um" aria-pressed="false"><b>6</b><span>The bridge: F01 to F06</span></button>
+    <div class="rh"><b>Knowledge</b><span>tells the agent what exists</span></div>
+    <div class="cellb ev"><b>0</b><span>The skill. Evidence on each card: the request and the skill path.</span></div>
+    <button class="cellb" data-cell="uk" aria-pressed="false"><b>4</b><span>Self-description: F07 to F10</span></button>
+    <div class="rh"><b>Check</b><span>shows that the result is correct</span></div>
+    <div class="cellb ev"><b>0</b><span>The testing kit. Evidence on each card: the test results.</span></div>
+    <button class="cellb" data-cell="uc" aria-pressed="false"><b>1</b><span>My measurement of all 100 UIs: F11</span></button>
+    <div class="rh"><b>Control</b><span>limits or records agent actions</span></div>
+    <div class="cellb ev"><b>0</b><span>The empty cell of the Map. It stays empty.</span></div>
+    <button class="cellb" data-cell="ux" aria-pressed="false"><b>5</b><span>Agent controls: F12 to F16</span></button>
+  </div>
+  <p class="note">Two Build cells have 0 UIs and still have evidence. The skill and the testing kit are not things that a person operates. Each card shows their output: the 1-sentence request that made the UI, and its test results.</p>
+
+  <p><strong>Axis 3, layer.</strong> The layer of a UI is the lowest layer where I must write code for it.</p>
+  <div class="bars" role="list" aria-label="UIs for each layer">
+    <div class="bar" role="listitem"><span>1 · New behavior</span><i style="width:9.3%"></i><span class="n">4</span></div>
+    <div class="bar" role="listitem"><span>2 · Own primitive</span><i style="width:100%"></i><span class="n">43</span></div>
+    <div class="bar" role="listitem"><span>3 · Other adapter</span><i style="width:11.6%"></i><span class="n">5</span></div>
+    <div class="bar" role="listitem"><span>4 · Shipped parts only</span><i style="width:100%"></i><span class="n">43</span></div>
+    <div class="bar" role="listitem"><span>5 · Look only</span><i style="width:11.6%"></i><span class="n">5</span></div>
+  </div>
+  <p class="note">Layer 2 has the 40 UIs of set B and 3 UIs of set F (F07 to F09). Layer 4 has the 30 UIs of set A and 13 UIs of set F. The 4 UIs of layer 1 are provisional.</p>
+</section>
+
+<section class="sec" id="uis">
+  <span class="eyebrow">4 · The 100 UIs</span>
+  <h2>Each row and the item that only it adds</h2>
+  <div class="filters">
+    <div class="fgroup" role="group" aria-label="Filter by set"><span>Set</span><span id="fset" style="display:contents"></span></div>
+    <div class="fgroup" role="group" aria-label="Filter by layer"><span>Layer</span><span id="flayer" style="display:contents"></span></div>
+    <div class="fgroup" role="group" aria-label="Filter by reason"><span>Reason</span><span id="fbasis" style="display:contents"></span></div>
+  </div>
+  <p class="small muted" id="count" aria-live="polite"></p>
+  <div class="scroll"><table>
+    <thead><tr><th>ID</th><th>UI</th><th>Adds, and no other row adds it</th><th>Layer</th><th>Cell</th><th>Reason</th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table></div>
+  <div class="grid3">
+    <div class="panel"><h3>Set A · 30 UIs · layer 4</h3><p class="small">Screens that only put shipped components together. They use all 55 components.</p></div>
+    <div class="panel"><h3>Set B · 40 UIs · layer 2</h3><p class="small">Components that UI SDK does not ship. They use 37 <code>create*</code> and all 11 <code>bind*</code> behaviors.</p></div>
+    <div class="panel"><h3>Set C · 4 UIs · layer 1</h3><p class="small">2 new behaviors with 2 users each. Provisional: the behaviors are not selected.</p></div>
+    <div class="panel"><h3>Set D · 5 UIs · layer 3</h3><p class="small">The primitive of B20 in React, Vue, Svelte and Solid, plus 1 page with all 5 under 1 bridge.</p></div>
+    <div class="panel"><h3>Set E · 5 UIs · layer 5</h3><p class="small">The screen of A01 in 5 more looks. The markup does not change. A01 in the gallery has <code>web.css</code> with the dark tokens of this project, and set E does not count that look again.</p></div>
+    <div class="panel"><h3>Set F · 16 UIs · the Use column</h3><p class="small">1 UI for each documented function of the bridge and of the agent controls.</p></div>
+  </div>
+  <p class="note">For A22, A27 and A29, I know the entry or page by its name only. I did not read it. The build confirms each one, and the row changes if the entry does not fit.</p>
+</section>
+
+<section class="sec" id="why">
+  <span class="eyebrow">5 · Why it shows versatility</span>
+  <h2>The argument has 4 parts</h2>
+
+  <h3>Part 1. The set changes on 7 dimensions, and each has evidence that can fail</h3>
+  <div class="scroll"><table>
+    <thead><tr><th>Dimension</th><th>Range in the set</th><th>Evidence</th><th>The claim is false if</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Layer</strong> (axis 3)</td><td>5 layers</td><td>Sets C, B, D, A, E</td><td>a layer has no UI that passes its gates</td></tr>
+      <tr><td><strong>Role</strong> (axis 1)</td><td>Built by an agent, used by an agent</td><td>The agent test of each UI: <code>snapshot</code> finds each control by name, and <code>act</code> changes it</td><td>the agent test of a UI fails</td></tr>
+      <tr><td><strong>Kind of help</strong> (axis 2)</td><td>Mechanism, knowledge, check, control</td><td>The card of each UI, and the 16 UIs of set F</td><td>a non-empty cell has no working evidence</td></tr>
+      <tr><td><strong>Interaction type</strong></td><td>50 behaviors: focus, text, selection, drag, resize, lists, trees, popups, canvas, storage, gestures</td><td>A coverage script counts the imports of each UI file</td><td>the script reports a behavior or component with 0 uses</td></tr>
+      <tr><td><strong>Size</strong></td><td>From 1 button (B23) to a spreadsheet (B04) and a node editor (B06)</td><td>The line count on each card</td><td>the large UIs need code outside UI SDK for their interaction</td></tr>
+      <tr><td><strong>Input</strong></td><td>Keyboard, pointer, touch, agent, right to left</td><td>Keyboard test and <code>checkDirection</code> for each primitive; B11, B14, B32, B33 for touch</td><td>a UI works with the pointer only</td></tr>
+      <tr><td><strong>Framework</strong></td><td>5 adapters</td><td>Set D: 1 primitive file, 5 render files</td><td>the primitive file must change for an adapter</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Part 2. The dimensions are independent: one can change while the others stay the same</h3>
+  <p>The set has pairs of UIs that differ on 1 dimension only. This is the same test that makes the 3 axes orthogonal.</p>
+  <ul>
+    <li><strong>Only the adapter changes:</strong> B20 against D01 to D04. The primitive file is the same.</li>
+    <li><strong>Only the look changes:</strong> A01 against E01 to E05. The markup is the same.</li>
+    <li><strong>Only the role changes:</strong> the Build face and the Use face of each card. The UI is the same, and a person or an agent operates it.</li>
+    <li><strong>Only the control changes:</strong> F12 to F15 add 1 attribute or 1 callback to parts that already work.</li>
+    <li><strong>Only the component changes (planned):</strong> I plan to use <code>createGridFocus</code> in a seat map (B01), a spreadsheet (B04), an emoji picker (B19) and a crossword (B36), and <code>createRovingFocus</code> in a log viewer (B13), a metro map (B17) and a piano (B35).</li>
+  </ul>
+  <p>The last pair type is the central claim of UI SDK: 1 behavior goes into many different components, and 1 component uses several behaviors (B06 uses 3). The table in section 4 names only the first use of each behavior. The coverage script will report the real count of uses after the build.</p>
+
+  <h3>Part 3. No single UI can make the claim, and no set is spare</h3>
+  <p>One UI has 1 layer and a small number of behaviors. Range is a property of a set. If you remove 1 set, 1 claim loses all its evidence:</p>
+  <div class="scroll"><table>
+    <thead><tr><th>Remove</th><th>Claim with no evidence left</th></tr></thead>
+    <tbody>
+      <tr><td>Set A</td><td>The 55 shipped components work together in real screens.</td></tr>
+      <tr><td>Set B</td><td>An agent can build components that UI SDK does not ship. This is the main promise of the launch post.</td></tr>
+      <tr><td>Set C</td><td>The lowest layer can get a new behavior.</td></tr>
+      <tr><td>Set D</td><td>The behavior is the same in each framework.</td></tr>
+      <tr><td>Set E</td><td>The look is separate from the behavior.</td></tr>
+      <tr><td>Set F</td><td>Each function of the bridge and each agent control has a UI that shows it.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Part 4. All 100 use the same small set of parts</h3>
+  <p>Range with a different tool for each job is not versatility. The 100 UIs use these parts:</p>
+  <ul>
+    <li><strong>1 core package,</strong> <code>@ui-sdk/core</code>, plus 1 adapter package for each framework. 95 UIs use only the Web Components adapter. Set D adds the other 4 adapters.</li>
+    <li><strong>1 function for each own component,</strong> <code>definePrimitive</code>, in sets B, C and D and in F07 to F09. The skill says that the shipped components of set A are built from the same behaviors.</li>
+    <li><strong>1 bridge,</strong> <code>createAgent</code>, and <strong>1 testing kit.</strong></li>
+  </ul>
+  <p>The test build installed 2 packages (core and the Web Components adapter). They have no dependencies of their own.</p>
+
+  <div class="panel">
+    <h3>What the set does not show</h3>
+    <ul class="small">
+      <li><strong>Visual design range.</strong> UI SDK gives behavior, not design. The reviewer said his result looked "AI heavy". The gallery uses 1 design system.</li>
+      <li><strong>A benefit against no UI SDK.</strong> Range is not benefit. The 3 comparison builds of decision 3 give a small comparison: 3 UIs, 1 attempt each.</li>
+      <li><strong>A live model.</strong> Scripted steps and tests exercise the bridge. No model drives it.</li>
+      <li><strong>A screen reader.</strong> <code>checkPattern</code> checks ARIA roles, states and keys. It does not run a screen reader.</li>
+      <li><strong>Real phones.</strong> The touch UIs run in desktop Chrome with touch emulation.</li>
+      <li><strong>Speed or cost.</strong> The gallery measures bytes, not seconds or dollars.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec" id="decisions">
+  <span class="eyebrow">6 · The 6 decisions</span>
+  <h2>My recommendation is the selected option for each</h2>
+  <p>The recommendations were accepted. Each decision below gives the selected option, the reason, and the option that I did not select.</p>
+  <div>
+    <div class="dec"><b>1</b><div>
+      <h3>Start with a pilot of 6 UIs</h3>
+      <p><span class="pick">Selected:</span> build A01, B01, B04, D01, E03 and F12 first, then stop for a review.</p>
+      <p><strong>Reason:</strong> the cost of 1 UI is not known. The pilot has 1 small primitive (B01), 1 large primitive (B04) and 1 second adapter (D01), so the measurement includes the high-cost cases.</p>
+      <p class="small muted">Not selected: all 100 in 1 run. An error in the shell or the gates would then repeat in 100 files.</p>
+    </div></div>
+    <div class="dec"><b>2</b><div>
+      <h3>Web Components for the main gallery</h3>
+      <p><span class="pick">Selected:</span> Web Components for sets A, B, C, E and F. Set D shows the other 4 adapters.</p>
+      <p><strong>Reason:</strong> the test build verified this path, and it needs no framework compiler. The claim about 5 adapters gets its own set, so it does not need 100 UIs in 5 frameworks.</p>
+      <p class="small muted">Not selected: React for all 100. It adds a framework to each file and shows nothing more about UI SDK.</p>
+    </div></div>
+    <div class="dec"><b>3</b><div>
+      <h3>Add 3 comparison builds with no UI SDK</h3>
+      <p><span class="pick">Selected:</span> build A01, B01 and B17 again with the same model and the same request, with no UI SDK and no mention of the keyboard. The total is 103 builds.</p>
+      <p><strong>Reason:</strong> the 100 UIs show range. They do not show a difference against plain code. The review video used this method on 1 map. The build with no UI SDK had 15 separate Tab stops and no tests.</p>
+      <p class="small muted">Limit: 3 UIs with 1 attempt each is a small sample. The page will say so.</p>
+    </div></div>
+    <div class="dec"><b>4</b><div>
+      <h3>TypeScript for the UI files</h3>
+      <p><span class="pick">Selected:</span> TypeScript, with the type check as gate 1.</p>
+      <p><strong>Reason:</strong> the skill says that TypeScript requires the handlers that each slot role needs, such as <code>focus</code> for a role that takes focus. The agents write the files, so a person does not write TypeScript.</p>
+      <p class="small muted">Not selected: JavaScript. The test build used JavaScript and passed. Thus I did not test the type checks, and the pilot is their first test.</p>
+    </div></div>
+    <div class="dec"><b>5</b><div>
+      <h3>One agent for the pilot, parallel subagents after it</h3>
+      <p><span class="pick">Selected:</span> I build the pilot alone. In phase 2, a maximum of 3 subagents work at the same time, each on 1 batch of 10 UI files. No live-model race.</p>
+      <p><strong>Reason:</strong> each UI is 1 independent file, so parallel work is safe. Subagents use more tokens, because each one reads the docs again. The pilot gives the number that shows if this cost is acceptable.</p>
+      <p class="small muted">In my first reply I gave no recommendation here. This is new, and the question comes again with the pilot numbers before phase 2.</p>
+    </div></div>
+    <div class="dec"><b>6</b><div>
+      <h3><code>git init</code> in the gallery folder</h3>
+      <p><span class="pick">Selected:</span> yes, in <code>gallery/</code> only.</p>
+      <p><strong>Reason:</strong> the project folder is not a git repository. About 110 new files would have no undo.</p>
+    </div></div>
+  </div>
+</section>
+
+<section class="sec" id="checked">
+  <span class="eyebrow">7 · What I checked</span>
+  <h2>Facts from the package and from 1 test build</h2>
+  <div class="scroll"><table>
+    <thead><tr><th>Fact</th><th>Value</th><th>How I checked</th></tr></thead>
+    <tbody>
+      <tr><td>Version</td><td><code>0.1.0-beta.16</code>, published 23 November 2026, 17:40 UTC</td><td><code>npm view</code></td></tr>
+      <tr><td>Shipped components</td><td class="n">55</td><td>Count of pages in <code>@ui-sdk/web/docs/components</code></td></tr>
+      <tr><td>Helpers in the "All Behaviors" tables</td><td class="n">134</td><td>Count of table rows in <code>docs/core.md</code></td></tr>
+      <tr><td>Stateful behaviors</td><td>50: 39 start with <code>create</code>, 11 start with <code>bind</code></td><td>The same tables</td></tr>
+      <tr><td>Testing kit</td><td><code>mount</code>, <code>checkPattern</code> (15 patterns), <code>checkServer</code>, <code>checkDirection</code>, <code>settle</code></td><td><code>@ui-sdk/core/testing</code></td></tr>
+      <tr><td>The skill and the docs</td><td>Both are in the npm package. <code>docs/core.md</code> is 403,122 bytes.</td><td>File list</td></tr>
+      <tr><td>Starter stylesheet</td><td><code>@ui-sdk/core/web.css</code>, 86,610 bytes</td><td>File size</td></tr>
+    </tbody>
+  </table></div>
+  <p>The test build had 4 controls: 1 switch, 1 input, 1 button, and 1 rating that I made with <code>definePrimitive</code>.</p>
+  <div class="scroll"><table>
+    <thead><tr><th>Check</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td>Testing kit on my primitive</td><td>Pass on the first run: keys, <code>checkPattern(…, "radio-group")</code>, <code>checkServer</code>, <code>checkDirection</code></td></tr>
+      <tr><td>Bridge <code>snapshot</code></td><td>4 entries, each with label, value and actions</td></tr>
+      <tr><td>Bridge <code>act</code></td><td>3 steps in 1 call changed the input, the switch and my rating</td></tr>
+      <tr><td><code>data-agent-confirm</code></td><td>Refused with <code>The person said no to "Deletes the project and all its files".</code> Then allowed after approval.</td></tr>
+      <tr><td><code>data-agent-secret</code></td><td>The value came back as <code>[redacted]</code></td></tr>
+      <tr><td><code>data-agent-hidden</code></td><td>The field was not in the snapshot</td></tr>
+      <tr><td>Real browser</td><td>The built page opened from disk in Chrome. <code>snapshot</code>, the 3-step <code>act</code> and the confirm refusal gave the same results. The secret, hidden and allow-after-approval checks ran only in jsdom.</td></tr>
+      <tr><td>Bundle size</td><td>106,642 bytes of script and 84,296 bytes of stylesheet</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">Not checked: the React, Vue, Svelte and Solid adapters; an Artifact publish of the built gallery; a model that drives the bridge; in-source tests in Vitest 5.1.1; 1 bridge for 2 adapters on 1 page (D05).</p>
+</section>
+
+<section class="sec" id="build">
+  <span class="eyebrow">8 · Build order and gates</span>
+  <h2>Four phases, with a stop after the pilot</h2>
+  <div class="grid2">
+    <div class="panel">
+      <h3>The system</h3>
+      <ul class="small">
+        <li>1 new folder, <code>gallery/</code>, with exact versions of the 2 packages.</li>
+        <li>1 file for each UI. It holds the primitive, the mount function, the card data and the tests.</li>
+        <li>1 shell that finds the UI files. It mounts 1 UI for each page load.</li>
+        <li>Vite writes 1 script and 1 stylesheet. The page opens from disk and can go into 1 new Artifact.</li>
+        <li>Estimated file count: about 110.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>The 4 gates for each UI</h3>
+      <ol class="small">
+        <li>Type check.</li>
+        <li>Tests: keyboard test and agent test. For a primitive: also <code>checkPattern</code>, <code>checkServer</code>, <code>checkDirection</code>, and a count of deliberate breaks that the tests caught.</li>
+        <li>Real browser: no console error, Tab through all controls, 1 screenshot, contrast 4.5:1 for text and 3:1 for control edges.</li>
+        <li><code>impeccable detect</code> on the built page: 0 findings.</li>
+      </ol>
+    </div>
+  </div>
+  <div class="scroll"><table>
+    <thead><tr><th>Phase</th><th>Work</th><th>Stop point</th></tr></thead>
+    <tbody>
+      <tr><td class="n">0</td><td>Test build</td><td>Done. Results are in section 7.</td></tr>
+      <tr><td class="n">1</td><td>Shell, the 4 gates, and 6 pilot UIs: A01, B01, B04, D01, E03, F12. Also the D05 check, an Artifact load check, and the search for the 2 behaviors of set C.</td><td><strong>Stop. The pilot gets a review.</strong> I report the measured time and tokens for each UI.</td></tr>
+      <tr><td class="n">2</td><td>Sets A, B, C and F in batches of 10. A coverage script prints the components and behaviors not used yet.</td><td>Report after each batch</td></tr>
+      <tr><td class="n">3</td><td>Set D, set E, F11 (the measurement of all 100), and the 3 comparison builds</td><td>Report</td></tr>
+      <tr><td class="n">4</td><td>All gates on the full build, publish the Artifact, update the notes</td><td>Done</td></tr>
+    </tbody>
+  </table></div>
+  <div class="panel">
+    <h3>What each UI card shows</h3>
+    <ol class="small">
+      <li>The UI, live.</li>
+      <li>Its position on the 3 orthogonal axes, with the same words as the Map tab.</li>
+      <li>Build face: the 1-sentence request, the behaviors or components used, and the line count.</li>
+      <li>Check face: the test results of gate 2.</li>
+      <li>Use face: the live <code>snapshot()</code> text, its byte count, and a button that runs a scripted <code>act</code> task.</li>
+      <li>Measurement: snapshot bytes against accessibility-tree bytes, with the label "my measurement". A browser tool records the second number at build time.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec" id="open">
+  <span class="eyebrow">9 · Risks and open points</span>
+  <h2>What can change the plan</h2>
+  <div class="grid2">
+    <div class="panel">
+      <h3>Risks</h3>
+      <ul class="small">
+        <li><strong>Beta.</strong> Version <code>0.1.0-beta.16</code> came out on the day of this plan. The plan pins the exact version.</li>
+        <li><strong>Set C.</strong> The 2 new behaviors are not selected. If no missing behavior exists, set C becomes 4 more rows of set B, and layer 1 has no UI. The gallery then says so.</li>
+        <li><strong>Docs gaps.</strong> When the docs do not answer, the skill says to write a small test. Each gap goes in the report.</li>
+        <li><strong>jsdom limits.</strong> Popups, layout and focus between fields need the real browser gate.</li>
+        <li><strong>Label matches.</strong> The bridge matches a label by its words, so "Tip" and "Custom tip" collide. Each UI needs unique control names.</li>
+        <li><strong>Cost.</strong> Not known until the pilot.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Differences between the package and the Map tab</h3>
+      <p class="small">The Map tab came from 4 sources. The package shows more. I did not change the Map tab.</p>
+      <ul class="small">
+        <li><strong>"50+ behaviors":</strong> the tables list 134 helpers. 50 start with <code>create</code> or <code>bind</code>.</li>
+        <li><strong>Starter library:</strong> 55 components, not the 12 that the website shows.</li>
+        <li><strong>On the Use side, not on the Map:</strong> a change log (Observe), history and undo, a preview of a suggestion, and a model that runs on your server.</li>
+        <li><strong>A candidate for the empty cell Build × Control:</strong> strict mode and typed slot roles stop some wrong builds. My reading: these are checks, so the cell stays empty. This is an open decision.</li>
+        <li><strong>The skill and the docs</strong> are in the npm package.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="small muted">
+  <p>Sources: the 4 summaries in this project (review video, launch post, repository README, website), and the npm packages <code>@ui-sdk/core</code>, <code>@ui-sdk/web</code> and <code>@ui-sdk/react</code> at <code>0.1.0-beta.16</code>.</p>
+  <p>My inferences, not source claims: the record of 3 values for each UI, the 6 sets and their sizes, the 7 dimensions, the split into 52, 30 and 18 rows, and the comparison of 432 bytes against 291 bytes.</p>
+  
+</footer>
+</div>
+
+<script>
+// [id, name, adds, layer, cell, basis]
+// basis: c component list, b behavior list, l layer 1, a adapter list, s layer 5, u bridge function, e extends
+const UIS=[
+["A01","Project settings, 3 tabs","tabs, field, input, select, switch, button, alert-dialog",4,"bm","c"],
+["A02","Sign-up with a one-time code","password-input, otp-input, checkbox",4,"bm","c"],
+["A03","Checkout","radio, number-input",4,"bm","c"],
+["A04","Hotel booking, date range","date-picker, calendar",4,"bm","c"],
+["A05","Clinic appointment","date-input, time-input, textarea",4,"bm","c"],
+["A06","Command palette for an editor","command, dialog",4,"bm","c"],
+["A07","Prompt box with files and a model","token-input, trigger-menu, file-input",4,"bm","c"],
+["A08","Profile photo upload","image-cropper, avatar, slider",4,"bm","c"],
+["A09","Brand theme editor","color-picker, popover, segmented-control",4,"bm","c"],
+["A10","Site header","navigation-menu, hover-card, menu",4,"bm","c"],
+["A11","Document editor top area","menubar, toolbar, toggle, tooltip, separator",4,"bm","c"],
+["A12","File explorer","tree, resizable, scroll-area",4,"bm","c"],
+["A13","Mail client with 3 panes","listbox",4,"bm","c"],
+["A14","Help center","accordion, collapsible, autocomplete",4,"bm","c"],
+["A15","Product gallery","carousel, rating, pagination",4,"bm","c"],
+["A16","Issue list with filters","combobox",4,"bm","c"],
+["A17","Request trace viewer","waterfall",4,"bm","c"],
+["A18","Video clip timeline","timeline",4,"bm","c"],
+["A19","Storage dashboard","meter, progress",4,"bm","c"],
+["A20","Phone navigation drawer","drawer",4,"bm","c"],
+["A21","Notification center","toast",4,"bm","c"],
+["A22","Survey with a progress bar","Native form submit, required-field errors and reset (`forms.md`)",4,"bm","e"],
+["A23","Flight search","autocomplete with `async-options`",4,"bm","e"],
+["A24","Meeting planner for 3 time zones","`@ui-sdk/core/date` (date arithmetic and localized labels)",4,"bm","e"],
+["A25","Display preferences","preferences",4,"bm","c"],
+["A26","Recipe scaler","`@ui-sdk/core/number` (steps, format, parse)",4,"bm","e"],
+["A27","Expense report","Server rendering first, then the elements start (`server-rendering.md`)",4,"bm","e"],
+["A28","Language picker, right to left","label, right-to-left layout",4,"bm","c"],
+["A29","Task card editor in a dialog","`overlays`: 4 nested layers, Escape closes 1 layer each time",4,"bm","e"],
+["A30","Palette contrast checker","`@ui-sdk/core/color` (colors as data)",4,"bm","e"],
+["B01","Cinema seat map","`createGridFocus`, `createSelection`",2,"bm","b"],
+["B02","Card board with columns","`createTransfer`, `createAutoScroll`, `bindDragPreview`",2,"bm","b"],
+["B03","Playlist that you reorder","`createReorder`",2,"bm","b"],
+["B04","Spreadsheet","`createCellRange`, `createInlineEdit`, `cellsToText`, `textToCells`",2,"bm","b"],
+["B05","Photo grid, select with a rectangle","`createLasso`",2,"bm","b"],
+["B06","Workflow node editor","`createViewport`, `createConnect`, `createMove`",2,"bm","b"],
+["B07","Project plan on tracks","`createSpans`",2,"bm","b"],
+["B08","Week calendar","`stackSpans`",2,"bm","e"],
+["B09","Image annotation boxes","`createResize`",2,"bm","b"],
+["B10","Sound pad with 2 axes","`createArea`",2,"bm","b"],
+["B11","Inbox with swipe actions","`createSwipeActions`, `createPointerKind`",2,"bm","b"],
+["B12","Chat thread","`createStickToBottom`, `createInputHistory`",2,"bm","b"],
+["B13","Log viewer with 100,000 rows","`createVirtualizer`",2,"bm","b"],
+["B14","Time wheel","`bindScrollPicker`",2,"bm","b"],
+["B15","Outline editor, nest by drag","`createTreeReorder`, `createTreeCollection`",2,"bm","b"],
+["B16","Permission tree with 3-state boxes","`treeCheckedStates`, `treeFromPaths`",2,"bm","e"],
+["B17","Metro line map","`createRovingFocus`, `createTypeahead`",2,"bm","b"],
+["B18","Periodic table","`spatialMove`, `nearestInDirection`",2,"bm","e"],
+["B19","Emoji picker","`createPopup` with a grid in it",2,"bm","b"],
+["B20","Teammate picker (the website's example)","`createListbox`, `createChange`",2,"bm","b"],
+["B21","Upload queue that tells a screen reader its progress","`announce`, `prepareAnnouncements`",2,"bm","e"],
+["B22","Wizard stepper","The stepper pattern of the skill",2,"bm","e"],
+["B23","Hold-to-delete button","`bindHold`",2,"bm","b"],
+["B24","Quantity control that repeats","`bindRepeat`",2,"bm","b"],
+["B25","Tag list with remove","`createFocusRecovery`",2,"bm","b"],
+["B26","Panels that browser search can open","`bindPanel`, `bindFindable`",2,"bm","b"],
+["B27","Sketch pad with undo","`createUndoStack`, `bindDrag`",2,"bm","b"],
+["B28","Theme switch that stays set","`createColorScheme`, `createPreference`, `createLocalStorage`",2,"bm","b"],
+["B29","Cookie consent bar","`createCookieStorage`, `bindPersistentLayer`",2,"bm","b"],
+["B30","Draft form that survives a reload","`createSessionStorage`, `createCommit`",2,"bm","b"],
+["B31","Font picker with a preview","`createPreview`",2,"bm","b"],
+["B32","Card deck that you flick","`createVelocityTracker`",2,"bm","b"],
+["B33","Phone bottom sheet with a text field","`bindAvoidKeyboard`, `bindViewport`, `bindLayer`",2,"bm","b"],
+["B34","Toolbar that follows a text selection","`position`",2,"bm","e"],
+["B35","Piano keyboard","2 roving groups in 1 primitive",2,"bm","e"],
+["B36","Crossword grid","`keepFocus`",2,"bm","e"],
+["B37","Shortcut recorder","`matchesShortcut`, `formatShortcut`, `ariaKeyshortcuts`",2,"bm","e"],
+["B38","File finder with fuzzy search","`fuzzyScore`, `matchSegments`",2,"bm","e"],
+["B39","Table with columns that resize and reorder","`settleDraft` (a controlled column order)",2,"bm","e"],
+["B40","Media player with 2 control areas","`createController`",2,"bm","b"],
+["C01","First UI of new behavior 1 (provisional)","A behavior that the package does not ship. Name not fixed.",1,"bm","l"],
+["C02","Second UI of new behavior 1 (provisional)","The second user of the same behavior",1,"bm","l"],
+["C03","First UI of new behavior 2 (provisional)","A second behavior that the package does not ship",1,"bm","l"],
+["C04","Second UI of new behavior 2 (provisional)","The second user of the same behavior",1,"bm","l"],
+["D01","The teammate picker of B20 in React","The same primitive file. Only the render file changes.",3,"bm","a"],
+["D02","The same picker in Vue","The Vue adapter",3,"bm","a"],
+["D03","The same picker in Svelte","The Svelte adapter",3,"bm","a"],
+["D04","The same picker in Solid","The Solid adapter",3,"bm","a"],
+["D05","All 5 renderings on 1 page with 1 bridge","1 snapshot lists the 5 pickers. Not verified yet.",3,"bm","a"],
+["E01","A01 with no stylesheet","Shows that the parts work with no design",5,"bm","s"],
+["E02","A01 with the `web.css` default","The starter stylesheet",5,"bm","s"],
+["E03","A01 with `web.css` and a second token set","A light, compact theme from tokens only. No selector is written.",5,"bm","s"],
+["E04","A01 with an own stylesheet","Styles on `data-slot` and state attributes, no `web.css`",5,"bm","s"],
+["E05","A01 in high contrast and reduced motion","Operating-system display modes",5,"bm","s"],
+["F01","Deploy form that 1 `act` call fills","4 changes in 1 call (the website's demo task)",4,"um","u"],
+["F02","Country list with 5,000 options","`query` finds an option and the list stays closed",4,"um","u"],
+["F03","Page with 150 controls","The `more` entry after 100 components",4,"um","u"],
+["F04","Team settings: 24 members, row menus, confirm dialog","The same shape as Vercel's benchmark screen. My build, not their code.",4,"um","u"],
+["F05","Tool console","`agentTools` schemas. A person types the steps. No model call.",4,"um","u"],
+["F06","WebMCP registration","`registerTools` with a mock of `document.modelContext`",4,"um","u"],
+["F07","Size picker","`closed: true`: a wrong value is refused with the valid values",2,"uk","u"],
+["F08","Stepper with hidden content","`items` and `reveals: true`",2,"uk","u"],
+["F09","Field that matters only with an error","`shown`",2,"uk","u"],
+["F10","Two labels that collide (\"Tip\", \"Custom tip\")","The error lists each match with its ref",4,"uk","u"],
+["F11","Measurement board for all 100 UIs","Snapshot bytes against accessibility-tree bytes. My measurement.",4,"uc","u"],
+["F12","Pay button","`data-agent-confirm` with an Allow / Deny prompt on the page",4,"ux","u"],
+["F13","Tax ID and card fields","`data-agent-secret`",4,"ux","u"],
+["F14","Recovery codes","`data-agent-hidden`",4,"ux","u"],
+["F15","Region rule","`details.source === \"agent\"`, `details.cancel()`, and an `allow` list",4,"ux","u"],
+["F16","Audit log with undo","Observe and `createHistory`: person or agent, undo, preview of a suggestion",4,"ux","u"]
+];
+const CELL={bm:"Build × Mechanism",um:"Use × Mechanism",uk:"Use × Knowledge",uc:"Use × Check",ux:"Use × Control"};
+const BASIS={c:"component list",b:"behavior list",l:"layer 1",a:"adapter list",s:"layer 5",u:"bridge function",e:"extends"};
+const f={set:"",layer:"",basis:"",cell:""};
+const code=s=>s.replace(/`([^`]+)`/g,"<code>$1</code>");
+const chips=(id,key,opts)=>{document.getElementById(id).innerHTML=opts.map(([v,l])=>`<button class="chip" data-k="${key}" data-v="${v}" aria-pressed="${v===""}">${l}</button>`).join("")};
+chips("fset","set",[["","All"],["A","A"],["B","B"],["C","C"],["D","D"],["E","E"],["F","F"]]);
+chips("flayer","layer",[["","All"],["1","1"],["2","2"],["3","3"],["4","4"],["5","5"]]);
+chips("fbasis","basis",[["","All"],["list","Carries a list item (52)"],["alloc","My allocation (30)"],["e","Extends (18)"]]);
+function draw(){
+  const rows=UIS.filter(u=>(!f.set||u[0][0]===f.set)&&(!f.layer||String(u[3])===f.layer)&&(!f.cell||u[4]===f.cell)&&(!f.basis||(f.basis==="e"?u[5]==="e":f.basis==="list"?"cb".includes(u[5]):"lasu".includes(u[5]))));
+  document.getElementById("rows").innerHTML=rows.map(u=>`<tr><td class="id">${u[0]}</td><td>${code(u[1])}</td><td>${code(u[2])}</td><td class="n">${u[3]}</td><td>${CELL[u[4]]}</td><td><span class="tag${u[5]==="e"?" ext":""}">${BASIS[u[5]]}</span></td></tr>`).join("")||`<tr><td colspan="6">No UI has this combination. Select "All" in one filter.</td></tr>`;
+  document.getElementById("count").textContent=`The table shows ${rows.length} of 100 UIs.`+(f.cell?` Cell filter: ${CELL[f.cell]}. Select the cell again to remove it.`:"");
+  document.querySelectorAll(".chip").forEach(b=>b.setAttribute("aria-pressed",String(f[b.dataset.k]===b.dataset.v)));
+  document.querySelectorAll(".cellb[data-cell]").forEach(b=>b.setAttribute("aria-pressed",String(f.cell===b.dataset.cell)));
+}
+document.addEventListener("click",e=>{
+  const c=e.target.closest(".chip");if(c){f[c.dataset.k]=c.dataset.v;draw();return}
+  const g=e.target.closest(".cellb[data-cell]");if(g){f.cell=f.cell===g.dataset.cell?"":g.dataset.cell;draw();document.getElementById("uis").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"})}
+});
+draw();
+</script>
