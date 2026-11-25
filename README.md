@@ -39,7 +39,7 @@ Each UI has a position on 3 axes:
 
 ## The 103 UIs
 
-Select a picture or a title to open the UI. Use the mouse or the keyboard. The card under each UI has its tests and a button that runs an agent task.
+Select a picture or a title to open the UI. Use the mouse or the keyboard. The card under each UI has its tests and a button that runs an agent task. The button is off in the 3 comparison builds (set X), which have no agent task.
 
 <!-- grid:start -->
 
