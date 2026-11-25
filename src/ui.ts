@@ -5,6 +5,8 @@ type Agent = ReturnType<typeof createAgent>
 type Context = {
   agent: Agent
   ask: (question: string) => Promise<boolean>
+  // The measured result of each UI, by ID, from results/*.json at build time. Row F11 draws them.
+  results?: Record<string, Pick<Result, "snapshotBytes" | "treeBytes">>
 }
 
 type UI = {

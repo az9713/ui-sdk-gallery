@@ -2,6 +2,14 @@ import { settle } from "@ui-sdk/core/testing"
 import { createAgent } from "@ui-sdk/web/agent"
 import type { UI } from "./ui"
 
+// A small fixed set, so a test of row F11 does not change when the gate writes a new result.
+const RESULTS = {
+  A01: { snapshotBytes: 588, treeBytes: 343 },
+  B01: { snapshotBytes: 171, treeBytes: 2104 },
+  F03: { snapshotBytes: 10843, treeBytes: 7240 },
+  X01: { snapshotBytes: null, treeBytes: 438 },
+}
+
 // One bridge for each test file: a bridge has no destroy and keeps removed components as offPage.
 function mountUI(ui: UI) {
   const person = { approves: false, asked: [] as string[] }
@@ -10,7 +18,7 @@ function mountUI(ui: UI) {
     allow: (step) => (ui.allow ? ui.allow(step, ask) : step.confirm ? ask(step.confirm) : true),
   })
   const root = document.body.appendChild(document.createElement("section"))
-  ui.mount(root, { agent, ask })
+  ui.mount(root, { agent, ask, results: RESULTS })
   const live = () => agent.snapshot().filter((entry) => !entry.offPage && entry.component !== "more")
   return { root, agent, person, live }
 }
@@ -48,4 +56,4 @@ async function keys(...names: string[]) {
   }
 }
 
-export { keys, mountUI, settle, tabbable }
+export { keys, mountUI, RESULTS, settle, tabbable }

@@ -5,7 +5,7 @@ import "@ui-sdk/web/overlays"
 import "@ui-sdk/web/segmented-control"
 import rowData from "../rows.json"
 import shellCss from "./shell.css?inline"
-import type { Agent, Entry, Row } from "./ui"
+import type { Agent, Context, Entry, Row } from "./ui"
 
 const rows: Row[] = rowData
 const LAYERS = ["", "behavior", "primitive", "parts", "complete part", "style"]
@@ -15,15 +15,15 @@ const esc = (text: unknown) =>
 
 const style = (css: string) => document.head.append(Object.assign(document.createElement("style"), { textContent: css }))
 
-function start(entries: Entry[]) {
+function start(entries: Entry[], results: NonNullable<Context["results"]>) {
   style(shellCss)
   const id = new URLSearchParams(location.search).get("ui")
   const entry = entries.find((e) => e.def.id === id)
-  if (entry) show(entry, entries)
+  if (entry) show(entry, entries, results)
   else index(entries)
 }
 
-function show(entry: Entry, entries: Entry[]) {
+function show(entry: Entry, entries: Entry[], results: NonNullable<Context["results"]>) {
   const { def, source, result } = entry
   const row = rows.find((r) => r.id === def.id)
   if (!row) throw new Error(`${def.id} is not a row of rows.json`)
@@ -95,7 +95,7 @@ function show(entry: Entry, entries: Entry[]) {
     allow: (step) => (def.allow ? def.allow(step, ask) : step.confirm ? ask(step.confirm) : true),
   })
   const stage = document.querySelector<HTMLElement>("[data-stage]")!
-  def.mount(stage, { agent, ask })
+  def.mount(stage, { agent, ask, results })
 
   const pre = document.querySelector(".g-snapshot")!
   const bytes = document.querySelector(".g-bytes")!

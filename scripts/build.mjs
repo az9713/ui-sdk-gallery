@@ -20,12 +20,19 @@ async function build({ ids = null, outDir = "dist", strict = false } = {}) {
     const path = join(here, "results", `${file.slice(0, 3)}.json`)
     return existsSync(path) ? readFileSync(path, "utf8") : "null"
   }
+  // Row F11 reads the results of all UIs, so a 1-UI build gets all of them too.
+  const measured = Object.fromEntries(
+    (existsSync(join(here, "results")) ? readdirSync(join(here, "results")) : []).sort().map((f) => {
+      const { snapshotBytes, treeBytes } = JSON.parse(readFileSync(join(here, "results", f), "utf8"))
+      return [f.slice(0, 3), { snapshotBytes, treeBytes }]
+    }),
+  )
   const entry = [
     // Strict mode turns each development warning of the SDK into an error. The gate build uses it.
     strict ? `import "../src/strict.ts"` : "",
     `import { start } from "../src/shell.ts"`,
     ...files.flatMap((f, i) => [`import ui${i} from "../ui/${f}"`, `import raw${i} from "../ui/${f}?raw"`]),
-    `start([${files.map((f, i) => `{ def: ui${i}, source: raw${i}, result: ${result(f)} }`).join(", ")}])`,
+    `start([${files.map((f, i) => `{ def: ui${i}, source: raw${i}, result: ${result(f)} }`).join(", ")}], ${JSON.stringify(measured)})`,
   ].join("\n")
   // The entry is a real file: 1 for each out folder, so that 2 gate runs at the same time do not share it.
   const entryFile = join(here, ".entries", `${outDir.replaceAll("/", "-")}.ts`)
